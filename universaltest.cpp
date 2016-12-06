@@ -8,8 +8,8 @@
 
 using namespace std;
 
-int dice();
-int result1,result2;
+int dice(),ChooseDice1(),ChooseDice2();
+int result1,result2,DiceNumber;
 
 struct  Player{
 
@@ -36,22 +36,41 @@ int main(){
                            }
                         }    // set up to 0
 
-     int DiceNumber;
+
 
      int n[3]={1,2,3};
       // -----------------------up it's basic set up -------------------------------------------------------------------
 
-      cout<<"請輸入任意個位數擲出第1顆骰子"<<endl;
+    do{
+      for(int xx=0;xx<4;xx++){
+
+        ChooseDice1();
+        ChooseDice2();
+
+
+     cout<<play[0].energy<<play[0].x<<play[0].y<<play[0].position[0][0]<<result1<<result2<<endl;
+
+
+      }
+    }while((play[0].energy!=0&&play[0].body!=0)&&(play[1].energy!=0&&play[1].body!=0)&&(play[2].energy!=0&&play[2].body!=0)&&(play[3].energy!=0&&play[3].body!=0));
+
+}
+
+int ChooseDice1(){
+
+    cout<<"請輸入任意個位數擲出第1顆骰子"<<endl;
       cin>>DiceNumber;
       result1=dice();
       cout<<"第一顆骰子為"<<result1<<endl;
 
-      cout<<"請再輸入任意個位數擲出第2顆骰子"<<endl;
+}
+
+int ChooseDice2(){
+
+    cout<<"請再輸入任意個位數擲出第2顆骰子"<<endl;
       cin>>DiceNumber;
       result2=dice();
       cout<<"第二顆骰子為"<<result2<<endl;
-
-     cout<<play[0].energy<<play[0].x<<play[0].y<<play[0].position[0][0]<<result1<<result2<<endl;
 
 }
 
