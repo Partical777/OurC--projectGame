@@ -5,12 +5,20 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+#include<windows.h>
 
 using namespace std;
 
 int dice(),ChooseDice1(),ChooseDice2(),InBlack();
 int result1,result2;
 string DiceNumber;
+
+void SetColor(int color = 7)  //更改顏色函式
+{
+HANDLE hConsole;
+hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+SetConsoleTextAttribute(hConsole,color);
+}
 
 struct  Player{
 
