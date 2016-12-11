@@ -5,11 +5,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
-#include<windows.h>
+#include <windows.h>
+#include <conio.h>
 
 using namespace std;
 
-int dice(),ChooseDice1(),ChooseDice2(),InBlack();
+int dice(),ChooseDice1(),ChooseDice2(),InBlack(),YesNo();
 int result1,result2;
 string DiceNumber;
 
@@ -63,7 +64,9 @@ int main(){
     do{
       for(int xx=0;xx<4;xx++){
         system("cls");
+        SetColor(14);
         cout<<"現在輪到第"<<xx+1<<"位玩家"<<endl;
+        SetColor();
         if(play[xx].BlackHole){  //測試是否在黑洞
            cout<<endl<<"*您仍被黑洞吸引中,請擲出相同的骰子點數以逃脫"<<endl<<endl;
         }
@@ -132,5 +135,54 @@ int InBlack(){
         }else{
            return 2 ;
         }
+}
+
+int YesNo(){  //選擇yes or no 的函式
+
+    int ch;
+
+    cout<< "choose yes or no" <<endl;
+    SetColor(240);
+
+    cout<< "\r YES " ;
+    SetColor();
+    cout<< " NO "  << flush;
+
+    do{
+       ch=getch();
+       if(ch==224){
+          ch=getch();
+
+    switch(ch){
+    case 75 :
+    SetColor(240);
+    cout<< "\r YES " ;
+    SetColor();
+    cout<< " NO  " << flush ;
+    break;
+
+    case 77 :
+    SetColor();
+    cout<< "\r YES " ;
+    SetColor(240);
+    cout<< " NO  " << flush ;
+    SetColor();
+    break;
+
+      }
+          } // if(13)的
+
+    }while(ch!=13);
+       switch(ch){
+      case 75 :
+       return 2;
+       break;  //yes
+      case 77 :
+       return 1;
+       break;  //no
+
+    }
+
+
 }
 
