@@ -302,9 +302,11 @@ int YesNo(){  //¿ï¾Üyes or no ªº¨ç¦¡
 }
 
 int GameStart(){
-    cout<<"ùÝùùùß¢z¢s¢{¢z¢w¢{¢s¢w¢{  ùÝùÞùß¢s¢w¢{¢z¢w¢{¢s¢z¢w"<<endl;
-cout<<"ùãùùùß  ¢x  ¢u¢w¢t¢u¢s¢}    ùø  ¢u¢s¢}¢u¢t  ¢u¢r¢{"<<endl;
-cout<<"ùãùùùå  ¢r  ¢r  ¢r¢r¢|¢w    ùä  ¢r¢|¢w¢|¢w¢}¢r  ¢r"<<endl<<endl;
+cout<<" _____ _____ _____ _____    _____ _____ _____ _____ "<<endl;
+cout<<"|   __|_   _|  _  | __  |  |_   _| __  |   __|  |  |"<<endl;
+cout<<"|__   | | | |     |    -|    | | |    -|   __|    -|"<<endl;
+cout<<"|_____| |_| |__|__|__|__|    |_| |__|__|_____|__|__|"<<endl<<endl;
+
 
 
     int ch;
@@ -339,9 +341,10 @@ int updown = 0; //¤W¤UÁä¦ì¸mÅÜ¼Æ
       switch(updown){
     case 0 :
         system("cls");
-            cout<<"ùÝùùùß¢z¢s¢{¢z¢w¢{¢s¢w¢{  ùÝùÞùß¢s¢w¢{¢z¢w¢{¢s¢z¢w"<<endl;
-cout<<"ùãùùùß  ¢x  ¢u¢w¢t¢u¢s¢}    ùø  ¢u¢s¢}¢u¢t  ¢u¢r¢{"<<endl;
-cout<<"ùãùùùå  ¢r  ¢r  ¢r¢r¢|¢w    ùä  ¢r¢|¢w¢|¢w¢}¢r  ¢r"<<endl<<endl;
+cout<<" _____ _____ _____ _____    _____ _____ _____ _____ "<<endl;
+cout<<"|   __|_   _|  _  | __  |  |_   _| __  |   __|  |  |"<<endl;
+cout<<"|__   | | | |     |    -|    | | |    -|   __|    -|"<<endl;
+cout<<"|_____| |_| |__|__|__|__|    |_| |__|__|_____|__|__|"<<endl<<endl;
     cout<<"                    ";  //space*20
         SetColor(240);
     cout<< " ¹CÀ¸¶}©l " <<endl<<endl<< flush;
@@ -354,9 +357,10 @@ cout<<"ùãùùùå  ¢r  ¢r  ¢r¢r¢|¢w    ùä  ¢r¢|¢w¢|¢w¢}¢r  ¢r"<<endl<<endl;
 
     case 1 :
         system("cls");
-            cout<<"ùÝùùùß¢z¢s¢{¢z¢w¢{¢s¢w¢{  ùÝùÞùß¢s¢w¢{¢z¢w¢{¢s¢z¢w"<<endl;
-cout<<"ùãùùùß  ¢x  ¢u¢w¢t¢u¢s¢}    ùø  ¢u¢s¢}¢u¢t  ¢u¢r¢{"<<endl;
-cout<<"ùãùùùå  ¢r  ¢r  ¢r¢r¢|¢w    ùä  ¢r¢|¢w¢|¢w¢}¢r  ¢r"<<endl<<endl;
+cout<<" _____ _____ _____ _____    _____ _____ _____ _____ "<<endl;
+cout<<"|   __|_   _|  _  | __  |  |_   _| __  |   __|  |  |"<<endl;
+cout<<"|__   | | | |     |    -|    | | |    -|   __|    -|"<<endl;
+cout<<"|_____| |_| |__|__|__|__|    |_| |__|__|_____|__|__|"<<endl<<endl;
         SetColor();
         cout<<"                    ";
     cout<< " ¹CÀ¸¶}©l " <<endl<<endl<< flush;
@@ -370,9 +374,10 @@ cout<<"ùãùùùå  ¢r  ¢r  ¢r¢r¢|¢w    ùä  ¢r¢|¢w¢|¢w¢}¢r  ¢r"<<endl<<endl;
 
     case 2 :
         system("cls");
-            cout<<"ùÝùùùß¢z¢s¢{¢z¢w¢{¢s¢w¢{  ùÝùÞùß¢s¢w¢{¢z¢w¢{¢s¢z¢w"<<endl;
-cout<<"ùãùùùß  ¢x  ¢u¢w¢t¢u¢s¢}    ùø  ¢u¢s¢}¢u¢t  ¢u¢r¢{"<<endl;
-cout<<"ùãùùùå  ¢r  ¢r  ¢r¢r¢|¢w    ùä  ¢r¢|¢w¢|¢w¢}¢r  ¢r"<<endl<<endl;
+cout<<" _____ _____ _____ _____    _____ _____ _____ _____ "<<endl;
+cout<<"|   __|_   _|  _  | __  |  |_   _| __  |   __|  |  |"<<endl;
+cout<<"|__   | | | |     |    -|    | | |    -|   __|    -|"<<endl;
+cout<<"|_____| |_| |__|__|__|__|    |_| |__|__|_____|__|__|"<<endl<<endl;
         SetColor();
         cout<<"                    ";
     cout<< " ¹CÀ¸¶}©l " <<endl<<endl<< flush;;
