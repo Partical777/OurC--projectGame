@@ -10,9 +10,10 @@
 
 using namespace std;
 
-int dice(),ChooseDice1(),ChooseDice2(),InBlack(),YesNo();
+int dice(),ChooseDice1(),ChooseDice2(),InBlack(),YesNo(),GameStart(),Rule();
 int result1,result2,sum;
 string DiceNumber;
+
 
 void SetColor(int color = 7)  //更改顏色函式
 {
@@ -40,6 +41,7 @@ struct  Player{
         /*BlackHole
           0表示 false 沒有在黑洞
           1表示 true 有在黑洞*/
+
 
 };
 
@@ -130,7 +132,9 @@ int main(){
 
 
       // -----------------------up it's basic set up -------------------------------------------------------------------
+int gamestart = GameStart();   //取得開始數據
 
+    if(gamestart==3){   //開始遊戲
     do{
       for(int xx=0;xx<4;xx++){
         system("cls");
@@ -255,6 +259,22 @@ int main(){
       cout<<play[0].energy<<play[0].x<<play[0].y<<play[0].position[0][0]<<result1<<result2<<endl;
 
     }while((play[0].energy!=0&&play[0].body!=0)&&(play[1].energy!=0&&play[1].body!=0)&&(play[2].energy!=0&&play[2].body!=0)&&(play[3].energy!=0&&play[3].body!=0));
+    //遊戲結束
+    //將設置跳回選單會離開~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+  } else if (gamestart==2){   //規則說明
+         Rule();
+         system("PAUSE");
+         system("cls");
+         return main();
+  } else {                    //離開遊戲
+      cout<<endl<<endl<<endl<<endl<<"                 ";
+      SetColor(207);
+     cout<<"即將離開遊戲....."<<endl;
+      SetColor();
+
+  }
 
 }
 //------------------------------------main up----------------------------------------------------
@@ -346,4 +366,118 @@ int YesNo(){  //選擇yes or no 的函式
     }
 
 
+}
+
+int GameStart(){
+    cout<<"╔═╗┌┬┐┌─┐┬─┐  ╔╦╗┬─┐┌─┐┬┌─"<<endl;
+cout<<"╚═╗  │  ├─┤├┬┘    ║  ├┬┘├┤  ├┴┐"<<endl;
+cout<<"╚═╝  ┴  ┴  ┴┴└─    ╩  ┴└─└─┘┴  ┴"<<endl<<endl;
+
+
+    int ch;
+
+    cout<<"                    ";
+    SetColor(240);
+    cout<< " 遊戲開始 " <<endl<<endl<< flush;
+    SetColor();
+    cout<<"                    ";
+    cout<< " 規則說明 "  <<endl<<endl<< flush;
+    cout<<"                    ";
+    cout<< " 離開遊戲 "  <<endl<< flush;
+int updown = 0; //上下鍵位置變數
+    do{
+       ch=getch();
+       if(ch==224){
+          ch=getch();
+
+    switch(ch){     //上下鍵控制
+    case 72 :
+        if(updown>0){
+            updown = updown-1;
+        }
+    break;
+    case 80 :
+        if(updown<2){
+            updown = updown+1;
+        }
+    break;
+      }
+
+      switch(updown){
+    case 0 :
+        system("cls");
+            cout<<"╔═╗┌┬┐┌─┐┬─┐  ╔╦╗┬─┐┌─┐┬┌─"<<endl;
+cout<<"╚═╗  │  ├─┤├┬┘    ║  ├┬┘├┤  ├┴┐"<<endl;
+cout<<"╚═╝  ┴  ┴  ┴┴└─    ╩  ┴└─└─┘┴  ┴"<<endl<<endl;
+    cout<<"                    ";  //space*20
+        SetColor(240);
+    cout<< " 遊戲開始 " <<endl<<endl<< flush;
+    SetColor();
+    cout<<"                    ";
+    cout<< " 規則說明 " <<endl<<endl<< flush;
+    cout<<"                    ";
+    cout<< " 離開遊戲 "  <<endl<< flush;
+    break;
+
+    case 1 :
+        system("cls");
+            cout<<"╔═╗┌┬┐┌─┐┬─┐  ╔╦╗┬─┐┌─┐┬┌─"<<endl;
+cout<<"╚═╗  │  ├─┤├┬┘    ║  ├┬┘├┤  ├┴┐"<<endl;
+cout<<"╚═╝  ┴  ┴  ┴┴└─    ╩  ┴└─└─┘┴  ┴"<<endl<<endl;
+        SetColor();
+        cout<<"                    ";
+    cout<< " 遊戲開始 " <<endl<<endl<< flush;
+    cout<<"                    ";
+    SetColor(240);
+    cout<< " 規則說明 " <<endl<<endl<< flush;
+    SetColor();
+    cout<<"                    ";
+    cout<< " 離開遊戲 "  <<endl<< flush;
+    break;
+
+    case 2 :
+        system("cls");
+            cout<<"╔═╗┌┬┐┌─┐┬─┐  ╔╦╗┬─┐┌─┐┬┌─"<<endl;
+cout<<"╚═╗  │  ├─┤├┬┘    ║  ├┬┘├┤  ├┴┐"<<endl;
+cout<<"╚═╝  ┴  ┴  ┴┴└─    ╩  ┴└─└─┘┴  ┴"<<endl<<endl;
+        SetColor();
+        cout<<"                    ";
+    cout<< " 遊戲開始 " <<endl<<endl<< flush;;
+    SetColor();
+    cout<<"                    ";
+    cout<< " 規則說明 " <<endl<<endl<< flush;
+    cout<<"                    ";
+    SetColor(240);
+    cout<< " 離開遊戲 "  <<endl<< flush;
+    SetColor();
+    break;
+
+      }
+          } // if(13)的
+
+    }while(ch!=13);
+       switch(updown){
+      case 0 :
+       return 3;
+       break;  //start
+      case 1 :
+       return 2;
+       break;  //rule
+      case 2 :
+        return 1;
+        break; // leave
+
+    }
+
+}
+
+int Rule(){
+    system("cls");
+
+    cout<<"12345678945612348974"<<endl;
+    cout<<"12345678945612348974"<<endl;
+    cout<<"12345678945612348974"<<endl;
+    cout<<"12345678945612348974"<<endl;
+    cout<<"12345678945612348974"<<endl;
+    return 0;
 }
