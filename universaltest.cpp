@@ -10,10 +10,10 @@
 
 using namespace std;
 
-int dice(),ChooseDice1(),ChooseDice2(),InBlack(),YesNo(),GameStart(),Rule(),TruePosition(int);
+int dice(),ChooseDice1(),ChooseDice2(),InBlack(),YesNo(),GameStart(),Rule(),TruePosition(int),Attack(int);
 int result1,result2,sum;
 string DiceNumber;
-
+int position[3][10]; // it's mean whose star
 
 void SetColor(int color = 7)  //更改顏色函式
 {
@@ -30,7 +30,7 @@ struct  Player{
         int y;  //y<20 it's star
         int z;  //z loop number(圈數)
         bool BlackHole; //是否在黑洞
-        int position[3][10]; // it's mean whose star
+
 
 
         /*position[]=800
@@ -124,7 +124,7 @@ int main(){
     for(int k=0;k<4;k++){
        for(int i=0;i<3;i++){
            for(int j=0;j<10;j++){
-               play[k].position[i][j] = 800;
+               position[i][j] = 800;
                                 }
                            }
                         }    // set up to 800
@@ -163,7 +163,7 @@ int gamestart = GameStart();   //取得開始數據
         }else{  //如未在黑洞裡,繼續執行程序
             sum = result1 + result2 ;
             play[xx].y = play[xx].y + sum;  //加上骰子行走步數
-            if(play[xx].y>20){   //超過一圈時歸零且加上一圈統計
+            if(play[xx].y>19){   //超過一圈時歸零且加上一圈統計
               play[xx].y = play[xx].y - 20;
               play[xx].z = play[xx].z+1;
             }
@@ -177,6 +177,9 @@ int gamestart = GameStart();   //取得開始數據
                cout<<endl<<"您的位置移動至";
                TruePosition(xx);  //確定位置
                cout<<endl;
+
+               Attack(xx);
+               cout<<endl;
             }
         }
 
@@ -187,7 +190,7 @@ int gamestart = GameStart();   //取得開始數據
         system("pause");
       }
 
-      cout<<play[0].energy<<play[0].x<<play[0].y<<play[0].position[0][0]<<result1<<result2<<endl;
+      cout<<play[0].energy<<play[0].x<<play[0].y<<position[0][0]<<result1<<result2<<endl;
 
     }while((play[0].energy!=0&&play[0].body!=0)&&(play[1].energy!=0&&play[1].body!=0)&&(play[2].energy!=0&&play[2].body!=0)&&(play[3].energy!=0&&play[3].body!=0));
     //遊戲結束
@@ -255,8 +258,7 @@ int InBlack(){
 int YesNo(){  //選擇yes or no 的函式
 
     int ch;
-
-    cout<< "choose yes or no" <<endl;
+    int lastch;
     SetColor(240);
 
     cout<< "\r YES " ;
@@ -274,6 +276,7 @@ int YesNo(){  //選擇yes or no 的函式
     cout<< "\r YES " ;
     SetColor();
     cout<< " NO  " << flush ;
+    lastch = 75;
     break;
 
     case 77 :
@@ -282,13 +285,14 @@ int YesNo(){  //選擇yes or no 的函式
     SetColor(240);
     cout<< " NO  " << flush ;
     SetColor();
+    lastch = 77;
     break;
 
       }
           } // if(13)的
 
     }while(ch!=13);
-       switch(ch){
+       switch(lastch){
       case 75 :
        return 2;
        break;  //yes
@@ -508,3 +512,26 @@ int TruePosition(int xx){
 
 
 }
+
+
+int Attack(int xx){
+    int xA , yA , zA;
+      xA = play[xx].x ;
+      yA = play[xx].y ;
+    if(position[xA][yA]==800){
+        cout<<endl<<"您到了一個無人星球"<<endl;
+        cout<<"是否要在此建立基地"<<endl<<endl;
+        zA = YesNo();
+        if(zA==18){ //yes 不知為何回傳18
+              position[xA][yA] = 800 + xx*10 ;
+              cout<<endl<<"成功在此建立 一 階段基地"<<endl;
+        }else {//no
+              cout<<endl<<"您未在此建立基地"<<endl;
+        }
+
+    }
+}
+
+
+
+
