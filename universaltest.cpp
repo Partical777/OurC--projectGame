@@ -12,7 +12,7 @@ using namespace std;
 
 int dice(),ChooseDice1(),ChooseDice2(),InBlack(),YesNo(),GameStart(),Rule(),TruePosition(int),Attack(int),FirstBase(int,int),SecondBase(int,int),ThirdBase(int,int),Energy(int),Body(int);
 int result1,result2,sum;
-string DiceNumber;
+string DiceNumber,name[4];
 int position[3][10]; // it's mean whose star
 
 void SetColor(int color = 7)  //更改顏色函式
@@ -136,11 +136,23 @@ int main(){
 int gamestart = GameStart();   //取得開始數據
 
     if(gamestart==3){   //開始遊戲
+
+      system("cls");
+      cout<<endl<<"請設定玩家1名稱:";  //設定玩家名稱
+      cin>>name[0]; cout<<endl;
+      cout<<"請設定玩家2名稱:";
+      cin>>name[1]; cout<<endl;
+      cout<<"請設定玩家3名稱:";
+      cin>>name[2]; cout<<endl;
+      cout<<"請設定玩家4名稱:";
+      cin>>name[3]; cout<<endl;
+
     do{
+
       for(int xx=0;xx<4;xx++){
         system("cls");
         SetColor(14);
-        cout<<"現在輪到第 "<<xx+1<<" 位玩家"<<endl;
+        cout<<"現在輪到 "<<xx+1<<" 號玩家 : "<<name[xx]<<endl;
         SetColor();
         cout<<"Energy  ";    //show energy
         Energy(xx);
@@ -166,11 +178,35 @@ int gamestart = GameStart();   //取得開始數據
                 cout<<"您未逃脫黑洞的束縛,將繼續被限制行動"<<endl<<endl;
             }else{
                 cout<<"您已成功逃脫黑洞的束縛,將被隨機傳送到另外兩個星系之一"<<endl<<endl;
+                int AshortName = 0;
+                switch(play[xx].x){  //隨機傳送至另兩星系
+                   case 0:
+                       do{
+                        AshortName = dice();
+                        play[xx].x = AshortName-1;
+                        cout<<play[xx].x;
+                       }while(play[xx].x == 0);
+                    break;
+                   case 1:
+                       do{
+                        AshortName = dice();
+                        play[xx].x = AshortName-1;
+                       }while(play[xx].x == 1);
+                    break;
+                   case 2:
+                       do{
+                        AshortName = dice();
+                        play[xx].x = AshortName-1;
+                       }while(play[xx].x == 2);
+                    break;
+                }
+
             }
             //--------------------------------------------------
         }else{  //如未在黑洞裡,繼續執行程序
             sum = result1 + result2 ;
             play[xx].y = play[xx].y + sum;  //加上骰子行走步數
+            play[xx].energy = play[xx].energy - sum*2 ;
             if(play[xx].y>19){   //超過一圈時歸零且加上一圈統計
               play[xx].y = play[xx].y - 20;
               play[xx].z = play[xx].z+1;
@@ -198,7 +234,6 @@ int gamestart = GameStart();   //取得開始數據
         system("pause");
       }
 
-      cout<<play[0].energy<<play[0].x<<play[0].y<<position[0][0]<<result1<<result2<<endl;
 
     }while((play[0].energy!=0&&play[0].body!=0)&&(play[1].energy!=0&&play[1].body!=0)&&(play[2].energy!=0&&play[2].body!=0)&&(play[3].energy!=0&&play[3].body!=0));
     //遊戲結束
@@ -378,7 +413,8 @@ int YesNo(){  //選擇yes or no 的函式
           } // if(13)的
 
     }while(ch!=13);
-       switch(lastch){
+       return lastch;
+    /*   switch(lastch){
       case 75 :
        return 2;
        break;  //yes
@@ -386,7 +422,7 @@ int YesNo(){  //選擇yes or no 的函式
        return 1;
        break;  //no
 
-    }
+    }*/
 
 
 }
@@ -594,6 +630,7 @@ int TruePosition(int xx){
                 }
                 break;
 
+
             }
 
 
@@ -608,11 +645,11 @@ int Attack(int xx){
         cout<<endl<<"您到了一個無人星球"<<endl;
         cout<<"是否要在此建立基地"<<endl<<endl;
         zA = YesNo();
-        if(zA==18){ //yes 不知為何回傳18
-              position[xA][yA] = position[xA][yA] + xx*10 ;
-              cout<<endl<<"成功建設一階段基地"<<endl;
-        }else {//no
+        if(zA==77){ //no
               cout<<endl<<"您未在此建立基地"<<endl;
+        }else {//yes
+              position[xA][yA] = position[xA][yA] + xx*10 ;
+              cout<<endl<<"Successful Building 一階段基地"<<endl;
         }
     }else if(position[xA][yA]==810||position[xA][yA]==811||position[xA][yA]==812){   //如果走到玩家1一階段基地
         cout<<endl<<position[xA][yA]<<endl<<endl;
@@ -693,11 +730,11 @@ int FirstBase(int xA,int yA){
     int zA;
                 cout<<"是否升級基地為二階段基地"<<endl;
                 zA = YesNo();
-                 if(zA==18){ //yes 不知為何回傳18
+                 if(zA==77){ //no
+                    cout<<endl<<"您未升級基地"<<endl;
+                }else {//yes
                     position[xA][yA] = position[xA][yA]+1 ;
                     cout<<endl<<"成功升級為第二階段基地"<<endl;
-                }else {//no
-                    cout<<endl<<"您未升級基地"<<endl;
                 }
 
 }
@@ -706,11 +743,11 @@ int SecondBase(int xA,int yA){
     int zA;
                 cout<<"是否升級基地為三階段基地"<<endl;
                 zA = YesNo();
-                 if(zA==18){ //yes 不知為何回傳18
+                 if(zA==75){ //no
+                    cout<<endl<<"您未升級基地"<<endl;
+                }else {//yes
                     position[xA][yA] = position[xA][yA]+1 ;
                     cout<<endl<<"成功升級為第三階段基地"<<endl;
-                }else {//no
-                    cout<<endl<<"您未升級基地"<<endl;
                 }
 
 }
