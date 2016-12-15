@@ -10,7 +10,7 @@
 
 using namespace std;
 
-int dice(),ChooseDice1(),ChooseDice2(),InBlack(),YesNo(),GameStart(),Rule(),TruePosition(int),Attack(int);
+int dice(),ChooseDice1(),ChooseDice2(),InBlack(),YesNo(),GameStart(),Rule(),TruePosition(int),Attack(int),FirstBase(int,int),SecondBase(int,int),ThirdBase(int,int);
 int result1,result2,sum;
 string DiceNumber;
 int position[3][10]; // it's mean whose star
@@ -36,8 +36,10 @@ struct  Player{
         /*position[]=800
           800是完全初始狀態
           8 無意義
-          0 代表幾階基地   1 2 3 分別代表階數
-          0 代表屬於誰的   1 2 3 4 分彆屬於4個玩家*/
+          0 代表屬於誰的   1 2 3 4 分別屬於4個玩家
+          0 代表幾階基地   0 1 2 分別代表階數
+          810 811 812 屬於player1*/
+
         /*BlackHole
           0表示 false 沒有在黑洞
           1表示 true 有在黑洞*/
@@ -523,13 +525,116 @@ int Attack(int xx){
         cout<<"是否要在此建立基地"<<endl<<endl;
         zA = YesNo();
         if(zA==18){ //yes 不知為何回傳18
-              position[xA][yA] = 800 + xx*10 ;
-              cout<<endl<<"成功在此建立 一 階段基地"<<endl;
+              position[xA][yA] = position[xA][yA] + xx*10 ;
+              cout<<endl<<"成功建設一階段基地"<<endl;
         }else {//no
               cout<<endl<<"您未在此建立基地"<<endl;
         }
+    }else if(position[xA][yA]==810||position[xA][yA]==811||position[xA][yA]==812){   //如果走到玩家1一階段基地
+        cout<<endl<<position[xA][yA]<<endl<<endl;
+        if(xx==0){   //如果玩家1到了玩家1的領地
+            switch(position[xA][yA]){
+            case 810:
+                FirstBase(xA,yA);
+                break;
+            case 811:
+                SecondBase(xA,yA);
+                break;
+            case 812:
+                ThirdBase(xA,yA);
+                break;
+            }
+        }else{  //其他玩家走到玩家1的基地
+
+        }
+
+    }else if(position[xA][yA]==820||position[xA][yA]==821||position[xA][yA]==822){   //如果走到玩家2一階段基地
+        cout<<endl<<position[xA][yA]<<endl<<endl;
+        if(xx==1){   //如果玩家2到了玩家2的領地
+            switch(position[xA][yA]){
+            case 820:
+                FirstBase(xA,yA);
+                break;
+            case 821:
+                SecondBase(xA,yA);
+                break;
+            case 822:
+                ThirdBase(xA,yA);
+                break;
+            }
+        }else{  //其他玩家走到玩家2的基地
+
+        }
+
+    }else if(position[xA][yA]==830||position[xA][yA]==831||position[xA][yA]==832){   //如果走到玩家3一階段基地
+        cout<<endl<<position[xA][yA]<<endl<<endl;
+        if(xx==2){   //如果玩家3到了玩家3的領地
+                switch(position[xA][yA]){
+            case 830:
+                FirstBase(xA,yA);
+                break;
+            case 831:
+                SecondBase(xA,yA);
+                break;
+            case 832:
+                ThirdBase(xA,yA);
+                break;
+            }
+        }else{  //其他玩家走到玩家3的基地
+
+        }
+
+    }else if(position[xA][yA]==840||position[xA][yA]==841||position[xA][yA]==842){   //如果走到玩家4一階段基地
+        cout<<endl<<position[xA][yA]<<endl<<endl;
+        if(xx==4){   //如果玩家4到了玩家4的領地
+                switch(position[xA][yA]){
+            case 840:
+                FirstBase(xA,yA);
+                break;
+            case 841:
+                SecondBase(xA,yA);
+                break;
+            case 842:
+                ThirdBase(xA,yA);
+                break;
+            }
+        }else{  //其他玩家走到玩家4的基地
+
+        }
 
     }
+}
+
+int FirstBase(int xA,int yA){
+    int zA;
+                cout<<"是否升級基地為二階段基地"<<endl;
+                zA = YesNo();
+                 if(zA==18){ //yes 不知為何回傳18
+                    position[xA][yA] = position[xA][yA]+1 ;
+                    cout<<endl<<"成功升級為第二階段基地"<<endl;
+                }else {//no
+                    cout<<endl<<"您未升級基地"<<endl;
+                }
+
+}
+
+int SecondBase(int xA,int yA){
+    int zA;
+                cout<<"是否升級基地為三階段基地"<<endl;
+                zA = YesNo();
+                 if(zA==18){ //yes 不知為何回傳18
+                    position[xA][yA] = position[xA][yA]+1 ;
+                    cout<<endl<<"成功升級為第三階段基地"<<endl;
+                }else {//no
+                    cout<<endl<<"您未升級基地"<<endl;
+                }
+
+}
+
+int ThirdBase(int xA,int yA){
+                cout<<"您的基地已升級至最高級,在此可修復機甲"<<endl;  //回復少許機甲讀數
+
+
 }
 
 
