@@ -10,7 +10,7 @@
 
 using namespace std;
 
-int dice(),ChooseDice1(),ChooseDice2(),InBlack(),YesNo(),GameStart(),Rule(),TruePosition(int),Attack(int),FirstBase(int,int),SecondBase(int,int),ThirdBase(int,int);
+int dice(),ChooseDice1(),ChooseDice2(),InBlack(),YesNo(),GameStart(),Rule(),TruePosition(int),Attack(int),FirstBase(int,int),SecondBase(int,int),ThirdBase(int,int),Energy(int),Body(int);
 int result1,result2,sum;
 string DiceNumber;
 int position[3][10]; // it's mean whose star
@@ -142,6 +142,12 @@ int gamestart = GameStart();   //¨ú±o¶}©l¼Æ¾Ú
         SetColor(14);
         cout<<"²{¦b½ü¨ì²Ä "<<xx+1<<" ¦ìª±®a"<<endl;
         SetColor();
+        cout<<"Energy  ";    //show energy
+        Energy(xx);
+        cout<<play[xx].energy<<" Tons"<<endl;
+        cout<<"Body    ";      // show body
+        Body(xx);
+        cout<<play[xx].body<<"%"<<endl;
 
         if(play[xx].BlackHole){  //´ú¸Õ¬O§_¦b¶Â¬}
            cout<<endl<<"*±z¤´³Q¶Â¬}§l¤Þ¤¤,½ÐÂY¥X¬Û¦Pªº»ë¤lÂI¼Æ¥H°k²æ"<<endl<<endl;
@@ -246,6 +252,84 @@ int dice(){
     }
     result = random[rand()%10000];
    return result;
+}
+
+int Energy(int xx){  //  energy~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+     if(play[xx].energy>=500){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢pùâ  ";}
+else if(play[xx].energy>=487){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢nùâ  ";}
+else if(play[xx].energy>=475){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p  ùâ  ";}
+else if(play[xx].energy>=462){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢n  ùâ  ";}
+else if(play[xx].energy>=450){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p    ùâ  ";}
+else if(play[xx].energy>=437){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢n    ùâ  ";}
+else if(play[xx].energy>=425){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p      ùâ  ";}
+else if(play[xx].energy>=412){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢n      ùâ  ";}
+else if(play[xx].energy>=400){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p        ùâ  ";}
+else if(play[xx].energy>=387){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢n        ùâ  ";}
+else if(play[xx].energy>=375){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p          ùâ  ";}
+else if(play[xx].energy>=362){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢n          ùâ  ";}
+else if(play[xx].energy>=350){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p            ùâ  ";}
+else if(play[xx].energy>=337){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢n            ùâ  ";}
+else if(play[xx].energy>=325){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p              ùâ  ";}
+else if(play[xx].energy>=312){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢n              ùâ  ";}
+else if(play[xx].energy>=300){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p                ùâ  ";}
+else if(play[xx].energy>=287){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢n                ùâ  ";}
+else if(play[xx].energy>=275){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p                  ùâ  ";}
+else if(play[xx].energy>=262){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢n                  ùâ  ";}
+else if(play[xx].energy>=250){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p                    ùâ  ";}
+else if(play[xx].energy>=237){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p¢p¢p¢n                    ùâ  ";}
+else if(play[xx].energy>=225){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p¢p¢p                      ùâ  ";}
+else if(play[xx].energy>=212){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p¢p¢n                      ùâ  ";}
+else if(play[xx].energy>=200){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p¢p                        ùâ  ";}
+else if(play[xx].energy>=187){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p¢n                        ùâ  ";}
+else if(play[xx].energy>=175){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p                          ùâ  ";}
+else if(play[xx].energy>=162){cout<<"ùà¢p¢p¢p¢p¢p¢p¢n                          ùâ  ";}
+else if(play[xx].energy>=150){cout<<"ùà¢p¢p¢p¢p¢p¢p                            ùâ  ";}
+else if(play[xx].energy>=137){cout<<"ùà¢p¢p¢p¢p¢p¢n                            ùâ  ";}
+else if(play[xx].energy>=125){cout<<"ùà¢p¢p¢p¢p¢p                              ùâ  ";}
+else if(play[xx].energy>=112){cout<<"ùà¢p¢p¢p¢p¢n                              ùâ  ";}
+else if(play[xx].energy>=100){cout<<"ùà¢p¢p¢p¢p                                ùâ  ";}
+else if(play[xx].energy>=87 ){cout<<"ùà¢p¢p¢p¢n                                ùâ  ";}
+else if(play[xx].energy>=75 ){SetColor(12);
+                              cout<<"ùà¢p¢p¢p                                  ùâ  ";SetColor();}
+else if(play[xx].energy>=62 ){SetColor(12);
+                              cout<<"ùà¢p¢p¢n                                  ùâ  ";SetColor();}
+else if(play[xx].energy>=50 ){SetColor(12);
+                              cout<<"ùà¢p¢p                                    ùâ  ";SetColor();}
+else if(play[xx].energy>=37 ){SetColor(12);
+                              cout<<"ùà¢p¢n                                    ùâ  ";SetColor();}
+else if(play[xx].energy>=25 ){SetColor(12);
+                              cout<<"ùà¢p                                      ùâ  ";SetColor();}
+else if(play[xx].energy>=12 ){SetColor(12);
+                              cout<<"ùà¢n                                      ùâ  ";SetColor();}
+
+}
+
+int Body(int xx){   //body~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    if(play[xx].body>=100){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢pùâ  ";}
+else if(play[xx].body>=95){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p  ùâ  ";}
+else if(play[xx].body>=90){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p    ùâ  ";}
+else if(play[xx].body>=85){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p      ùâ  ";}
+else if(play[xx].body>=80){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p        ùâ  ";}
+else if(play[xx].body>=75){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p          ùâ  ";}
+else if(play[xx].body>=70){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p            ùâ  ";}
+else if(play[xx].body>=65){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p              ùâ  ";}
+else if(play[xx].body>=60){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p                ùâ  ";}
+else if(play[xx].body>=55){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p                  ùâ  ";}
+else if(play[xx].body>=50){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p¢p¢p¢p                    ùâ  ";}
+else if(play[xx].body>=45){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p¢p¢p                      ùâ  ";}
+else if(play[xx].body>=40){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p¢p                        ùâ  ";}
+else if(play[xx].body>=35){cout<<"ùà¢p¢p¢p¢p¢p¢p¢p                          ùâ  ";}
+else if(play[xx].body>=30){cout<<"ùà¢p¢p¢p¢p¢p¢p                            ùâ  ";}
+else if(play[xx].body>=25){cout<<"ùà¢p¢p¢p¢p¢p                              ùâ  ";}
+else if(play[xx].body>=20){cout<<"ùà¢p¢p¢p¢p                                ùâ  ";}
+else if(play[xx].body>=15){SetColor(13);
+                           cout<<"ùà¢p¢p¢p                                  ùâ  ";SetColor();}
+else if(play[xx].body>=10){SetColor(13);
+                           cout<<"ùà¢p¢p                                    ùâ  ";SetColor();}
+else if(play[xx].body>=5 ){SetColor(13);
+                           cout<<"ùà¢p                                      ùâ  ";SetColor();}
+
 }
 
 int InBlack(){
