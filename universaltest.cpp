@@ -10,9 +10,9 @@
 
 using namespace std;
 
-int dice(),ChooseDice1(),ChooseDice2(),InBlack(),YesNo(),GameStart(),Rule(),TruePosition(int),Attack(int);
+int dice(),ChooseDice1(),ChooseDice2(),InBlack(),YesNo(),GameStart(),Rule(),TruePosition(int),Attack(int),FirstBase(int,int),SecondBase(int,int),ThirdBase(int,int),Energy(int),Body(int),Map(),BaseColor(int,int),Stage(int,int);
 int result1,result2,sum;
-string DiceNumber;
+string DiceNumber,name[4];
 int position[3][10]; // it's mean whose star
 
 void SetColor(int color = 7)  //更改顏色函式
@@ -36,8 +36,10 @@ struct  Player{
         /*position[]=800
           800是完全初始狀態
           8 無意義
-          0 代表幾階基地   1 2 3 分別代表階數
-          0 代表屬於誰的   1 2 3 4 分彆屬於4個玩家*/
+          0 代表屬於誰的   1 2 3 4 分別屬於4個玩家
+          0 代表幾階基地   0 1 2 分別代表階數
+          810 811 812 屬於player1*/
+
         /*BlackHole
           0表示 false 沒有在黑洞
           1表示 true 有在黑洞*/
@@ -134,12 +136,31 @@ int main(){
 int gamestart = GameStart();   //取得開始數據
 
     if(gamestart==3){   //開始遊戲
+
+      system("cls");
+      cout<<endl<<"請設定玩家1名稱:";  //設定玩家名稱
+      cin>>name[0]; cout<<endl;
+      cout<<"請設定玩家2名稱:";
+      cin>>name[1]; cout<<endl;
+      cout<<"請設定玩家3名稱:";
+      cin>>name[2]; cout<<endl;
+      cout<<"請設定玩家4名稱:";
+      cin>>name[3]; cout<<endl;
+
     do{
+
       for(int xx=0;xx<4;xx++){
         system("cls");
         SetColor(14);
-        cout<<"現在輪到第 "<<xx+1<<" 位玩家"<<endl;
+        cout<<"現在輪到 "<<xx+1<<" 號玩家 : "<<name[xx]<<endl;
         SetColor();
+        cout<<"Energy  ";    //show energy
+        Energy(xx);
+        cout<<play[xx].energy<<" Tons"<<endl;
+        cout<<"Body    ";      // show body
+        Body(xx);
+        cout<<play[xx].body<<"%"<<endl;
+        Map();
 
         if(play[xx].BlackHole){  //測試是否在黑洞
            cout<<endl<<"*您仍被黑洞吸引中,請擲出相同的骰子點數以逃脫"<<endl<<endl;
@@ -158,11 +179,35 @@ int gamestart = GameStart();   //取得開始數據
                 cout<<"您未逃脫黑洞的束縛,將繼續被限制行動"<<endl<<endl;
             }else{
                 cout<<"您已成功逃脫黑洞的束縛,將被隨機傳送到另外兩個星系之一"<<endl<<endl;
+                int AshortName = 0;
+                switch(play[xx].x){  //隨機傳送至另兩星系
+                   case 0:
+                       do{
+                        AshortName = dice();
+                        play[xx].x = AshortName-1;
+                        cout<<play[xx].x;
+                       }while(play[xx].x == 0);
+                    break;
+                   case 1:
+                       do{
+                        AshortName = dice();
+                        play[xx].x = AshortName-1;
+                       }while(play[xx].x == 1);
+                    break;
+                   case 2:
+                       do{
+                        AshortName = dice();
+                        play[xx].x = AshortName-1;
+                       }while(play[xx].x == 2);
+                    break;
+                }
+
             }
             //--------------------------------------------------
         }else{  //如未在黑洞裡,繼續執行程序
             sum = result1 + result2 ;
             play[xx].y = play[xx].y + sum;  //加上骰子行走步數
+            play[xx].energy = play[xx].energy - sum*2 ;
             if(play[xx].y>19){   //超過一圈時歸零且加上一圈統計
               play[xx].y = play[xx].y - 20;
               play[xx].z = play[xx].z+1;
@@ -190,7 +235,6 @@ int gamestart = GameStart();   //取得開始數據
         system("pause");
       }
 
-      cout<<play[0].energy<<play[0].x<<play[0].y<<position[0][0]<<result1<<result2<<endl;
 
     }while((play[0].energy!=0&&play[0].body!=0)&&(play[1].energy!=0&&play[1].body!=0)&&(play[2].energy!=0&&play[2].body!=0)&&(play[3].energy!=0&&play[3].body!=0));
     //遊戲結束
@@ -246,6 +290,84 @@ int dice(){
    return result;
 }
 
+int Energy(int xx){  //  energy~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+     if(play[xx].energy>=500){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉╣  ";}
+else if(play[xx].energy>=487){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▋╣  ";}
+else if(play[xx].energy>=475){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉  ╣  ";}
+else if(play[xx].energy>=462){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▋  ╣  ";}
+else if(play[xx].energy>=450){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉    ╣  ";}
+else if(play[xx].energy>=437){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▋    ╣  ";}
+else if(play[xx].energy>=425){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉      ╣  ";}
+else if(play[xx].energy>=412){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▋      ╣  ";}
+else if(play[xx].energy>=400){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉        ╣  ";}
+else if(play[xx].energy>=387){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▋        ╣  ";}
+else if(play[xx].energy>=375){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉          ╣  ";}
+else if(play[xx].energy>=362){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▋          ╣  ";}
+else if(play[xx].energy>=350){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉            ╣  ";}
+else if(play[xx].energy>=337){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▋            ╣  ";}
+else if(play[xx].energy>=325){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉              ╣  ";}
+else if(play[xx].energy>=312){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▋              ╣  ";}
+else if(play[xx].energy>=300){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉                ╣  ";}
+else if(play[xx].energy>=287){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▋                ╣  ";}
+else if(play[xx].energy>=275){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉                  ╣  ";}
+else if(play[xx].energy>=262){cout<<"╠▉▉▉▉▉▉▉▉▉▉▋                  ╣  ";}
+else if(play[xx].energy>=250){cout<<"╠▉▉▉▉▉▉▉▉▉▉                    ╣  ";}
+else if(play[xx].energy>=237){cout<<"╠▉▉▉▉▉▉▉▉▉▋                    ╣  ";}
+else if(play[xx].energy>=225){cout<<"╠▉▉▉▉▉▉▉▉▉                      ╣  ";}
+else if(play[xx].energy>=212){cout<<"╠▉▉▉▉▉▉▉▉▋                      ╣  ";}
+else if(play[xx].energy>=200){cout<<"╠▉▉▉▉▉▉▉▉                        ╣  ";}
+else if(play[xx].energy>=187){cout<<"╠▉▉▉▉▉▉▉▋                        ╣  ";}
+else if(play[xx].energy>=175){cout<<"╠▉▉▉▉▉▉▉                          ╣  ";}
+else if(play[xx].energy>=162){cout<<"╠▉▉▉▉▉▉▋                          ╣  ";}
+else if(play[xx].energy>=150){cout<<"╠▉▉▉▉▉▉                            ╣  ";}
+else if(play[xx].energy>=137){cout<<"╠▉▉▉▉▉▋                            ╣  ";}
+else if(play[xx].energy>=125){cout<<"╠▉▉▉▉▉                              ╣  ";}
+else if(play[xx].energy>=112){cout<<"╠▉▉▉▉▋                              ╣  ";}
+else if(play[xx].energy>=100){cout<<"╠▉▉▉▉                                ╣  ";}
+else if(play[xx].energy>=87 ){cout<<"╠▉▉▉▋                                ╣  ";}
+else if(play[xx].energy>=75 ){SetColor(12);
+                              cout<<"╠▉▉▉                                  ╣  ";SetColor();}
+else if(play[xx].energy>=62 ){SetColor(12);
+                              cout<<"╠▉▉▋                                  ╣  ";SetColor();}
+else if(play[xx].energy>=50 ){SetColor(12);
+                              cout<<"╠▉▉                                    ╣  ";SetColor();}
+else if(play[xx].energy>=37 ){SetColor(12);
+                              cout<<"╠▉▋                                    ╣  ";SetColor();}
+else if(play[xx].energy>=25 ){SetColor(12);
+                              cout<<"╠▉                                      ╣  ";SetColor();}
+else if(play[xx].energy>=12 ){SetColor(12);
+                              cout<<"╠▋                                      ╣  ";SetColor();}
+
+}
+
+int Body(int xx){   //body~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    if(play[xx].body>=100){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉╣  ";}
+else if(play[xx].body>=95){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉  ╣  ";}
+else if(play[xx].body>=90){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉    ╣  ";}
+else if(play[xx].body>=85){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉      ╣  ";}
+else if(play[xx].body>=80){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉        ╣  ";}
+else if(play[xx].body>=75){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉          ╣  ";}
+else if(play[xx].body>=70){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉            ╣  ";}
+else if(play[xx].body>=65){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉              ╣  ";}
+else if(play[xx].body>=60){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉                ╣  ";}
+else if(play[xx].body>=55){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉                  ╣  ";}
+else if(play[xx].body>=50){cout<<"╠▉▉▉▉▉▉▉▉▉▉                    ╣  ";}
+else if(play[xx].body>=45){cout<<"╠▉▉▉▉▉▉▉▉▉                      ╣  ";}
+else if(play[xx].body>=40){cout<<"╠▉▉▉▉▉▉▉▉                        ╣  ";}
+else if(play[xx].body>=35){cout<<"╠▉▉▉▉▉▉▉                          ╣  ";}
+else if(play[xx].body>=30){cout<<"╠▉▉▉▉▉▉                            ╣  ";}
+else if(play[xx].body>=25){cout<<"╠▉▉▉▉▉                              ╣  ";}
+else if(play[xx].body>=20){cout<<"╠▉▉▉▉                                ╣  ";}
+else if(play[xx].body>=15){SetColor(13);
+                           cout<<"╠▉▉▉                                  ╣  ";SetColor();}
+else if(play[xx].body>=10){SetColor(13);
+                           cout<<"╠▉▉                                    ╣  ";SetColor();}
+else if(play[xx].body>=5 ){SetColor(13);
+                           cout<<"╠▉                                      ╣  ";SetColor();}
+
+}
+
 int InBlack(){
     //  黑洞程序
         if(result1==result2){ //測試兩個骰子是否一樣
@@ -292,7 +414,8 @@ int YesNo(){  //選擇yes or no 的函式
           } // if(13)的
 
     }while(ch!=13);
-       switch(lastch){
+       return lastch;
+    /*   switch(lastch){
       case 75 :
        return 2;
        break;  //yes
@@ -300,7 +423,7 @@ int YesNo(){  //選擇yes or no 的函式
        return 1;
        break;  //no
 
-    }
+    }*/
 
 
 }
@@ -508,6 +631,7 @@ int TruePosition(int xx){
                 }
                 break;
 
+
             }
 
 
@@ -522,16 +646,341 @@ int Attack(int xx){
         cout<<endl<<"您到了一個無人星球"<<endl;
         cout<<"是否要在此建立基地"<<endl<<endl;
         zA = YesNo();
-        if(zA==18){ //yes 不知為何回傳18
-              position[xA][yA] = 800 + xx*10 ;
-              cout<<endl<<"成功在此建立 一 階段基地"<<endl;
-        }else {//no
+        if(zA==77){ //no
               cout<<endl<<"您未在此建立基地"<<endl;
+        }else {//yes
+              position[xA][yA] = position[xA][yA] + xx*10 ;
+              cout<<endl<<"Successful Building 一階段基地"<<endl;
+        }
+    }else if(position[xA][yA]==810||position[xA][yA]==811||position[xA][yA]==812){   //如果走到玩家1一階段基地
+        cout<<endl<<position[xA][yA]<<endl<<endl;
+        if(xx==0){   //如果玩家1到了玩家1的領地
+            switch(position[xA][yA]){
+            case 810:
+                FirstBase(xA,yA);
+                break;
+            case 811:
+                SecondBase(xA,yA);
+                break;
+            case 812:
+                ThirdBase(xA,yA);
+                break;
+            }
+        }else{  //其他玩家走到玩家1的基地
+
+        }
+
+    }else if(position[xA][yA]==820||position[xA][yA]==821||position[xA][yA]==822){   //如果走到玩家2一階段基地
+        cout<<endl<<position[xA][yA]<<endl<<endl;
+        if(xx==1){   //如果玩家2到了玩家2的領地
+            switch(position[xA][yA]){
+            case 820:
+                FirstBase(xA,yA);
+                break;
+            case 821:
+                SecondBase(xA,yA);
+                break;
+            case 822:
+                ThirdBase(xA,yA);
+                break;
+            }
+        }else{  //其他玩家走到玩家2的基地
+
+        }
+
+    }else if(position[xA][yA]==830||position[xA][yA]==831||position[xA][yA]==832){   //如果走到玩家3一階段基地
+        cout<<endl<<position[xA][yA]<<endl<<endl;
+        if(xx==2){   //如果玩家3到了玩家3的領地
+                switch(position[xA][yA]){
+            case 830:
+                FirstBase(xA,yA);
+                break;
+            case 831:
+                SecondBase(xA,yA);
+                break;
+            case 832:
+                ThirdBase(xA,yA);
+                break;
+            }
+        }else{  //其他玩家走到玩家3的基地
+
+        }
+
+    }else if(position[xA][yA]==840||position[xA][yA]==841||position[xA][yA]==842){   //如果走到玩家4一階段基地
+        cout<<endl<<position[xA][yA]<<endl<<endl;
+        if(xx==4){   //如果玩家4到了玩家4的領地
+                switch(position[xA][yA]){
+            case 840:
+                FirstBase(xA,yA);
+                break;
+            case 841:
+                SecondBase(xA,yA);
+                break;
+            case 842:
+                ThirdBase(xA,yA);
+                break;
+            }
+        }else{  //其他玩家走到玩家4的基地
+
         }
 
     }
 }
 
+int FirstBase(int xA,int yA){
+    int zA;
+                cout<<"是否升級基地為二階段基地"<<endl;
+                zA = YesNo();
+                 if(zA==77){ //no
+                    cout<<endl<<"您未升級基地"<<endl;
+                }else {//yes
+                    position[xA][yA] = position[xA][yA]+1 ;
+                    cout<<endl<<"成功升級為第二階段基地"<<endl;
+                }
 
+}
+
+int SecondBase(int xA,int yA){
+    int zA;
+                cout<<"是否升級基地為三階段基地"<<endl;
+                zA = YesNo();
+                 if(zA==75){ //no
+                    cout<<endl<<"您未升級基地"<<endl;
+                }else {//yes
+                    position[xA][yA] = position[xA][yA]+1 ;
+                    cout<<endl<<"成功升級為第三階段基地"<<endl;
+                }
+
+}
+
+int ThirdBase(int xA,int yA){
+                cout<<"您的基地已升級至最高級,在此可修復機甲"<<endl;  //回復少許機甲讀數
+
+
+}
+
+int Map(){
+
+    BaseColor(0,0);
+    cout<<"                                     ";
+    Stage(0,0);
+    cout<<endl;
+    cout<<"                                      "<<"★"<<endl;  //1
+    cout<<"                                      "<<"sun"<<endl<<endl;  //1
+    SetColor();
+
+    BaseColor(0,19);
+    cout<<"                               ";
+    Stage(0,19);  SetColor();                                 //20
+    BaseColor(0,1);
+    cout<<"            ";
+    Stage(0,1);
+    cout<<endl;   SetColor();                                 //2
+
+    BaseColor(0,19);
+    cout<<"                               "<<"★"<<"      ";  SetColor();   //20
+    BaseColor(0,1);
+    cout<<"      "<<"★"<<"              "<<endl;             SetColor();    //2`
+    BaseColor(0,19);
+    cout<<"                               "<<"sun"<<"      ";SetColor();  //20
+    BaseColor(0,1);
+    cout<<"       "<<"sun"<<"              "<<endl<<endl;    SetColor();//2
+
+    BaseColor(0,18);
+    cout<<"                          ";
+    Stage(0,18);  SetColor();                                 //19
+    BaseColor(0,2);
+    cout<<"                      ";
+    Stage(0,2);
+    cout<<endl;   SetColor();                                 //3
+
+    BaseColor(0,18);
+    cout<<"                          "<<"★"<<"          ";    SetColor();//19
+    BaseColor(0,2);
+    cout<<"            "<<"★"<<"              "<<endl;        SetColor();//3
+    BaseColor(0,18);
+    cout<<"                          "<<"sun"<<"          ";  SetColor();  //19
+    BaseColor(0,2);
+    cout<<"            "<<"sun"<<"              "<<endl<<endl;SetColor();    //3
+
+    BaseColor(0,17);
+    cout<<"                    ";
+    Stage(0,17);  SetColor();                                 //18
+    BaseColor(0,3);
+    cout<<"                                  ";
+    Stage(0,3);
+    cout<<endl;   SetColor();                                 //4
+
+    BaseColor(0,17);
+    cout<<"                    "<<"★"<<"            ";          SetColor(); //18
+    BaseColor(0,3);
+    cout<<"                      "<<"★"<<"     "<<endl;         SetColor(); //4
+    BaseColor(0,17);
+    cout<<"                    "<<"sun"<<"            ";        SetColor();   //18
+    BaseColor(0,3);
+    cout<<"                      "<<"sun"<<"     "<<endl<<endl; SetColor(); //4
+
+    BaseColor(0,16);
+    cout<<"               ";
+    Stage(0,16);  SetColor();                                 //17
+    BaseColor(0,2);
+    cout<<"                                             ";
+    Stage(0,2);
+    cout<<endl;   SetColor();                                 //5
+
+    BaseColor(0,16);
+    cout<<"               "<<"★"<<"                   ";           SetColor(); //17
+    BaseColor(0,4);
+    cout<<"                          "<<"★"<<"     "<<endl;        SetColor();//5
+    BaseColor(0,16);
+    cout<<"               "<<"sun"<<"                   ";         SetColor();//17
+    BaseColor(0,4);
+    cout<<"                          "<<"sun"<<"     "<<endl<<endl;SetColor();  //5
+
+    BaseColor(0,15);
+    cout<<"          ";
+    Stage(0,15);  SetColor();                                 //16
+    BaseColor(0,5);
+    cout<<"                                                       ";
+    Stage(0,5);
+    cout<<endl;   SetColor();                                 //6
+
+    BaseColor(0,15);
+    cout<<"          "<<"★"<<"                        ";                 SetColor(); //16
+    BaseColor(0,5);
+    cout<<"                               "<<"★"<<"     "<<endl;         SetColor();  //6
+    BaseColor(0,15);
+    cout<<"          "<<"sun"<<"                        ";               SetColor();//16
+    BaseColor(0,5);
+    cout<<"                               "<<"sun"<<"     "<<endl<<endl; SetColor(); //6
+
+    BaseColor(0,14);
+    cout<<"      ";
+    Stage(0,14);  SetColor();                                 //15
+    BaseColor(0,6);
+    cout<<"                                                                ";
+    Stage(0,6);
+    cout<<endl;   SetColor();                                 //7
+
+    BaseColor(0,14);
+    cout<<"      "<<"★"<<"                             ";                    SetColor();//15
+    BaseColor(0,6);
+    cout<<"                                   "<<"★"<<"     "<<endl;         SetColor();//7
+    BaseColor(0,14);
+    cout<<"      "<<"sun"<<"                             ";                  SetColor();//15
+    BaseColor(0,6);
+    cout<<"                                   "<<"sun"<<"     "<<endl<<endl; SetColor(); //7
+
+    BaseColor(0,13);
+    cout<<" ";
+    Stage(0,13);  SetColor();                                 //14
+    BaseColor(0,12);
+    cout<<"          ";
+    Stage(0,12);  SetColor();                                 //13
+    BaseColor(0,11);
+    cout<<"           ";
+    Stage(0,11);  SetColor();                                 //12
+    BaseColor(0,10);
+    cout<<"           ";
+    Stage(0,10);  SetColor();                                 //11
+    BaseColor(0,9);
+    cout<<"           ";
+    Stage(0,9);  SetColor();                                 //10
+    BaseColor(0,8);
+    cout<<"          ";
+    Stage(0,8);  SetColor();                                 //9
+    BaseColor(0,7);
+    cout<<"           ";
+    Stage(0,7);
+    cout<<endl;   SetColor();                                 //8
+
+    BaseColor(0,13);
+    cout<<" "<<"★"<<"          ";  SetColor(); //14
+    BaseColor(0,12);
+    cout<<"★"<<"           ";  SetColor(); //13
+    BaseColor(0,11);
+    cout<<"★"<<"           ";  SetColor(); //12
+    BaseColor(0,10);
+    cout<<"★"<<"           ";  SetColor(); //11
+    BaseColor(0,9);
+    cout<<"★"<<"           ";  SetColor(); //10
+    BaseColor(0,8);
+    cout<<"★"<<"          ";  SetColor(); //9
+    BaseColor(0,7);
+    cout<<"★"<<"           "<<endl; SetColor();  //8
+    BaseColor(0,13);
+    cout<<" "<<"sun"<<"          ";  SetColor(); //14
+    BaseColor(0,12);
+    cout<<"sun"<<"           ";  SetColor(); //13
+    BaseColor(0,11);
+    cout<<"sun"<<"           ";  SetColor(); //12
+    BaseColor(0,10);
+    cout<<"sun"<<"           ";  SetColor(); //11
+    BaseColor(0,9);
+    cout<<"sun"<<"           ";  SetColor(); //10
+    BaseColor(0,8);
+    cout<<"sun"<<"            ";  SetColor(); //9
+    BaseColor(0,7);
+    cout<<"sun"<<"           "<<endl<<endl;  SetColor(); //8
+
+}
+
+int BaseColor(int a,int b){    //設置佔領區顏色
+
+    switch(position[a][b]){
+        case 800:
+            SetColor();
+        break;
+        case 810:
+            SetColor(12);
+        break;
+        case 811:
+            SetColor(12);
+        break;
+        case 812:
+            SetColor(12);
+        break;
+        case 820:
+            SetColor(14);
+        break;
+        case 821:
+            SetColor(14);
+        break;
+        case 822:
+            SetColor(14);
+        break;
+        case 830:
+            SetColor(10);
+        break;
+        case 831:
+            SetColor(10);
+        break;
+        case 832:
+            SetColor(10);
+        break;
+        case 840:
+            SetColor(11);
+        break;
+        case 841:
+            SetColor(11);
+        break;
+        case 842:
+            SetColor(11);
+        break;
+    }
+}
+
+int Stage(int a,int b){    //設置階段基地
+          if(position[a][b]==810||position[a][b]==820||position[a][b]==830){
+        cout<<" * ";
+    }else if(position[a][b]==811||position[a][b]==821||position[a][b]==831){
+        cout<<" **";
+    }else if(position[a][b]==812||position[a][b]==822||position[a][b]==832){
+        cout<<"***";
+    }else{
+        cout<<"   ";
+    }
+
+}
 
 
