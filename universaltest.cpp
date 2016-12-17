@@ -11,7 +11,7 @@
 using namespace std;
 
 int dice(),ChooseDice1(),ChooseDice2(),InBlack(),YesNo(),GameStart(),Rule(),TruePosition(int),Attack(int),FirstBase(int,int),SecondBase(int,int),ThirdBase(int,int),Energy(int),Body(int),Map(),BaseColor(int,int),Stage(int,int);
-int result1,result2,sum;
+int result1,result2,sum,xxglobal;
 string DiceNumber,name[4];
 int position[3][10]; // it's mean whose star
 
@@ -121,7 +121,7 @@ struct Player play[] = {
      };
 //---------------------------------------main----------------------------------------------------------------------------------
 int main(){
-
+    int color[4]={12,14,10,11};
 
     for(int k=0;k<4;k++){
        for(int i=0;i<3;i++){
@@ -129,7 +129,14 @@ int main(){
                position[i][j] = 800;
                                 }
                            }
+               play[k].energy = 500;
+               play[k].body = 100 ;
+               play[k].x = 0 ;
+               play[k].y = 0 ;
+               play[k].z = 0 ;
+               play[k].BlackHole = 0 ;
                         }    // set up to 800
+               system("cls");
 
 
       // -----------------------up it's basic set up -------------------------------------------------------------------
@@ -151,7 +158,7 @@ int gamestart = GameStart();   //取得開始數據
 
       for(int xx=0;xx<4;xx++){
         system("cls");
-        SetColor(14);
+        SetColor(color[xx]);
         cout<<"現在輪到 "<<xx+1<<" 號玩家 : "<<name[xx]<<endl;
         SetColor();
         cout<<"Energy  ";    //show energy
@@ -161,7 +168,7 @@ int gamestart = GameStart();   //取得開始數據
         Body(xx);
         cout<<play[xx].body<<"%"<<endl;
         Map();
-
+              xxglobal = xx ;
         if(play[xx].BlackHole){  //測試是否在黑洞
            cout<<endl<<"*您仍被黑洞吸引中,請擲出相同的骰子點數以逃脫"<<endl<<endl;
         }else{
@@ -185,7 +192,6 @@ int gamestart = GameStart();   //取得開始數據
                        do{
                         AshortName = dice();
                         play[xx].x = AshortName-1;
-                        cout<<play[xx].x;
                        }while(play[xx].x == 0);
                     break;
                    case 1:
@@ -236,9 +242,10 @@ int gamestart = GameStart();   //取得開始數據
       }
 
 
-    }while((play[0].energy!=0&&play[0].body!=0)&&(play[1].energy!=0&&play[1].body!=0)&&(play[2].energy!=0&&play[2].body!=0)&&(play[3].energy!=0&&play[3].body!=0));
+    }while((play[0].energy>0&&play[0].body>0)&&(play[1].energy>0&&play[1].body>0)&&(play[2].energy>0&&play[2].body>0)&&(play[3].energy>0&&play[3].body>0));
     //遊戲結束
       cout<<"The Game Over,winner is "; //winner
+      system("pause");
       return main();
     //將設置跳回選單會離開~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -338,6 +345,8 @@ else if(play[xx].energy>=25 ){SetColor(12);
                               cout<<"╠▉                                      ╣  ";SetColor();}
 else if(play[xx].energy>=12 ){SetColor(12);
                               cout<<"╠▋                                      ╣  ";SetColor();}
+else if(play[xx].energy>0 ){SetColor(0);
+                              cout<<"╠▎                                      ╣  ";SetColor();}
 
 }
 
@@ -365,6 +374,8 @@ else if(play[xx].body>=10){SetColor(13);
                            cout<<"╠▉▉                                    ╣  ";SetColor();}
 else if(play[xx].body>=5 ){SetColor(13);
                            cout<<"╠▉                                      ╣  ";SetColor();}
+else if(play[xx].body>0 ){SetColor(13);
+                           cout<<"╠▎                                      ╣  ";SetColor();}
 
 }
 
@@ -644,16 +655,18 @@ int Attack(int xx){
       yA = play[xx].y ;
     if(position[xA][yA]==800){
         cout<<endl<<"您到了一個無人星球"<<endl;
-        cout<<"是否要在此建立基地"<<endl<<endl;
+        cout<<"是否要消耗50Tons在此建立基地"<<endl<<endl;
         zA = YesNo();
         if(zA==77){ //no
               cout<<endl<<"您未在此建立基地"<<endl;
         }else {//yes
-              position[xA][yA] = position[xA][yA] + xx*10 ;
+              position[xA][yA] = position[xA][yA] + (xx+1)*10 ;
+              play[xx].energy = play[xx].energy - 50 ;
               cout<<endl<<"Successful Building 一階段基地"<<endl;
+              cout<<"Energy 減少了 50 Tons " <<endl;
         }
     }else if(position[xA][yA]==810||position[xA][yA]==811||position[xA][yA]==812){   //如果走到玩家1一階段基地
-        cout<<endl<<position[xA][yA]<<endl<<endl;
+
         if(xx==0){   //如果玩家1到了玩家1的領地
             switch(position[xA][yA]){
             case 810:
@@ -668,10 +681,30 @@ int Attack(int xx){
             }
         }else{  //其他玩家走到玩家1的基地
 
+         switch(position[xA][yA]){
+            case 810:
+                cout<<"您現在走到 "<<name[0]<<" 的一階段基地"<<endl<<"遭受內部防禦設施攻擊!"<<endl<<"Energy減少10 Tons  ,  Body受損2%"<<endl<<name[0]<<" 的Energy 增加10 Tons";
+          play[xx].energy = play[xx].energy - 10;
+          play[xx].body = play[xx].body - 2 ;
+          play[0].energy = play[0].energy + 10;
+                break;
+            case 811:
+                cout<<"您現在走到 "<<name[0]<<" 的二階段基地"<<endl<<"遭受內部防禦設施攻擊!!"<<endl<<"Energy減少20 Tons  ,  Body受損4%"<<endl<<name[0]<<" 的Energy 增加20 Tons";
+          play[xx].energy = play[xx].energy - 20;
+          play[xx].body = play[xx].body - 4 ;
+          play[0].energy = play[0].energy + 20;
+                break;
+            case 812:
+                cout<<"您現在走到 "<<name[0]<<" 的三階段基地"<<endl<<"遭受內部防禦設施攻擊!!!"<<endl<<"Energy減少50 Tons  ,  Body受損8%"<<endl<<name[0]<<" 的Energy 增加50 Tons";
+          play[xx].energy = play[xx].energy - 50;
+          play[xx].body = play[xx].body - 8 ;
+          play[0].energy = play[0].energy + 50;
+                break;
+         }    //switch
         }
 
     }else if(position[xA][yA]==820||position[xA][yA]==821||position[xA][yA]==822){   //如果走到玩家2一階段基地
-        cout<<endl<<position[xA][yA]<<endl<<endl;
+
         if(xx==1){   //如果玩家2到了玩家2的領地
             switch(position[xA][yA]){
             case 820:
@@ -686,10 +719,31 @@ int Attack(int xx){
             }
         }else{  //其他玩家走到玩家2的基地
 
+          switch(position[xA][yA]){
+            case 820:
+                cout<<"您現在走到 "<<name[1]<<" 的一階段基地"<<endl<<"遭受內部防禦設施攻擊!!"<<endl<<"Energy減少10 Tons  ,  Body受損2%"<<endl<<name[1]<<" 的Energy 增加10 Tons";
+          play[xx].energy = play[xx].energy - 10;
+          play[xx].body = play[xx].body - 2 ;
+          play[0].energy = play[0].energy + 10;
+                break;
+            case 821:
+                cout<<"您現在走到 "<<name[1]<<" 的二階段基地"<<endl<<"遭受內部防禦設施攻擊!!"<<endl<<"Energy減少20 Tons  ,  Body受損4%"<<endl<<name[1]<<" 的Energy 增加20 Tons";
+          play[xx].energy = play[xx].energy - 20;
+          play[xx].body = play[xx].body - 4 ;
+          play[0].energy = play[0].energy + 20;
+                break;
+            case 822:
+                cout<<"您現在走到 "<<name[1]<<" 的三階段基地"<<endl<<"遭受內部防禦設施攻擊!!!"<<endl<<"Energy減少50 Tons  ,  Body受損8%"<<endl<<name[1]<<" 的Energy 增加50 Tons";
+          play[xx].energy = play[xx].energy - 50;
+          play[xx].body = play[xx].body - 8 ;
+          play[1].energy = play[1].energy + 50;
+                break;
+         }    //switch
+
         }
 
     }else if(position[xA][yA]==830||position[xA][yA]==831||position[xA][yA]==832){   //如果走到玩家3一階段基地
-        cout<<endl<<position[xA][yA]<<endl<<endl;
+
         if(xx==2){   //如果玩家3到了玩家3的領地
                 switch(position[xA][yA]){
             case 830:
@@ -704,10 +758,31 @@ int Attack(int xx){
             }
         }else{  //其他玩家走到玩家3的基地
 
+          switch(position[xA][yA]){
+            case 830:
+                cout<<"您現在走到 "<<name[2]<<" 的一階段基地"<<endl<<"遭受內部防禦設施攻擊!!"<<endl<<"Energy減少10 Tons  ,  Body受損2%"<<endl<<name[2]<<" 的Energy 增加10 Tons";
+          play[xx].energy = play[xx].energy - 10;
+          play[xx].body = play[xx].body - 2 ;
+          play[0].energy = play[0].energy + 10;
+                break;
+            case 831:
+                cout<<"您現在走到 "<<name[2]<<" 的二階段基地"<<endl<<"遭受內部防禦設施攻擊!!"<<endl<<"Energy減少20 Tons  ,  Body受損4%"<<endl<<name[2]<<" 的Energy 增加20 Tons";
+          play[xx].energy = play[xx].energy - 20;
+          play[xx].body = play[xx].body - 4 ;
+          play[0].energy = play[0].energy + 20;
+                break;
+            case 832:
+                cout<<"您現在走到 "<<name[2]<<" 的三階段基地"<<endl<<"遭受內部防禦設施攻擊!!!"<<endl<<"Energy減少50 Tons  ,  Body受損8%"<<endl<<name[2]<<" 的Energy 增加50 Tons";
+          play[xx].energy = play[xx].energy - 50;
+          play[xx].body = play[xx].body - 8 ;
+          play[2].energy = play[2].energy + 50;
+                break;
+         }    //switch
+
         }
 
     }else if(position[xA][yA]==840||position[xA][yA]==841||position[xA][yA]==842){   //如果走到玩家4一階段基地
-        cout<<endl<<position[xA][yA]<<endl<<endl;
+
         if(xx==4){   //如果玩家4到了玩家4的領地
                 switch(position[xA][yA]){
             case 840:
@@ -722,6 +797,27 @@ int Attack(int xx){
             }
         }else{  //其他玩家走到玩家4的基地
 
+          switch(position[xA][yA]){
+            case 840:
+                cout<<"您現在走到 "<<name[3]<<" 的一階段基地"<<endl<<"遭受內部防禦設施攻擊!!"<<endl<<"Energy減少10 Tons  ,  Body受損2%"<<endl<<name[3]<<" 的Energy 增加10 Tons";
+          play[xx].energy = play[xx].energy - 10;
+          play[xx].body = play[xx].body - 2 ;
+          play[0].energy = play[0].energy + 10;
+                break;
+            case 841:
+                cout<<"您現在走到 "<<name[3]<<" 的二階段基地"<<endl<<"遭受內部防禦設施攻擊!!"<<endl<<"Energy減少20 Tons  ,  Body受損4%"<<endl<<name[3]<<" 的Energy 增加20 Tons";
+          play[xx].energy = play[xx].energy - 20;
+          play[xx].body = play[xx].body - 4 ;
+          play[0].energy = play[0].energy + 20;
+                break;
+            case 842:
+                cout<<"您現在走到 "<<name[3]<<" 的三階段基地"<<endl<<"遭受內部防禦設施攻擊!!!"<<endl<<"Energy減少50 Tons  ,  Body受損8%"<<endl<<name[3]<<" 的Energy 增加50 Tons";
+          play[xx].energy = play[xx].energy - 50;
+          play[xx].body = play[xx].body - 8 ;
+          play[3].energy = play[3].energy + 50;
+                break;
+         }    //switch
+
         }
 
     }
@@ -729,26 +825,32 @@ int Attack(int xx){
 
 int FirstBase(int xA,int yA){
     int zA;
-                cout<<"是否升級基地為二階段基地"<<endl;
+    int xx = xxglobal;
+                cout<<"是否消耗80Tons來升級基地為二階段基地"<<endl;
                 zA = YesNo();
                  if(zA==77){ //no
                     cout<<endl<<"您未升級基地"<<endl;
                 }else {//yes
                     position[xA][yA] = position[xA][yA]+1 ;
+                    play[xx].energy = play[xx].energy - 80 ;
                     cout<<endl<<"成功升級為第二階段基地"<<endl;
+                    cout<<"Energy 減少了 80 Tons " <<endl;
                 }
 
 }
 
 int SecondBase(int xA,int yA){
     int zA;
-                cout<<"是否升級基地為三階段基地"<<endl;
+    int xx = xxglobal;
+                cout<<"是否消耗150Tons升級基地為三階段基地"<<endl;
                 zA = YesNo();
                  if(zA==75){ //no
                     cout<<endl<<"您未升級基地"<<endl;
                 }else {//yes
                     position[xA][yA] = position[xA][yA]+1 ;
+                    play[xx].energy = play[xx].energy - 150 ;
                     cout<<endl<<"成功升級為第三階段基地"<<endl;
+                    cout<<"Energy 減少了 150 Tons " <<endl;
                 }
 
 }
@@ -823,9 +925,9 @@ int Map(){
     BaseColor(0,16);
     cout<<"               ";
     Stage(0,16);  SetColor();                                 //17
-    BaseColor(0,2);
+    BaseColor(0,4);
     cout<<"                                             ";
-    Stage(0,2);
+    Stage(0,4);
     cout<<endl;   SetColor();                                 //5
 
     BaseColor(0,16);
@@ -971,11 +1073,11 @@ int BaseColor(int a,int b){    //設置佔領區顏色
 }
 
 int Stage(int a,int b){    //設置階段基地
-          if(position[a][b]==810||position[a][b]==820||position[a][b]==830){
+          if(position[a][b]==810||position[a][b]==820||position[a][b]==830||position[a][b]==840){
         cout<<" * ";
-    }else if(position[a][b]==811||position[a][b]==821||position[a][b]==831){
+    }else if(position[a][b]==811||position[a][b]==821||position[a][b]==831||position[a][b]==841){
         cout<<" **";
-    }else if(position[a][b]==812||position[a][b]==822||position[a][b]==832){
+    }else if(position[a][b]==812||position[a][b]==822||position[a][b]==832||position[a][b]==842){
         cout<<"***";
     }else{
         cout<<"   ";
