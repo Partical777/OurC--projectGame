@@ -13,7 +13,7 @@ using namespace std;
 int dice(),ChooseDice1(),ChooseDice2(),InBlack(),YesNo(),GameStart(),Rule(),TruePosition(int),Attack(int),FirstBase(int,int),SecondBase(int,int),ThirdBase(int,int),Energy(int),Body(int),Map(),BaseColor(int,int),Stage(int,int);
 int result1,result2,sum,xxglobal;
 string DiceNumber,name[4];
-int position[3][10]; // it's mean whose star
+int position[3][20]; // it's mean whose star
 
 void SetColor(int color = 7)  //更改顏色函式
 {
@@ -114,10 +114,10 @@ struct  Drama3{  //星系3劇情
         string c19 = "星系3星球20";
 };
 struct Player play[] = {
-       {500,100,0,0,0,0},  //player1  use play[0]
-       {500,100,0,0,0,0},  //player2  use play[1]
-       {500,100,0,0,0,0},  //player3  use play[2]
-       {500,100,0,0,0,0},  //player4  use play[3]
+       {5000,100,0,0,0,0},  //player1  use play[0]
+       {5000,100,0,0,0,0},  //player2  use play[1]
+       {5000,100,0,0,0,0},  //player3  use play[2]
+       {5000,100,0,0,0,0},  //player4  use play[3]
      };
 //---------------------------------------main----------------------------------------------------------------------------------
 int main(){
@@ -125,11 +125,11 @@ int main(){
 
     for(int k=0;k<4;k++){
        for(int i=0;i<3;i++){
-           for(int j=0;j<10;j++){
+           for(int j=0;j<20;j++){
                position[i][j] = 800;
                                 }
                            }
-               play[k].energy = 500;
+               play[k].energy = 5000;
                play[k].body = 100 ;
                play[k].x = 0 ;
                play[k].y = 0 ;
@@ -167,10 +167,10 @@ int gamestart = GameStart();   //取得開始數據
         cout<<"Body    ";      // show body
         Body(xx);
         cout<<play[xx].body<<"%"<<endl;
+        xxglobal = xx ;
         Map();
-              xxglobal = xx ;
         if(play[xx].BlackHole){  //測試是否在黑洞
-           cout<<endl<<"*您仍被黑洞吸引中,請擲出相同的骰子點數以逃脫"<<endl<<endl;
+           cout<<"您仍在第"<<play[xx].x+1<<"星系"<<endl<<"*仍被黑洞吸引中,請擲出相同的骰子點數以逃脫"<<endl<<endl;
         }else{
             cout<<endl<<"您現在的位置是";
             TruePosition(xx);  //確定位置
@@ -244,7 +244,19 @@ int gamestart = GameStart();   //取得開始數據
 
     }while((play[0].energy>0&&play[0].body>0)&&(play[1].energy>0&&play[1].body>0)&&(play[2].energy>0&&play[2].body>0)&&(play[3].energy>0&&play[3].body>0));
     //遊戲結束
-      cout<<"The Game Over,winner is "; //winner
+     string loser;
+      if(play[0].energy>0&&play[0].body>0){
+        loser = name[0];
+      }else if(play[1].energy>0&&play[1].body>0){
+        loser = name[1];
+      }else if(play[2].energy>0&&play[2].body>0){
+        loser = name[2];
+      }else if(play[3].energy>0&&play[3].body>0){
+        loser = name[3];
+      }
+      cout<<"The Game Over,loser is "<<loser<<endl; //winner
+      cout<<"請輸入任意按鍵"<<endl;
+      cin>>loser ;
       system("pause");
       return main();
     //將設置跳回選單會離開~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -724,13 +736,13 @@ int Attack(int xx){
                 cout<<"您現在走到 "<<name[1]<<" 的一階段基地"<<endl<<"遭受內部防禦設施攻擊!!"<<endl<<"Energy減少10 Tons  ,  Body受損2%"<<endl<<name[1]<<" 的Energy 增加10 Tons";
           play[xx].energy = play[xx].energy - 10;
           play[xx].body = play[xx].body - 2 ;
-          play[0].energy = play[0].energy + 10;
+          play[1].energy = play[1].energy + 10;
                 break;
             case 821:
                 cout<<"您現在走到 "<<name[1]<<" 的二階段基地"<<endl<<"遭受內部防禦設施攻擊!!"<<endl<<"Energy減少20 Tons  ,  Body受損4%"<<endl<<name[1]<<" 的Energy 增加20 Tons";
           play[xx].energy = play[xx].energy - 20;
           play[xx].body = play[xx].body - 4 ;
-          play[0].energy = play[0].energy + 20;
+          play[1].energy = play[1].energy + 20;
                 break;
             case 822:
                 cout<<"您現在走到 "<<name[1]<<" 的三階段基地"<<endl<<"遭受內部防禦設施攻擊!!!"<<endl<<"Energy減少50 Tons  ,  Body受損8%"<<endl<<name[1]<<" 的Energy 增加50 Tons";
@@ -763,13 +775,13 @@ int Attack(int xx){
                 cout<<"您現在走到 "<<name[2]<<" 的一階段基地"<<endl<<"遭受內部防禦設施攻擊!!"<<endl<<"Energy減少10 Tons  ,  Body受損2%"<<endl<<name[2]<<" 的Energy 增加10 Tons";
           play[xx].energy = play[xx].energy - 10;
           play[xx].body = play[xx].body - 2 ;
-          play[0].energy = play[0].energy + 10;
+          play[2].energy = play[2].energy + 10;
                 break;
             case 831:
                 cout<<"您現在走到 "<<name[2]<<" 的二階段基地"<<endl<<"遭受內部防禦設施攻擊!!"<<endl<<"Energy減少20 Tons  ,  Body受損4%"<<endl<<name[2]<<" 的Energy 增加20 Tons";
           play[xx].energy = play[xx].energy - 20;
           play[xx].body = play[xx].body - 4 ;
-          play[0].energy = play[0].energy + 20;
+          play[2].energy = play[2].energy + 20;
                 break;
             case 832:
                 cout<<"您現在走到 "<<name[2]<<" 的三階段基地"<<endl<<"遭受內部防禦設施攻擊!!!"<<endl<<"Energy減少50 Tons  ,  Body受損8%"<<endl<<name[2]<<" 的Energy 增加50 Tons";
@@ -802,13 +814,13 @@ int Attack(int xx){
                 cout<<"您現在走到 "<<name[3]<<" 的一階段基地"<<endl<<"遭受內部防禦設施攻擊!!"<<endl<<"Energy減少10 Tons  ,  Body受損2%"<<endl<<name[3]<<" 的Energy 增加10 Tons";
           play[xx].energy = play[xx].energy - 10;
           play[xx].body = play[xx].body - 2 ;
-          play[0].energy = play[0].energy + 10;
+          play[3].energy = play[3].energy + 10;
                 break;
             case 841:
                 cout<<"您現在走到 "<<name[3]<<" 的二階段基地"<<endl<<"遭受內部防禦設施攻擊!!"<<endl<<"Energy減少20 Tons  ,  Body受損4%"<<endl<<name[3]<<" 的Energy 增加20 Tons";
           play[xx].energy = play[xx].energy - 20;
           play[xx].body = play[xx].body - 4 ;
-          play[0].energy = play[0].energy + 20;
+          play[3].energy = play[3].energy + 20;
                 break;
             case 842:
                 cout<<"您現在走到 "<<name[3]<<" 的三階段基地"<<endl<<"遭受內部防禦設施攻擊!!!"<<endl<<"Energy減少50 Tons  ,  Body受損8%"<<endl<<name[3]<<" 的Energy 增加50 Tons";
@@ -862,167 +874,168 @@ int ThirdBase(int xA,int yA){
 }
 
 int Map(){
+    int yy = play[xxglobal].x ;
 
-    BaseColor(0,0);
+    BaseColor(yy,0);
     cout<<"                                     ";
-    Stage(0,0);
+    Stage(yy,0);
     cout<<endl;
     cout<<"                                      "<<"★"<<endl;  //1
     cout<<"                                      "<<"sun"<<endl<<endl;  //1
     SetColor();
 
-    BaseColor(0,19);
+    BaseColor(yy,19);
     cout<<"                               ";
-    Stage(0,19);  SetColor();                                 //20
-    BaseColor(0,1);
+    Stage(yy,19);  SetColor();                                 //20
+    BaseColor(yy,1);
     cout<<"            ";
-    Stage(0,1);
+    Stage(yy,1);
     cout<<endl;   SetColor();                                 //2
 
-    BaseColor(0,19);
+    BaseColor(yy,19);
     cout<<"                               "<<"★"<<"      ";  SetColor();   //20
-    BaseColor(0,1);
+    BaseColor(yy,1);
     cout<<"      "<<"★"<<"              "<<endl;             SetColor();    //2`
-    BaseColor(0,19);
+    BaseColor(yy,19);
     cout<<"                               "<<"sun"<<"      ";SetColor();  //20
-    BaseColor(0,1);
+    BaseColor(yy,1);
     cout<<"       "<<"sun"<<"              "<<endl<<endl;    SetColor();//2
 
-    BaseColor(0,18);
+    BaseColor(yy,18);
     cout<<"                          ";
-    Stage(0,18);  SetColor();                                 //19
-    BaseColor(0,2);
+    Stage(yy,18);  SetColor();                                 //19
+    BaseColor(yy,2);
     cout<<"                      ";
-    Stage(0,2);
+    Stage(yy,2);
     cout<<endl;   SetColor();                                 //3
 
-    BaseColor(0,18);
+    BaseColor(yy,18);
     cout<<"                          "<<"★"<<"          ";    SetColor();//19
-    BaseColor(0,2);
+    BaseColor(yy,2);
     cout<<"            "<<"★"<<"              "<<endl;        SetColor();//3
-    BaseColor(0,18);
+    BaseColor(yy,18);
     cout<<"                          "<<"sun"<<"          ";  SetColor();  //19
-    BaseColor(0,2);
+    BaseColor(yy,2);
     cout<<"            "<<"sun"<<"              "<<endl<<endl;SetColor();    //3
 
-    BaseColor(0,17);
+    BaseColor(yy,17);
     cout<<"                    ";
-    Stage(0,17);  SetColor();                                 //18
-    BaseColor(0,3);
+    Stage(yy,17);  SetColor();                                 //18
+    BaseColor(yy,3);
     cout<<"                                  ";
-    Stage(0,3);
+    Stage(yy,3);
     cout<<endl;   SetColor();                                 //4
 
-    BaseColor(0,17);
+    BaseColor(yy,17);
     cout<<"                    "<<"★"<<"            ";          SetColor(); //18
-    BaseColor(0,3);
+    BaseColor(yy,3);
     cout<<"                      "<<"★"<<"     "<<endl;         SetColor(); //4
-    BaseColor(0,17);
+    BaseColor(yy,17);
     cout<<"                    "<<"sun"<<"            ";        SetColor();   //18
-    BaseColor(0,3);
+    BaseColor(yy,3);
     cout<<"                      "<<"sun"<<"     "<<endl<<endl; SetColor(); //4
 
-    BaseColor(0,16);
+    BaseColor(yy,16);
     cout<<"               ";
-    Stage(0,16);  SetColor();                                 //17
-    BaseColor(0,4);
+    Stage(yy,16);  SetColor();                                 //17
+    BaseColor(yy,4);
     cout<<"                                             ";
-    Stage(0,4);
+    Stage(yy,4);
     cout<<endl;   SetColor();                                 //5
 
-    BaseColor(0,16);
+    BaseColor(yy,16);
     cout<<"               "<<"★"<<"                   ";           SetColor(); //17
-    BaseColor(0,4);
+    BaseColor(yy,4);
     cout<<"                          "<<"★"<<"     "<<endl;        SetColor();//5
-    BaseColor(0,16);
+    BaseColor(yy,16);
     cout<<"               "<<"sun"<<"                   ";         SetColor();//17
-    BaseColor(0,4);
+    BaseColor(yy,4);
     cout<<"                          "<<"sun"<<"     "<<endl<<endl;SetColor();  //5
 
-    BaseColor(0,15);
+    BaseColor(yy,15);
     cout<<"          ";
-    Stage(0,15);  SetColor();                                 //16
-    BaseColor(0,5);
+    Stage(yy,15);  SetColor();                                 //16
+    BaseColor(yy,5);
     cout<<"                                                       ";
-    Stage(0,5);
+    Stage(yy,5);
     cout<<endl;   SetColor();                                 //6
 
-    BaseColor(0,15);
+    BaseColor(yy,15);
     cout<<"          "<<"★"<<"                        ";                 SetColor(); //16
-    BaseColor(0,5);
+    BaseColor(yy,5);
     cout<<"                               "<<"★"<<"     "<<endl;         SetColor();  //6
-    BaseColor(0,15);
+    BaseColor(yy,15);
     cout<<"          "<<"sun"<<"                        ";               SetColor();//16
-    BaseColor(0,5);
+    BaseColor(yy,5);
     cout<<"                               "<<"sun"<<"     "<<endl<<endl; SetColor(); //6
 
-    BaseColor(0,14);
+    BaseColor(yy,14);
     cout<<"      ";
-    Stage(0,14);  SetColor();                                 //15
-    BaseColor(0,6);
+    Stage(yy,14);  SetColor();                                 //15
+    BaseColor(yy,6);
     cout<<"                                                                ";
-    Stage(0,6);
+    Stage(yy,6);
     cout<<endl;   SetColor();                                 //7
 
-    BaseColor(0,14);
+    BaseColor(yy,14);
     cout<<"      "<<"★"<<"                             ";                    SetColor();//15
-    BaseColor(0,6);
+    BaseColor(yy,6);
     cout<<"                                   "<<"★"<<"     "<<endl;         SetColor();//7
-    BaseColor(0,14);
+    BaseColor(yy,14);
     cout<<"      "<<"sun"<<"                             ";                  SetColor();//15
-    BaseColor(0,6);
+    BaseColor(yy,6);
     cout<<"                                   "<<"sun"<<"     "<<endl<<endl; SetColor(); //7
 
-    BaseColor(0,13);
+    BaseColor(yy,13);
     cout<<" ";
-    Stage(0,13);  SetColor();                                 //14
-    BaseColor(0,12);
+    Stage(yy,13);  SetColor();                                 //14
+    BaseColor(yy,12);
     cout<<"          ";
-    Stage(0,12);  SetColor();                                 //13
-    BaseColor(0,11);
+    Stage(yy,12);  SetColor();                                 //13
+    BaseColor(yy,11);
     cout<<"           ";
-    Stage(0,11);  SetColor();                                 //12
-    BaseColor(0,10);
+    Stage(yy,11);  SetColor();                                 //12
+    BaseColor(yy,10);
     cout<<"           ";
-    Stage(0,10);  SetColor();                                 //11
-    BaseColor(0,9);
+    Stage(yy,10);  SetColor();                                 //11
+    BaseColor(yy,9);
     cout<<"           ";
-    Stage(0,9);  SetColor();                                 //10
-    BaseColor(0,8);
+    Stage(yy,9);  SetColor();                                 //10
+    BaseColor(yy,8);
     cout<<"          ";
-    Stage(0,8);  SetColor();                                 //9
-    BaseColor(0,7);
+    Stage(yy,8);  SetColor();                                 //9
+    BaseColor(yy,7);
     cout<<"           ";
-    Stage(0,7);
+    Stage(yy,7);
     cout<<endl;   SetColor();                                 //8
 
-    BaseColor(0,13);
+    BaseColor(yy,13);
     cout<<" "<<"★"<<"          ";  SetColor(); //14
-    BaseColor(0,12);
+    BaseColor(yy,12);
     cout<<"★"<<"           ";  SetColor(); //13
-    BaseColor(0,11);
+    BaseColor(yy,11);
     cout<<"★"<<"           ";  SetColor(); //12
-    BaseColor(0,10);
+    BaseColor(yy,10);
     cout<<"★"<<"           ";  SetColor(); //11
-    BaseColor(0,9);
+    BaseColor(yy,9);
     cout<<"★"<<"           ";  SetColor(); //10
-    BaseColor(0,8);
+    BaseColor(yy,8);
     cout<<"★"<<"          ";  SetColor(); //9
-    BaseColor(0,7);
+    BaseColor(yy,7);
     cout<<"★"<<"           "<<endl; SetColor();  //8
-    BaseColor(0,13);
+    BaseColor(yy,13);
     cout<<" "<<"sun"<<"          ";  SetColor(); //14
-    BaseColor(0,12);
+    BaseColor(yy,12);
     cout<<"sun"<<"           ";  SetColor(); //13
-    BaseColor(0,11);
+    BaseColor(yy,11);
     cout<<"sun"<<"           ";  SetColor(); //12
-    BaseColor(0,10);
+    BaseColor(yy,10);
     cout<<"sun"<<"           ";  SetColor(); //11
-    BaseColor(0,9);
+    BaseColor(yy,9);
     cout<<"sun"<<"           ";  SetColor(); //10
-    BaseColor(0,8);
+    BaseColor(yy,8);
     cout<<"sun"<<"            ";  SetColor(); //9
-    BaseColor(0,7);
+    BaseColor(yy,7);
     cout<<"sun"<<"           "<<endl<<endl;  SetColor(); //8
 
 }
