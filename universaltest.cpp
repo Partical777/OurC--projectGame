@@ -11,7 +11,7 @@
 using namespace std;
 
 int dice(),ChooseDice1(),ChooseDice2(),InBlack(),YesNo(),GameStart(),Rule(),TruePosition(int),Attack(int),FirstBase(int,int),SecondBase(int,int),ThirdBase(int,int),Energy(int),Body(int),Map(),BaseColor(int,int),Stage(int,int);
-int Bet(),ChooseGame(),GuessNumber(),BigSmall();
+int Bet(),ChooseGame(),GuessNumber(),BigSmall(),Wormhole(int),SuddenlyEvent(int),Alien(int);
 int result1,result2,sum,xxglobal;
 string DiceNumber,name[4];
 int position[3][20]; // it's mean whose star
@@ -53,7 +53,7 @@ struct  Drama1{  //星系1劇情
         string a1 = "星系1星球2";
         string a2 = "星系1星球3";
         string a3 = "星系1星球4";
-        string a4 = "您來到了星際賭場，將可以使用能源作為籌碼，以換取更多能源";
+        string a4 = "星系1星球5";
         string a5 = "蟲洞";
         string a6 = "星系1星球7";
         string a7 = "星系1星球8";
@@ -86,7 +86,7 @@ struct  Drama2{  //星系2劇情
         string b12 = "星系2星球13";
         string b13 = "星系2星球14";
         string b14 = "星系2星球15";
-        string b15 = "賭場";
+        string b15 = "星際賭場";
         string b16 = "星系2星球17";
         string b17 = "星系2星球18";
         string b18 = "星系2星球19";
@@ -239,21 +239,49 @@ int gamestart = GameStart();   //取得開始數據
             if(play[xx].y>19){   //超過一圈時歸零且加上一圈統計
               play[xx].y = play[xx].y - 20;
               play[xx].z = play[xx].z+1;
+              if(play[xx].x==0){   //如果在第一星系經過太空站會回復100TONS能源
+              play[xx].energy = play[xx].energy + 100;
+               }
             }
             if(play[xx].z>1){    //走超過兩圈者 進入黑洞
               play[xx].BlackHole = 1;
               play[xx].y = 0;
               play[xx].z = 0;
               cout<<endl<<"您不幸待在此星系過久,被星系中強大的黑洞束縛住,將暫停移動能力"<<endl;
-            }else{
+            }else{  //------------------沒在黑洞且沒因超過兩圈進入黑洞
              //switch
                cout<<endl<<"您的位置移動至";
                TruePosition(xx);  //確定位置
                cout<<endl;
 
-               Attack(xx);
+
+               SuddenlyEvent(xx);   //突發事件
+               Alien(xx);   //外星人事件
+
+
+               if(play[xx].x==0){
+                  if(play[xx].y==0){            //如果不是1-1
+                  }else if(play[xx].y==5){      //        1-5
+                  }else{
+                      Attack(xx);
+                  }
+               }else if(play[xx].x==1){
+                  if(play[xx].y==11){            //        2-11
+                  }else if(play[xx].y==15){      //        2-15
+                  }else{
+                      Attack(xx);
+                  }
+               }else{
+                   if(play[xx].y==9){            //        3-9
+                   }else if(play[xx].y==17){     //        3-17
+                   }else{
+                      Attack(xx);
+                   }
+               }
+
+
                cout<<endl;
-            }
+            }  //----------------------------------------------
         }
 
 
@@ -602,7 +630,9 @@ int TruePosition(int xx){
                   case 2: cout<<drama1.a2 ;break;
                   case 3: cout<<drama1.a3 ;break;
                   case 4: cout<<drama1.a4 ;break;
-                  case 5: cout<<drama1.a5 ;break;
+                  case 5: cout<<drama1.a5 ;
+                          Wormhole(xx);
+                          break;
                   case 6: cout<<drama1.a6 ;break;
                   case 7: cout<<drama1.a7 ;break;
                   case 8: cout<<drama1.a8 ;break;
@@ -634,7 +664,9 @@ int TruePosition(int xx){
                   case 8: cout<<drama2.b8 ;break;
                   case 9: cout<<drama2.b9 ;break;
                   case 10: cout<<drama2.b10 ;break;
-                  case 11: cout<<drama2.b11 ;break;
+                  case 11: cout<<drama2.b11 ;
+                          Wormhole(xx);
+                          break;
                   case 12: cout<<drama2.b12 ;break;
                   case 13: cout<<drama2.b13 ;break;
                   case 14: cout<<drama2.b14 ;break;
@@ -668,7 +700,9 @@ int TruePosition(int xx){
                   case 14: cout<<drama3.c14 ;break;
                   case 15: cout<<drama3.c15 ;break;
                   case 16: cout<<drama3.c16 ;break;
-                  case 17: cout<<drama3.c17 ;break;
+                  case 17: cout<<drama3.c17 ;
+                          Wormhole(xx);
+                          break;
                   case 18: cout<<drama3.c18 ;break;
                   case 19: cout<<drama3.c19 ;break;
 
@@ -897,7 +931,7 @@ int ThirdBase(int xA,int yA){
 int Map(){
     int yy = play[xxglobal].x ;
     string StarNameInMap[20];
-    switch(yy){
+    switch(yy){   // 顯示地圖區
   case 0:
       StarNameInMap[0] = drama1.a0;
       StarNameInMap[1] = drama1.a1;
@@ -1190,6 +1224,7 @@ int Stage(int a,int b){    //設置階段基地
 }
 
 int Bet(){     //  賭場大函數
+    cout<<"您來到了星際賭場，將可以使用能源作為籌碼，以換取更多能源"<<endl<<endl;
     int latech = 0;
     cout<<"請選擇遊戲"<<endl;
     cout<<"猜數字可獲得三倍能源，比大小可獲得兩倍能源"<<endl;
@@ -1410,3 +1445,82 @@ int BigSmall(){   //比大小
 
 }
 
+int Wormhole(int xx){         //蟲洞函式
+    int AshortSystem = 0;
+                switch(play[xx].x){  //選擇傳送至另兩星系
+                   case 0:
+                       do{
+                        cout<<endl<<"請輸入欲前往星系，除了第一星系外"<<endl;
+                        cin>>AshortSystem;
+                        play[xx].x = AshortSystem-1;
+                       }while(play[xx].x == 0);
+
+                    break;
+                   case 1:
+                       do{
+                        cout<<endl<<"請輸入欲前往星系，除了第二星系外"<<endl;
+                        cin>>AshortSystem;
+                        play[xx].x = AshortSystem-1;
+                       }while(play[xx].x == 1);
+
+                    break;
+                   case 2:
+                       do{
+                        cout<<endl<<"請輸入欲前往星系，除了第三星系外"<<endl;
+                        cin>>AshortSystem;
+                        play[xx].x = AshortSystem-1;
+                       }while(play[xx].x == 2);
+
+                    break;
+                }
+                play[xx].energy = play[xx].energy - 15 ;
+                cout<<"Success moving !"<<endl;
+}
+
+
+int SuddenlyEvent(int xx){    // 突發事件程序
+    //  隨機程序
+    int result;
+    srand(time(NULL));
+     int random[10000];
+    for(int i=0;i<10000;i++)
+    {
+        random[i]={(rand()%20)+1};
+    }
+    result = random[rand()%10000];
+
+    if(result==7){   //由此5%的機率觸發事件
+
+
+        //事件帶享有多少個 一樣隨機取樣
+
+
+    }
+}
+
+int Alien(int xx){       //突發遇到外星人
+    //  隨機程序
+    int result;
+    srand(time(NULL));
+     int random[10000];
+    for(int i=0;i<10000;i++)
+    {
+        random[i]={(rand()%40)+1};
+    }
+    result = random[rand()%10000];
+
+    if(result==35){   //由此2.5%的機率觸發事件
+         for(int i=0;i<10000;i++)
+        {
+           random[i]={(rand()%2)+1};
+        }
+        result = random[rand()%10000];    //在隨機取出1/2的機率碰到好的或壞的外星人
+
+        if(result==1){   //如果碰到好的
+        //外星人事件
+        }else{           //如果碰到壞的
+        //外星人事件
+        }
+    }
+
+}
