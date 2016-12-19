@@ -11,6 +11,7 @@
 using namespace std;
 
 int dice(),ChooseDice1(),ChooseDice2(),InBlack(),YesNo(),GameStart(),Rule(),TruePosition(int),Attack(int),FirstBase(int,int),SecondBase(int,int),ThirdBase(int,int),Energy(int),Body(int),Map(),BaseColor(int,int),Stage(int,int);
+int Bet(),ChooseGame(),GuessNumber(),BigSmall();
 int result1,result2,sum,xxglobal;
 string DiceNumber,name[4];
 int position[3][20]; // it's mean whose star
@@ -52,7 +53,7 @@ struct  Drama1{  //星系1劇情
         string a1 = "星系1星球2";
         string a2 = "星系1星球3";
         string a3 = "星系1星球4";
-        string a4 = "星系1星球5";
+        string a4 = "您來到了星際賭場，將可以使用能源作為籌碼，以換取更多能源";
         string a5 = "星系1星球6";
         string a6 = "星系1星球7";
         string a7 = "星系1星球8";
@@ -582,7 +583,9 @@ int TruePosition(int xx){
                   case 1: cout<<drama1.a1 ;break;
                   case 2: cout<<drama1.a2 ;break;
                   case 3: cout<<drama1.a3 ;break;
-                  case 4: cout<<drama1.a4 ;break;
+                  case 4: cout<<drama1.a4 ;  //賭場
+                          Bet();
+                          break;
                   case 5: cout<<drama1.a5 ;break;
                   case 6: cout<<drama1.a6 ;break;
                   case 7: cout<<drama1.a7 ;break;
@@ -1098,4 +1101,199 @@ int Stage(int a,int b){    //設置階段基地
 
 }
 
+int Bet(){     //  賭場大函數
+    int latech = 0;
+    cout<<"請選擇遊戲"<<endl;
+    cout<<"猜數字可獲得三倍能源，比大小可獲得兩倍能源"<<endl;
+    latech = ChooseGame();
+    if(latech==77){   //right's
+        BigSmall();
+    }else{
+        GuessNumber();
+    }
+
+}
+
+int ChooseGame(){　　//選擇遊戲種類　和YesNo()一樣
+    int ch;
+    int lastch;
+    SetColor(240);
+
+    cout<< "\r 猜數字 " ;
+    SetColor();
+    cout<< " 比大小 "  << flush;
+
+    do{
+       ch=getch();
+       if(ch==224){
+          ch=getch();
+
+    switch(ch){
+    case 75 :
+    SetColor(240);
+    cout<< "\r 猜數字 " ;
+    SetColor();
+    cout<< " 比大小 " << flush ;
+    lastch = 75;
+    break;
+
+    case 77 :
+    SetColor();
+    cout<< "\r 猜數字 " ;
+    SetColor(240);
+    cout<< " 比大小 " << flush ;
+    SetColor();
+    lastch = 77;
+    break;
+
+      }
+          } // if(13)的
+
+    }while(ch!=13);
+       return lastch;
+
+}
+
+int GuessNumber(){     //猜數字
+    int betmoney = 0;
+    int result123456789 = 0;
+    int betnumber = 0;
+    do{
+    cout<<endl<<"請輸入欲賭博能源數量 : ";
+    cin>>betmoney;
+    }while(betmoney>play[xxglobal].energy);
+
+
+    srand(time(NULL));
+     int random[10000];
+    for(int i=0;i<10000;i++)
+    {
+        random[i]={(rand()%5)+1};
+    }
+    result123456789 = random[rand()%10000];
+
+    cout<<endl<<"請輸入任一數字1~5，如猜中即可獲得能源三倍的獎勵"<<endl;
+    do{
+    cin>>betnumber;
+    }while(betnumber>5||betnumber<1);
+
+    if(betnumber==result123456789){
+        play[xxglobal].energy = play[xxglobal].energy + betmoney*2 ;
+
+        cout<<"莊家的數字為"<<result123456789<<","<<"您的數字為"<<betnumber<<endl;
+        cout<<"恭喜獲勝！！"<<endl;
+    }else{
+        play[xxglobal].energy = play[xxglobal].energy - betmoney ;
+        cout<<"莊家的數字為"<<result123456789<<","<<"您的數字為"<<betnumber<<endl;
+        cout<<"您的運氣不好，猜錯了，請再接再厲"<<endl;
+
+    }
+
+    cout<<"是否繼續 猜數字換能源"<<endl;     //是否繼續賭博
+    result123456789 = YesNo();       //result123456789 重複使用
+    if(result123456789==77){ //no
+              cout<<endl<<"將離開星際賭場"<<endl;
+        }else {//yes
+              GuessNumber();
+        }
+
+}
+
+int BigSmall(){   //比大小
+    int betmoney = 0;
+    int result123456789 = 0;
+    int betnumber = 0;
+    do{
+    cout<<endl<<"請輸入欲賭博能源數量 : ";
+    cin>>betmoney;
+    }while(betmoney>play[xxglobal].energy);
+
+
+    srand(time(NULL));
+     int random[10000];
+    for(int i=0;i<10000;i++)
+    {
+        random[i]={(rand()%20)+1};
+    }
+    result123456789 = random[rand()%10000];
+
+
+    int ch;
+    int lastch;
+    SetColor(240);
+
+    cout<< "\r 比大 " ;
+    SetColor();
+    cout<< " 比小 "  << flush;
+
+    do{
+       ch=getch();
+       if(ch==224){
+          ch=getch();
+
+    switch(ch){
+    case 75 :
+    SetColor(240);
+    cout<< "\r 比大 " ;
+    SetColor();
+    cout<< " 比小 " << flush ;
+    lastch = 75;
+    break;
+
+    case 77 :
+    SetColor();
+    cout<< "\r 比大 " ;
+    SetColor(240);
+    cout<< " 比小 " << flush ;
+    SetColor();
+    lastch = 77;
+    break;
+
+      }
+          } // if(13)的
+
+    }while(ch!=13);
+
+
+    cout<<endl<<"請輸入任一數字1~20，如比較勝利可獲得二倍的獎勵"<<endl;
+    do{
+    cin>>betnumber;
+    }while(betnumber>20||betnumber<1);
+
+
+    if(latech==77){   //比小
+
+         if(betnumber<result123456789){
+         play[xxglobal].energy = play[xxglobal].energy + betmoney ;
+         cout<<"莊家的數字為"<<result123456789<<","<<"您的數字為"<<betnumber<<endl;
+         cout<<"恭喜獲勝！！"<<endl;
+         }else{
+         play[xxglobal].energy = play[xxglobal].energy - betmoney ;
+         cout<<"莊家的數字為"<<result123456789<<","<<"您的數字為"<<betnumber<<endl;
+         cout<<"您的運氣不好，猜錯了，請再接再厲"<<endl;
+    }
+
+    }else{           //比大
+
+        if(betnumber>result123456789){
+        play[xxglobal].energy = play[xxglobal].energy + betmoney ;
+        cout<<"莊家的數字為"<<result123456789<<","<<"您的數字為"<<betnumber<<endl;
+        cout<<"恭喜獲勝！！"<<endl;
+        }else{
+        play[xxglobal].energy = play[xxglobal].energy - betmoney ;
+        cout<<"莊家的數字為"<<result123456789<<","<<"您的數字為"<<ber=tnumber<<endl;
+        cout<<"您的運氣不好，猜錯了，請再接再厲"<<endl;
+    }
+
+    }
+
+    cout<<"是否繼續 比大小換能源"<<endl;     //是否繼續賭博
+    result123456789 = YesNo();       //result123456789 重複使用
+    if(result123456789==77){ //no
+              cout<<endl<<"將離開星際賭場"<<endl;
+        }else {//yes
+              GuessNumber();
+        }
+
+}
 
