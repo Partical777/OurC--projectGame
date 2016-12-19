@@ -49,12 +49,12 @@ struct  Player{
 };
 
 struct  Drama1{  //星系1劇情
-        string a0 = "星系1星球1";
+        string a0 = "太空站";
         string a1 = "星系1星球2";
         string a2 = "星系1星球3";
         string a3 = "星系1星球4";
         string a4 = "您來到了星際賭場，將可以使用能源作為籌碼，以換取更多能源";
-        string a5 = "星系1星球6";
+        string a5 = "蟲洞";
         string a6 = "星系1星球7";
         string a7 = "星系1星球8";
         string a8 = "星系1星球9";
@@ -82,11 +82,11 @@ struct  Drama2{  //星系2劇情
         string b8 = "星系2星球9";
         string b9 = "星系2星球10";
         string b10 = "星系2星球11";
-        string b11 = "星系2星球12";
+        string b11 = "蟲洞";
         string b12 = "星系2星球13";
         string b13 = "星系2星球14";
         string b14 = "星系2星球15";
-        string b15 = "星系2星球16";
+        string b15 = "賭場";
         string b16 = "星系2星球17";
         string b17 = "星系2星球18";
         string b18 = "星系2星球19";
@@ -102,7 +102,7 @@ struct  Drama3{  //星系3劇情
         string c6 = "星系3星球7";
         string c7 = "星系3星球8";
         string c8 = "星系3星球9";
-        string c9 = "星系3星球10";
+        string c9 = "商店";
         string c10 = "星系3星球11";
         string c11 = "星系3星球12";
         string c12 = "星系3星球13";
@@ -110,7 +110,7 @@ struct  Drama3{  //星系3劇情
         string c14 = "星系3星球15";
         string c15 = "星系3星球16";
         string c16 = "星系3星球17";
-        string c17 = "星系3星球18";
+        string c17 = "蟲洞";
         string c18 = "星系3星球19";
         string c19 = "星系3星球20";
 };
@@ -128,6 +128,9 @@ struct Player play[] = {
        {5000,100,0,0,0,0},  //player3  use play[2]
        {5000,100,0,0,0,0},  //player4  use play[3]
      };
+struct Drama1 drama1;
+struct Drama2 drama2;
+struct Drama3 drama3;
 //---------------------------------------main----------------------------------------------------------------------------------
 int main(){
     int color[4]={12,14,10,11};
@@ -590,9 +593,6 @@ int Rule(){   //在此輸入規則
 }
 
 int TruePosition(int xx){
-     struct Drama1 drama1;
-     struct Drama2 drama2;
-     struct Drama3 drama3;
 
     switch(play[xx].x){  //先辨識在哪個星系
             case 0:
@@ -601,9 +601,7 @@ int TruePosition(int xx){
                   case 1: cout<<drama1.a1 ;break;
                   case 2: cout<<drama1.a2 ;break;
                   case 3: cout<<drama1.a3 ;break;
-                  case 4: cout<<drama1.a4 ;  //賭場
-                          Bet();
-                          break;
+                  case 4: cout<<drama1.a4 ;break;
                   case 5: cout<<drama1.a5 ;break;
                   case 6: cout<<drama1.a6 ;break;
                   case 7: cout<<drama1.a7 ;break;
@@ -640,7 +638,9 @@ int TruePosition(int xx){
                   case 12: cout<<drama2.b12 ;break;
                   case 13: cout<<drama2.b13 ;break;
                   case 14: cout<<drama2.b14 ;break;
-                  case 15: cout<<drama2.b15 ;break;
+                  case 15: cout<<drama2.b15 ;//賭場
+                          Bet();
+                          break;
                   case 16: cout<<drama2.b16 ;break;
                   case 17: cout<<drama2.b17 ;break;
                   case 18: cout<<drama2.b18 ;break;
@@ -896,13 +896,83 @@ int ThirdBase(int xA,int yA){
 
 int Map(){
     int yy = play[xxglobal].x ;
+    string StarNameInMap[20];
+    switch(yy){
+  case 0:
+      StarNameInMap[0] = drama1.a0;
+      StarNameInMap[1] = drama1.a1;
+      StarNameInMap[2] = drama1.a2;
+      StarNameInMap[3] = drama1.a3;
+      StarNameInMap[4] = drama1.a4;
+      StarNameInMap[5] = drama1.a5;
+      StarNameInMap[6] = drama1.a6;
+      StarNameInMap[7] = drama1.a7;
+      StarNameInMap[8] = drama1.a8;
+      StarNameInMap[9] = drama1.a9;
+      StarNameInMap[10] = drama1.a10;
+      StarNameInMap[11] = drama1.a11;
+      StarNameInMap[12] = drama1.a12;
+      StarNameInMap[13] = drama1.a13;
+      StarNameInMap[14] = drama1.a14;
+      StarNameInMap[15] = drama1.a15;
+      StarNameInMap[16] = drama1.a16;
+      StarNameInMap[17] = drama1.a17;
+      StarNameInMap[18] = drama1.a18;
+      StarNameInMap[19] = drama1.a19;
+      break;
+  case 1:
+      StarNameInMap[0] = drama2.b0;
+      StarNameInMap[1] = drama2.b1;
+      StarNameInMap[2] = drama2.b2;
+      StarNameInMap[3] = drama2.b3;
+      StarNameInMap[4] = drama2.b4;
+      StarNameInMap[5] = drama2.b5;
+      StarNameInMap[6] = drama2.b6;
+      StarNameInMap[7] = drama2.b7;
+      StarNameInMap[8] = drama2.b8;
+      StarNameInMap[9] = drama2.b9;
+      StarNameInMap[10] = drama2.b10;
+      StarNameInMap[11] = drama2.b11;
+      StarNameInMap[12] = drama2.b12;
+      StarNameInMap[13] = drama2.b13;
+      StarNameInMap[14] = drama2.b14;
+      StarNameInMap[15] = drama2.b15;
+      StarNameInMap[16] = drama2.b16;
+      StarNameInMap[17] = drama2.b17;
+      StarNameInMap[18] = drama2.b18;
+      StarNameInMap[19] = drama2.b19;
+      break;
+  case 2:
+      StarNameInMap[0] = drama3.c0;
+      StarNameInMap[1] = drama3.c1;
+      StarNameInMap[2] = drama3.c2;
+      StarNameInMap[3] = drama3.c3;
+      StarNameInMap[4] = drama3.c4;
+      StarNameInMap[5] = drama3.c5;
+      StarNameInMap[6] = drama3.c6;
+      StarNameInMap[7] = drama3.c7;
+      StarNameInMap[8] = drama3.c8;
+      StarNameInMap[9] = drama3.c9;
+      StarNameInMap[10] = drama3.c10;
+      StarNameInMap[11] = drama3.c11;
+      StarNameInMap[12] = drama3.c12;
+      StarNameInMap[13] = drama3.c13;
+      StarNameInMap[14] = drama3.c14;
+      StarNameInMap[15] = drama3.c15;
+      StarNameInMap[16] = drama3.c16;
+      StarNameInMap[17] = drama3.c17;
+      StarNameInMap[18] = drama3.c18;
+      StarNameInMap[19] = drama3.c19;
+      break;
+    }
+
 
     BaseColor(yy,0);
     cout<<"                                     ";
     Stage(yy,0);
     cout<<endl;
     cout<<"                                      "<<"★"<<endl;  //1
-    cout<<"                                      "<<"sun"<<endl<<endl;  //1
+    cout<<"                                      "<<StarNameInMap[0]<<endl<<endl;  //1
     SetColor();
 
     BaseColor(yy,19);
@@ -918,9 +988,9 @@ int Map(){
     BaseColor(yy,1);
     cout<<"      "<<"★"<<"              "<<endl;             SetColor();    //2`
     BaseColor(yy,19);
-    cout<<"                               "<<"sun"<<"      ";SetColor();  //20
+    cout<<"                               "<<StarNameInMap[19]<<"      ";SetColor();  //20
     BaseColor(yy,1);
-    cout<<"       "<<"sun"<<"              "<<endl<<endl;    SetColor();//2
+    cout<<"       "<<StarNameInMap[1]<<"              "<<endl<<endl;    SetColor();//2
 
     BaseColor(yy,18);
     cout<<"                          ";
@@ -935,9 +1005,9 @@ int Map(){
     BaseColor(yy,2);
     cout<<"            "<<"★"<<"              "<<endl;        SetColor();//3
     BaseColor(yy,18);
-    cout<<"                          "<<"sun"<<"          ";  SetColor();  //19
+    cout<<"                          "<<StarNameInMap[18]<<"          ";  SetColor();  //19
     BaseColor(yy,2);
-    cout<<"            "<<"sun"<<"              "<<endl<<endl;SetColor();    //3
+    cout<<"            "<<StarNameInMap[2]<<"              "<<endl<<endl;SetColor();    //3
 
     BaseColor(yy,17);
     cout<<"                    ";
@@ -952,9 +1022,9 @@ int Map(){
     BaseColor(yy,3);
     cout<<"                      "<<"★"<<"     "<<endl;         SetColor(); //4
     BaseColor(yy,17);
-    cout<<"                    "<<"sun"<<"            ";        SetColor();   //18
+    cout<<"                    "<<StarNameInMap[17]<<"            ";        SetColor();   //18
     BaseColor(yy,3);
-    cout<<"                      "<<"sun"<<"     "<<endl<<endl; SetColor(); //4
+    cout<<"                      "<<StarNameInMap[3]<<"     "<<endl<<endl; SetColor(); //4
 
     BaseColor(yy,16);
     cout<<"               ";
@@ -969,9 +1039,9 @@ int Map(){
     BaseColor(yy,4);
     cout<<"                          "<<"★"<<"     "<<endl;        SetColor();//5
     BaseColor(yy,16);
-    cout<<"               "<<"sun"<<"                   ";         SetColor();//17
+    cout<<"               "<<StarNameInMap[16]<<"                   ";         SetColor();//17
     BaseColor(yy,4);
-    cout<<"                          "<<"sun"<<"     "<<endl<<endl;SetColor();  //5
+    cout<<"                          "<<StarNameInMap[4]<<"     "<<endl<<endl;SetColor();  //5
 
     BaseColor(yy,15);
     cout<<"          ";
@@ -986,9 +1056,9 @@ int Map(){
     BaseColor(yy,5);
     cout<<"                               "<<"★"<<"     "<<endl;         SetColor();  //6
     BaseColor(yy,15);
-    cout<<"          "<<"sun"<<"                        ";               SetColor();//16
+    cout<<"          "<<StarNameInMap[15]<<"                        ";               SetColor();//16
     BaseColor(yy,5);
-    cout<<"                               "<<"sun"<<"     "<<endl<<endl; SetColor(); //6
+    cout<<"                               "<<StarNameInMap[5]<<"     "<<endl<<endl; SetColor(); //6
 
     BaseColor(yy,14);
     cout<<"      ";
@@ -1003,9 +1073,9 @@ int Map(){
     BaseColor(yy,6);
     cout<<"                                   "<<"★"<<"     "<<endl;         SetColor();//7
     BaseColor(yy,14);
-    cout<<"      "<<"sun"<<"                             ";                  SetColor();//15
+    cout<<"      "<<StarNameInMap[14]<<"                             ";                  SetColor();//15
     BaseColor(yy,6);
-    cout<<"                                   "<<"sun"<<"     "<<endl<<endl; SetColor(); //7
+    cout<<"                                   "<<StarNameInMap[6]<<"     "<<endl<<endl; SetColor(); //7
 
     BaseColor(yy,13);
     cout<<" ";
@@ -1045,19 +1115,19 @@ int Map(){
     BaseColor(yy,7);
     cout<<"★"<<"           "<<endl; SetColor();  //8
     BaseColor(yy,13);
-    cout<<" "<<"sun"<<"          ";  SetColor(); //14
+    cout<<" "<<StarNameInMap[13]<<"          ";  SetColor(); //14
     BaseColor(yy,12);
-    cout<<"sun"<<"           ";  SetColor(); //13
+    cout<<StarNameInMap[12]<<"           ";  SetColor(); //13
     BaseColor(yy,11);
-    cout<<"sun"<<"           ";  SetColor(); //12
+    cout<<StarNameInMap[11]<<"           ";  SetColor(); //12
     BaseColor(yy,10);
-    cout<<"sun"<<"           ";  SetColor(); //11
+    cout<<StarNameInMap[10]<<"           ";  SetColor(); //11
     BaseColor(yy,9);
-    cout<<"sun"<<"           ";  SetColor(); //10
+    cout<<StarNameInMap[9]<<"           ";  SetColor(); //10
     BaseColor(yy,8);
-    cout<<"sun"<<"            ";  SetColor(); //9
+    cout<<StarNameInMap[8]<<"            ";  SetColor(); //9
     BaseColor(yy,7);
-    cout<<"sun"<<"           "<<endl<<endl;  SetColor(); //8
+    cout<<StarNameInMap[7]<<"           "<<endl<<endl;  SetColor(); //8
 
 }
 
@@ -1198,8 +1268,19 @@ int GuessNumber(){     //猜數字
     if(betnumber==result123456789){
         play[xxglobal].energy = play[xxglobal].energy + betmoney*2 ;
 
+        //------------------如獲勝可繼續賭博
         cout<<"莊家的數字為"<<result123456789<<","<<"您的數字為"<<betnumber<<endl;
         cout<<"恭喜獲勝！！"<<endl;
+
+          cout<<"是否繼續 猜數字換能源"<<endl;     //是否繼續賭博
+          result123456789 = YesNo();       //result123456789 重複使用
+          if(result123456789==77){ //no
+              cout<<endl<<"將離開星際賭場"<<endl;
+             }else {//yes
+              GuessNumber();
+             }
+         //----------------------------------------
+
     }else{
         play[xxglobal].energy = play[xxglobal].energy - betmoney ;
         cout<<"莊家的數字為"<<result123456789<<","<<"您的數字為"<<betnumber<<endl;
@@ -1285,6 +1366,17 @@ int BigSmall(){   //比大小
          play[xxglobal].energy = play[xxglobal].energy + betmoney ;
          cout<<"莊家的數字為"<<result123456789<<","<<"您的數字為"<<betnumber<<endl;
          cout<<"恭喜獲勝！！"<<endl;
+
+         //----------------如獲勝可繼續賭博
+          cout<<"是否繼續 比大小換能源"<<endl;     //是否繼續賭博
+          result123456789 = YesNo();       //result123456789 重複使用
+          if(result123456789==77){ //no
+              cout<<endl<<"將離開星際賭場"<<endl;
+          }else {//yes
+              GuessNumber();
+          }
+        //--------------------------------
+
          }else{
          play[xxglobal].energy = play[xxglobal].energy - betmoney ;
          cout<<"莊家的數字為"<<result123456789<<","<<"您的數字為"<<betnumber<<endl;
@@ -1297,6 +1389,15 @@ int BigSmall(){   //比大小
         play[xxglobal].energy = play[xxglobal].energy + betmoney ;
         cout<<"莊家的數字為"<<result123456789<<","<<"您的數字為"<<betnumber<<endl;
         cout<<"恭喜獲勝！！"<<endl;
+        //----------------如獲勝可繼續賭博
+          cout<<"是否繼續 比大小換能源"<<endl;     //是否繼續賭博
+          result123456789 = YesNo();       //result123456789 重複使用
+          if(result123456789==77){ //no
+              cout<<endl<<"將離開星際賭場"<<endl;
+          }else {//yes
+              GuessNumber();
+          }
+        //--------------------------------
         }else{
         play[xxglobal].energy = play[xxglobal].energy - betmoney ;
         cout<<"莊家的數字為"<<result123456789<<","<<"您的數字為"<<betnumber<<endl;
@@ -1305,13 +1406,7 @@ int BigSmall(){   //比大小
 
     }
 
-    cout<<"是否繼續 比大小換能源"<<endl;     //是否繼續賭博
-    result123456789 = YesNo();       //result123456789 重複使用
-    if(result123456789==77){ //no
-              cout<<endl<<"將離開星際賭場"<<endl;
-        }else {//yes
-              GuessNumber();
-        }
+
 
 }
 
