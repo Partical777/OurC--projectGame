@@ -11,10 +11,12 @@
 using namespace std;
 
 int dice(),ChooseDice1(),ChooseDice2(),InBlack(),YesNo(),GameStart(),Rule(),TruePosition(int),Attack(int),FirstBase(int,int),SecondBase(int,int),ThirdBase(int,int),Energy(int),Body(int),Map(),BaseColor(int,int),Stage(int,int);
-int Bet(),ChooseGame(),GuessNumber(),BigSmall(),Wormhole(int),SuddenlyEvent(int),Alien(int);
+int Bet(),ChooseGame(),GuessNumber(),BigSmall(),Wormhole(int),SuddenlyEvent(int),Alien(int),Store(int);
 int result1,result2,sum,xxglobal;
 string DiceNumber,name[4];
-int position[3][20]; // it's mean whose star
+int position[3][20],Tool[4]; // it's mean whose star  &  道具數值
+                             // 道具在main中設立初始值
+                             // 如有購買該道具 則0會變為1
 
 void SetColor(int color = 7)  //更改顏色函式
 {
@@ -141,6 +143,8 @@ int main(){
                position[i][j] = 800;
                                 }
                            }
+               Tool[k]=700000000;  //這是道具初始值
+
                play[k].energy = 5000;
                play[k].body = 100 ;
                play[k].x = 0 ;
@@ -692,7 +696,9 @@ int TruePosition(int xx){
                   case 6: cout<<drama3.c6 ;break;
                   case 7: cout<<drama3.c7 ;break;
                   case 8: cout<<drama3.c8 ;break;
-                  case 9: cout<<drama3.c9 ;break;
+                  case 9: cout<<drama3.c9 ;
+                          Store(xx);
+                          break;
                   case 10: cout<<drama3.c10 ;break;
                   case 11: cout<<drama3.c11 ;break;
                   case 12: cout<<drama3.c12 ;break;
@@ -1522,5 +1528,38 @@ int Alien(int xx){       //突發遇到外星人
         //外星人事件
         }
     }
+
+}
+
+int Store(int xx){  //暫定8種
+       int s = Tool[xx];
+       int num[8];
+       int toolchoose;
+
+       cout<<"歡迎來到宇宙便利站"<<endl<<"這裡有很多道具任你選擇"<<endl;
+
+       for(int z = 0; z<8 ;z++){   //辨識已有何種道具 取出每一位數
+         num[z] = s%10;
+         s = s/10 ;
+       }
+       // 如果有下列道具
+       if(num[0]==1){cout<<"您目前持有......道具";}
+       if(num[1]==1){cout<<"您目前持有......道具";}
+       if(num[2]==1){cout<<"您目前持有......道具";}
+       if(num[3]==1){cout<<"您目前持有......道具";}
+       if(num[4]==1){cout<<"您目前持有......道具";}
+       if(num[5]==1){cout<<"您目前持有......道具";}
+       if(num[6]==1){cout<<"您目前持有......道具";}
+       if(num[7]==1){cout<<"您目前持有......道具";}
+
+       for(int k = 0 ;k<8;k++){    //########此為測試輸出#########
+       cout<<num[k]<<endl;
+       }
+
+
+       cout<<"輸出道具項目......."<<endl;
+       cout<<"請選擇您想購買道具之編號"<<endl;
+
+
 
 }
