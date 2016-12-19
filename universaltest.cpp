@@ -114,6 +114,14 @@ struct  Drama3{  //星系3劇情
         string c18 = "星系3星球19";
         string c19 = "星系3星球20";
 };
+struct story{    //剛開始的劇情
+    string story0 = "╔═════════════════════════════════════╗\n║";
+	string story1 = "║由於地球即將毀滅，四位大富翁為了生存，於是他們決定在地球以外的星球，      ║\n║";
+	string story2 = "║建立自己的殖民地。但是他們要出發去爭奪自己的殖民地時，他們產生了激烈衝突，║\n║";
+    string story3 = "║誰也不讓誰，於是他們決定各憑自己的力量，去爭奪自己的領地，彼此不互相往來，║\n║";
+    string story4 = "║就這樣開始了激烈的你爭我奪......                                          ║\n║";
+    string story5 = "╚═════════════════════════════════════╝\n";
+ };
 struct Player play[] = {
        {5000,100,0,0,0,0},  //player1  use play[0]
        {5000,100,0,0,0,0},  //player2  use play[1]
@@ -144,6 +152,16 @@ int main(){
 int gamestart = GameStart();   //取得開始數據
 
     if(gamestart==3){   //開始遊戲
+      struct story pass ;
+
+      system("cls");     //顯示劇情
+      cout<<pass.story0<<"                                                                          ║"<<endl;
+      cout<<pass.story1<<"                                                                          ║"<<endl;
+      cout<<pass.story2<<"                                                                          ║"<<endl;
+      cout<<pass.story3<<"                                                                          ║"<<endl;
+      cout<<pass.story4<<"                                                                          ║"<<endl;
+      cout<<pass.story5;
+      system("pause");
 
       system("cls");
       cout<<endl<<"請設定玩家1名稱:";  //設定玩家名稱
@@ -1114,7 +1132,7 @@ int Bet(){     //  賭場大函數
 
 }
 
-int ChooseGame(){　　//選擇遊戲種類　和YesNo()一樣
+int ChooseGame(){//選擇遊戲種類　和YesNo()一樣
     int ch;
     int lastch;
     SetColor(240);
@@ -1261,7 +1279,7 @@ int BigSmall(){   //比大小
     }while(betnumber>20||betnumber<1);
 
 
-    if(latech==77){   //比小
+    if(lastch==77){   //比小
 
          if(betnumber<result123456789){
          play[xxglobal].energy = play[xxglobal].energy + betmoney ;
@@ -1281,7 +1299,7 @@ int BigSmall(){   //比大小
         cout<<"恭喜獲勝！！"<<endl;
         }else{
         play[xxglobal].energy = play[xxglobal].energy - betmoney ;
-        cout<<"莊家的數字為"<<result123456789<<","<<"您的數字為"<<ber=tnumber<<endl;
+        cout<<"莊家的數字為"<<result123456789<<","<<"您的數字為"<<betnumber<<endl;
         cout<<"您的運氣不好，猜錯了，請再接再厲"<<endl;
     }
 
