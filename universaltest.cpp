@@ -11,8 +11,9 @@
 using namespace std;
 
 int dice(),ChooseDice1(),ChooseDice2(),InBlack(),YesNo(),GameStart(),Rule(),TruePosition(int),Attack(int),FirstBase(int,int),SecondBase(int,int),ThirdBase(int,int),Energy(int),Body(int),Map(),BaseColor(int,int),Stage(int,int);
-int Bet(),ChooseGame(),GuessNumber(),BigSmall(),Wormhole(int),SuddenlyEvent(int),Alien(int),Store(int);
+int Bet(),ChooseGame(),GuessNumber(),BigSmall(),Wormhole(int),SuddenlyEvent(int),Alien(int),Store(int),HowManyTool(int),UcantSeeMe(int);
 int result1,result2,sum,xxglobal;
+int skill = 6;
 string DiceNumber,name[4];
 int position[3][20],Tool[4]; // it's mean whose star  &  道具數值
                              // 道具在main中設立初始值
@@ -143,7 +144,7 @@ int main(){
                position[i][j] = 800;
                                 }
                            }
-               Tool[k]=700000000;  //這是道具初始值
+               Tool[k]=8000000;  //這是道具初始值
 
                play[k].energy = 5000;
                play[k].body = 100 ;
@@ -267,18 +268,21 @@ int gamestart = GameStart();   //取得開始數據
                   if(play[xx].y==0){            //如果不是1-1
                   }else if(play[xx].y==5){      //        1-5
                   }else{
+                      skill = 6;
                       Attack(xx);
                   }
                }else if(play[xx].x==1){
                   if(play[xx].y==11){            //        2-11
                   }else if(play[xx].y==15){      //        2-15
                   }else{
+                      skill = 6;
                       Attack(xx);
                   }
                }else{
                    if(play[xx].y==9){            //        3-9
                    }else if(play[xx].y==17){     //        3-17
                    }else{
+                      skill = 6;
                       Attack(xx);
                    }
                }
@@ -756,22 +760,121 @@ int Attack(int xx){
 
          switch(position[xA][yA]){
             case 810:
+                UcantSeeMe(xx);
+                if(skill!=1){  //免受攻擊
                 cout<<"您現在走到 "<<name[0]<<" 的一階段基地"<<endl<<"遭受內部防禦設施攻擊!"<<endl<<"Energy減少10 Tons  ,  Body受損2%"<<endl<<name[0]<<" 的Energy 增加10 Tons";
           play[xx].energy = play[xx].energy - 10;
           play[xx].body = play[xx].body - 2 ;
           play[0].energy = play[0].energy + 10;
+                }
+                HowManyTool(xx);  //是否搶下對方的基地
+
+                switch(skill){  //選擇道具
+                case 2 :
+                    switch(xx){   //攻佔對方地
+                       case 2:
+                       position[xA][yA] = 820;
+                       break;
+                       case 3:
+                       position[xA][yA] = 830;
+                       break;
+                       case 4:
+                       position[xA][yA] = 840;
+                       break;
+                    }
+                break;
+                case 3 :     //毀滅基地
+                    position[xA][yA] = 800;
+
+                break;
+                case 4 :     //降低2階
+                    position[xA][yA] = 800;
+
+                break;
+                case 5 :     //降低1階
+                    position[xA][yA] = 800;
+
+                break;
+                }
+
                 break;
             case 811:
+                UcantSeeMe(xx);
+                if(skill!=1){  //免受攻擊
                 cout<<"您現在走到 "<<name[0]<<" 的二階段基地"<<endl<<"遭受內部防禦設施攻擊!!"<<endl<<"Energy減少20 Tons  ,  Body受損4%"<<endl<<name[0]<<" 的Energy 增加20 Tons";
           play[xx].energy = play[xx].energy - 20;
           play[xx].body = play[xx].body - 4 ;
           play[0].energy = play[0].energy + 20;
+                }
+                HowManyTool(xx);  //是否搶下對方的基地
+
+                switch(skill){  //選擇道具
+                case 2 :
+                    switch(xx){   //攻佔對方地
+                       case 2:
+                       position[xA][yA] = 821;
+                       break;
+                       case 3:
+                       position[xA][yA] = 831;
+                       break;
+                       case 4:
+                       position[xA][yA] = 841;
+                       break;
+                    }
+                break;
+                case 3 :     //毀滅基地
+                    position[xA][yA] = 800;
+
+                break;
+                case 4 :     //降低2階
+                    position[xA][yA] = 800;
+
+                break;
+                case 5 :     //降低1階
+                    position[xA][yA] = 810;
+
+                break;
+                }
+
                 break;
             case 812:
+                UcantSeeMe(xx);
+                if(skill!=1){  //免受攻擊
                 cout<<"您現在走到 "<<name[0]<<" 的三階段基地"<<endl<<"遭受內部防禦設施攻擊!!!"<<endl<<"Energy減少50 Tons  ,  Body受損8%"<<endl<<name[0]<<" 的Energy 增加50 Tons";
           play[xx].energy = play[xx].energy - 50;
           play[xx].body = play[xx].body - 8 ;
           play[0].energy = play[0].energy + 50;
+                }
+                HowManyTool(xx);  //是否搶下對方的基地
+
+                switch(skill){  //選擇道具
+                case 2 :
+                    switch(xx){   //攻佔對方地
+                       case 2:
+                       position[xA][yA] = 822;
+                       break;
+                       case 3:
+                       position[xA][yA] = 832;
+                       break;
+                       case 4:
+                       position[xA][yA] = 842;
+                       break;
+                    }
+                break;
+                case 3 :     //毀滅基地
+                    position[xA][yA] = 800;
+
+                break;
+                case 4 :     //降低2階
+                    position[xA][yA] = 810;
+
+                break;
+                case 5 :     //降低1階
+                    position[xA][yA] = 811;
+
+                break;
+                }
+
                 break;
          }    //switch
         }
@@ -794,22 +897,121 @@ int Attack(int xx){
 
           switch(position[xA][yA]){
             case 820:
+                UcantSeeMe(xx);
+                if(skill!=1){  //免受攻擊
                 cout<<"您現在走到 "<<name[1]<<" 的一階段基地"<<endl<<"遭受內部防禦設施攻擊!!"<<endl<<"Energy減少10 Tons  ,  Body受損2%"<<endl<<name[1]<<" 的Energy 增加10 Tons";
           play[xx].energy = play[xx].energy - 10;
           play[xx].body = play[xx].body - 2 ;
           play[1].energy = play[1].energy + 10;
+                     }
+                     HowManyTool(xx);  //是否搶下對方的基地
+
+                     switch(skill){  //選擇道具
+                case 2 :
+                    switch(xx){   //攻佔對方地
+                       case 1:
+                       position[xA][yA] = 810;
+                       break;
+                       case 3:
+                       position[xA][yA] = 830;
+                       break;
+                       case 4:
+                       position[xA][yA] = 840;
+                       break;
+                    }
+                break;
+                case 3 :     //毀滅基地
+                    position[xA][yA] = 800;
+
+                break;
+                case 4 :     //降低2階
+                    position[xA][yA] = 800;
+
+                break;
+                case 5 :     //降低1階
+                    position[xA][yA] = 800;
+
+                break;
+                }
+
                 break;
             case 821:
+                UcantSeeMe(xx);
+                if(skill!=1){  //免受攻擊
                 cout<<"您現在走到 "<<name[1]<<" 的二階段基地"<<endl<<"遭受內部防禦設施攻擊!!"<<endl<<"Energy減少20 Tons  ,  Body受損4%"<<endl<<name[1]<<" 的Energy 增加20 Tons";
           play[xx].energy = play[xx].energy - 20;
           play[xx].body = play[xx].body - 4 ;
           play[1].energy = play[1].energy + 20;
+                     }
+                     HowManyTool(xx);  //是否搶下對方的基地
+
+                     switch(skill){  //選擇道具
+                case 2 :
+                    switch(xx){   //攻佔對方地
+                       case 1:
+                       position[xA][yA] = 811;
+                       break;
+                       case 3:
+                       position[xA][yA] = 831;
+                       break;
+                       case 4:
+                       position[xA][yA] = 841;
+                       break;
+                    }
+                break;
+                case 3 :     //毀滅基地
+                    position[xA][yA] = 800;
+
+                break;
+                case 4 :     //降低2階
+                    position[xA][yA] = 800;
+
+                break;
+                case 5 :     //降低1階
+                    position[xA][yA] = 820;
+
+                break;
+                }
+
                 break;
             case 822:
+                UcantSeeMe(xx);
+                if(skill!=1){  //免受攻擊
                 cout<<"您現在走到 "<<name[1]<<" 的三階段基地"<<endl<<"遭受內部防禦設施攻擊!!!"<<endl<<"Energy減少50 Tons  ,  Body受損8%"<<endl<<name[1]<<" 的Energy 增加50 Tons";
           play[xx].energy = play[xx].energy - 50;
           play[xx].body = play[xx].body - 8 ;
           play[1].energy = play[1].energy + 50;
+                     }
+                     HowManyTool(xx);  //是否搶下對方的基地
+
+                     switch(skill){  //選擇道具
+                case 2 :
+                    switch(xx){   //攻佔對方地
+                       case 1:
+                       position[xA][yA] = 812;
+                       break;
+                       case 3:
+                       position[xA][yA] = 832;
+                       break;
+                       case 4:
+                       position[xA][yA] = 842;
+                       break;
+                    }
+                break;
+                case 3 :     //毀滅基地
+                    position[xA][yA] = 800;
+
+                break;
+                case 4 :     //降低2階
+                    position[xA][yA] = 820;
+
+                break;
+                case 5 :     //降低1階
+                    position[xA][yA] = 821;
+
+                break;
+                }
+
                 break;
          }    //switch
 
@@ -833,22 +1035,121 @@ int Attack(int xx){
 
           switch(position[xA][yA]){
             case 830:
+                UcantSeeMe(xx);
+                if(skill!=1){  //免受攻擊
                 cout<<"您現在走到 "<<name[2]<<" 的一階段基地"<<endl<<"遭受內部防禦設施攻擊!!"<<endl<<"Energy減少10 Tons  ,  Body受損2%"<<endl<<name[2]<<" 的Energy 增加10 Tons";
           play[xx].energy = play[xx].energy - 10;
           play[xx].body = play[xx].body - 2 ;
           play[2].energy = play[2].energy + 10;
+                     }
+                     HowManyTool(xx);  //是否搶下對方的基地
+
+                     switch(skill){  //選擇道具
+                case 2 :
+                    switch(xx){   //攻佔對方地
+                       case 1:
+                       position[xA][yA] = 810;
+                       break;
+                       case 2:
+                       position[xA][yA] = 820;
+                       break;
+                       case 4:
+                       position[xA][yA] = 840;
+                       break;
+                    }
+                break;
+                case 3 :     //毀滅基地
+                    position[xA][yA] = 800;
+
+                break;
+                case 4 :     //降低2階
+                    position[xA][yA] = 800;
+
+                break;
+                case 5 :     //降低1階
+                    position[xA][yA] = 800;
+
+                break;
+                }
+
                 break;
             case 831:
+                UcantSeeMe(xx);
+                if(skill!=1){  //免受攻擊
                 cout<<"您現在走到 "<<name[2]<<" 的二階段基地"<<endl<<"遭受內部防禦設施攻擊!!"<<endl<<"Energy減少20 Tons  ,  Body受損4%"<<endl<<name[2]<<" 的Energy 增加20 Tons";
           play[xx].energy = play[xx].energy - 20;
           play[xx].body = play[xx].body - 4 ;
           play[2].energy = play[2].energy + 20;
+                     }
+                     HowManyTool(xx);  //是否搶下對方的基地
+
+                     switch(skill){  //選擇道具
+                case 2 :
+                    switch(xx){   //攻佔對方地
+                       case 1:
+                       position[xA][yA] = 811;
+                       break;
+                       case 2:
+                       position[xA][yA] = 821;
+                       break;
+                       case 4:
+                       position[xA][yA] = 841;
+                       break;
+                    }
+                break;
+                case 3 :     //毀滅基地
+                    position[xA][yA] = 800;
+
+                break;
+                case 4 :     //降低2階
+                    position[xA][yA] = 800;
+
+                break;
+                case 5 :     //降低1階
+                    position[xA][yA] = 830;
+
+                break;
+                }
+
                 break;
             case 832:
+                UcantSeeMe(xx);
+                if(skill!=1){  //免受攻擊
                 cout<<"您現在走到 "<<name[2]<<" 的三階段基地"<<endl<<"遭受內部防禦設施攻擊!!!"<<endl<<"Energy減少50 Tons  ,  Body受損8%"<<endl<<name[2]<<" 的Energy 增加50 Tons";
           play[xx].energy = play[xx].energy - 50;
           play[xx].body = play[xx].body - 8 ;
           play[2].energy = play[2].energy + 50;
+                     }
+                     HowManyTool(xx);  //是否搶下對方的基地
+
+                     switch(skill){  //選擇道具
+                case 2 :
+                    switch(xx){   //攻佔對方地
+                       case 1:
+                       position[xA][yA] = 812;
+                       break;
+                       case 2:
+                       position[xA][yA] = 822;
+                       break;
+                       case 4:
+                       position[xA][yA] = 842;
+                       break;
+                    }
+                break;
+                case 3 :     //毀滅基地
+                    position[xA][yA] = 800;
+
+                break;
+                case 4 :     //降低2階
+                    position[xA][yA] = 830;
+
+                break;
+                case 5 :     //降低1階
+                    position[xA][yA] = 831;
+
+                break;
+                }
+
                 break;
          }    //switch
 
@@ -872,22 +1173,121 @@ int Attack(int xx){
 
           switch(position[xA][yA]){
             case 840:
+                UcantSeeMe(xx);
+                if(skill!=1){  //免受攻擊
                 cout<<"您現在走到 "<<name[3]<<" 的一階段基地"<<endl<<"遭受內部防禦設施攻擊!!"<<endl<<"Energy減少10 Tons  ,  Body受損2%"<<endl<<name[3]<<" 的Energy 增加10 Tons";
           play[xx].energy = play[xx].energy - 10;
           play[xx].body = play[xx].body - 2 ;
           play[3].energy = play[3].energy + 10;
+                     }
+                     HowManyTool(xx);  //是否搶下對方的基地
+
+                     switch(skill){  //選擇道具
+                case 2 :
+                    switch(xx){   //攻佔對方地
+                       case 1:
+                       position[xA][yA] = 810;
+                       break;
+                       case 2:
+                       position[xA][yA] = 820;
+                       break;
+                       case 3:
+                       position[xA][yA] = 830;
+                       break;
+                    }
+                break;
+                case 3 :     //毀滅基地
+                    position[xA][yA] = 800;
+
+                break;
+                case 4 :     //降低2階
+                    position[xA][yA] = 800;
+
+                break;
+                case 5 :     //降低1階
+                    position[xA][yA] = 800;
+
+                break;
+                }
+
                 break;
             case 841:
+                UcantSeeMe(xx);
+                if(skill!=1){  //免受攻擊
                 cout<<"您現在走到 "<<name[3]<<" 的二階段基地"<<endl<<"遭受內部防禦設施攻擊!!"<<endl<<"Energy減少20 Tons  ,  Body受損4%"<<endl<<name[3]<<" 的Energy 增加20 Tons";
           play[xx].energy = play[xx].energy - 20;
           play[xx].body = play[xx].body - 4 ;
           play[3].energy = play[3].energy + 20;
+                     }
+                     HowManyTool(xx);  //是否搶下對方的基地
+
+                     switch(skill){  //選擇道具
+                case 2 :
+                    switch(xx){   //攻佔對方地
+                       case 1:
+                       position[xA][yA] = 811;
+                       break;
+                       case 2:
+                       position[xA][yA] = 821;
+                       break;
+                       case 3:
+                       position[xA][yA] = 831;
+                       break;
+                    }
+                break;
+                case 3 :     //毀滅基地
+                    position[xA][yA] = 800;
+
+                break;
+                case 4 :     //降低2階
+                    position[xA][yA] = 800;
+
+                break;
+                case 5 :     //降低1階
+                    position[xA][yA] = 840;
+
+                break;
+                }
+
                 break;
             case 842:
+                UcantSeeMe(xx);
+                if(skill!=1){  //免受攻擊
                 cout<<"您現在走到 "<<name[3]<<" 的三階段基地"<<endl<<"遭受內部防禦設施攻擊!!!"<<endl<<"Energy減少50 Tons  ,  Body受損8%"<<endl<<name[3]<<" 的Energy 增加50 Tons";
           play[xx].energy = play[xx].energy - 50;
           play[xx].body = play[xx].body - 8 ;
           play[3].energy = play[3].energy + 50;
+                     }
+                     HowManyTool(xx);  //是否搶下對方的基地
+
+                     switch(skill){  //選擇道具
+                case 2 :
+                    switch(xx){   //攻佔對方地
+                       case 1:
+                       position[xA][yA] = 812;
+                       break;
+                       case 2:
+                       position[xA][yA] = 822;
+                       break;
+                       case 3:
+                       position[xA][yA] = 832;
+                       break;
+                    }
+                break;
+                case 3 :     //毀滅基地
+                    position[xA][yA] = 800;
+
+                break;
+                case 4 :     //降低2階
+                    position[xA][yA] = 840;
+
+                break;
+                case 5 :     //降低1階
+                    position[xA][yA] = 841;
+
+                break;
+                }
+
                 break;
          }    //switch
 
@@ -1531,35 +1931,148 @@ int Alien(int xx){       //突發遇到外星人
 
 }
 
-int Store(int xx){  //暫定8種
+int Store(int xx){  //確定6種
        int s = Tool[xx];
-       int num[8];
-       int toolchoose;
+       int num[6];
+       int toolchoose = 0;
 
        cout<<"歡迎來到宇宙便利站"<<endl<<"這裡有很多道具任你選擇"<<endl;
 
-       for(int z = 0; z<8 ;z++){   //辨識已有何種道具 取出每一位數
+       for(int z = 0; z<6 ;z++){   //辨識已有何種道具 取出每一位數
          num[z] = s%10;
          s = s/10 ;
        }
-       // 如果有下列道具
-       if(num[0]==1){cout<<"您目前持有......道具";}
-       if(num[1]==1){cout<<"您目前持有......道具";}
-       if(num[2]==1){cout<<"您目前持有......道具";}
-       if(num[3]==1){cout<<"您目前持有......道具";}
-       if(num[4]==1){cout<<"您目前持有......道具";}
-       if(num[5]==1){cout<<"您目前持有......道具";}
-       if(num[6]==1){cout<<"您目前持有......道具";}
-       if(num[7]==1){cout<<"您目前持有......道具";}
 
-       for(int k = 0 ;k<8;k++){    //########此為測試輸出#########
-       cout<<num[k]<<endl;
+       //   80 0 0 0 0 0    從後面開始數
+       //    5 4 3 2 1 0 位
+
+       if(s!=8000000){    //如果有道具
+
+       cout<<"您目前持有";
+       // 如果有下列道具
+       if(num[0]==1){cout<<"回復機體 ";}
+       if(num[1]==1){cout<<"光學隱形 ";}
+       if(num[2]==1){cout<<"駭入星體 ";}
+       if(num[3]==1){cout<<"死星 Death Star ";}
+       if(num[4]==1){cout<<"核彈 ";}
+       if(num[5]==1){cout<<"電磁脈衝 ";}
        }
 
 
-       cout<<"輸出道具項目......."<<endl;
-       cout<<"請選擇您想購買道具之編號"<<endl;
 
+       cout<<endl<<"可購買道具項目,如已購買之項目將不再增加"<<endl;
+       cout<<"1.回復機體((用能源換防禦機體 2.光學隱形((免受攻擊"<<endl<<"3.駭入星體((攻佔對方基地 4.死星 Death Star((毀滅對方基地"<<endl<<"5.核彈((降低二階基地 6.電磁脈衝((降低一階基地 7. Cancel"<<endl;
+       cout<<"請選擇您想購買道具之編號，一回合只能購買一種"<<endl;
+       do{
+            cin>>toolchoose;
+       }while(toolchoose>7||toolchoose<1);
+
+       toolchoose = toolchoose - 1 ;
+
+       switch(toolchoose){
+       case 0 : play[xx].energy = play[xx].energy - 100;
+                play[xx].body = play[xx].body + 10;
+                break;                                                 //回復機體
+       case 1 : if (num[0]==1){Tool[xx] = Tool[xx]+10;play[xx].energy = play[xx].energy - 40 ;}; break;        //光學隱形
+       case 2 : if (num[0]==1){Tool[xx] = Tool[xx]+100;play[xx].energy = play[xx].energy - 100 ;}; break;       //駭入星體
+       case 3 : if (num[0]==1){Tool[xx] = Tool[xx]+1000;play[xx].energy = play[xx].energy - 75 ;}; break;      //死星 Death Star
+       case 4 : if (num[0]==1){Tool[xx] = Tool[xx]+10000;play[xx].energy = play[xx].energy - 50 ;}; break;     //核彈
+       case 5 : if (num[0]==1){Tool[xx] = Tool[xx]+100000;play[xx].energy = play[xx].energy - 25 ;}; break;    //電磁脈衝
+
+       }
+}
+
+int UcantSeeMe(int xx){
+       int s = Tool[xx];
+       int num[6];
+
+       for(int z = 0; z<6 ;z++){   //辨識已有何種道具 取出每一位數
+         num[z] = s%10;
+         s = s/10 ;
+       }
+       //   80 0 0 0 0 0    從後面開始數
+       //    5 4 3 2 1 0 位
+
+       if(num[1]==1){    //如果有道具
+
+       cout<<"您目前持有:";
+       // 如果有下列道具
+       //if(num[0]==1){cout<<"1.回復機體 ";}
+       cout<<"1.光學隱形";
+/*     if(num[2]==1){cout<<"2.駭入星體 ";}
+       if(num[3]==1){cout<<"3.死星 Death Star ";}
+       if(num[4]==1){cout<<"4.核彈 ";}
+       if(num[5]==1){cout<<"5.電磁脈衝 ";}
+  */
+       cout<<endl<<"是否使用光學隱形,如要使用請按1,如不使用請按 6 "<<endl;
+       do{
+       cin>>skill;
+       }while(skill!=1||skill!=6);
+       if(skill==1){
+        Tool[xx] = Tool[xx] - 10;
+        cout<<"成功躲過對方的偵測器"<<endl;
+       }
+
+       }
+
+
+}
+
+
+int HowManyTool(int xx){
+       int s = Tool[xx];
+       int num[6];
+
+       for(int z = 0; z<6 ;z++){   //辨識已有何種道具 取出每一位數
+         num[z] = s%10;
+         s = s/10 ;
+       }
+
+       //   80 0 0 0 0 0    從後面開始數
+       //    5 4 3 2 1 0 位
+
+       if(s!=8000000&&s!=8000010){    //如果有道具
+
+       cout<<"您目前持有:";
+       // 如果有下列道具
+       //if(num[0]==1){cout<<"1.回復機體 ";}
+       //if(num[1]==1){cout<<"1.光學隱形 ";}
+       if(num[2]==1){
+            cout<<"2.駭入星體 ";
+       }
+       if(num[3]==1){
+            cout<<"3.死星 Death Star ";
+            }
+       if(num[4]==1){
+            cout<<"4.核彈 ";
+       }
+       if(num[5]==1){
+            cout<<"5.電磁脈衝 ";
+       }
+
+       cout<<endl<<"請選擇使用道具，如不使用請按 6 "<<endl;
+       do{
+       cin>>skill;
+       }while(skill>6||skill<2);
+
+         switch(skill){
+        case 2:
+        cout<<endl<<"已使用 駭入星體 , 佔據了對方基地,變為我方陣地"<<endl;
+        break;
+        case 3:
+        cout<<endl<<"死星 Death Star , 已將敵方奢師破壞殆盡,回歸無人星球"<<endl;
+        break;
+        case 4:
+        cout<<endl<<"核彈 , 已讓敵方損失慘重,降低二階基地"<<endl;
+        break;
+        case 5:
+        cout<<endl<<"電磁脈衝 , 已讓敵方遭受些許毀損,降低一階基地"<<endl;
+        break;
+
+
+         }
+
+    }
 
 
 }
