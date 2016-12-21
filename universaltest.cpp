@@ -10,7 +10,7 @@
 
 using namespace std;
 
-int dice(),ChooseDice1(),ChooseDice2(),InBlack(),YesNo(),GameStart(),Rule(),TruePosition(int),Attack(int),FirstBase(int,int),SecondBase(int,int),ThirdBase(int,int),Energy(int),Body(int),Map(),BaseColor(int,int),Stage(int,int);
+int dice(),ChooseDice1(),ChooseDice2(),InBlack(),YesNo(),GameStart(),Rule(),TruePosition(int),TruePositionOnlyName(int),Attack(int),FirstBase(int,int),SecondBase(int,int),ThirdBase(int,int),Energy(int),Body(int),Map(),BaseColor(int,int),Stage(int,int);
 int Bet(),ChooseGame(),GuessNumber(),BigSmall(),Wormhole(int),SuddenlyEvent(int),Alien(int),Store(int),HowManyTool(int),UcantSeeMe(int);
 int result1,result2,sum,xxglobal;
 int skill = 6;
@@ -199,9 +199,9 @@ int gamestart = GameStart();   //取得開始數據
         if(play[xx].BlackHole){  //測試是否在黑洞
            cout<<"您仍在第"<<play[xx].x+1<<"星系"<<endl<<"*仍被黑洞吸引中,請擲出相同的骰子點數以逃脫"<<endl<<endl;
         }else{
-            cout<<endl<<"您現在的位置是";
-            TruePosition(xx);  //確定位置
-            cout<<"第"<<play[xx].z+1<<"圈"<<endl;
+            cout<<endl<<"第"<<play[xx].z+1<<"圈"<<"   ";
+            cout<<"您現在的位置是"<<endl;
+            TruePositionOnlyName(xx);  //確定位置
         }
             //先顯示一次位置
         ChooseDice1(); //擲出第一顆骰子
@@ -256,6 +256,7 @@ int gamestart = GameStart();   //取得開始數據
             }else{  //------------------沒在黑洞且沒因超過兩圈進入黑洞
              //switch
                cout<<endl<<"您的位置移動至";
+               int temporary = play[xx].x ;
                TruePosition(xx);  //確定位置
                cout<<endl;
 
@@ -263,7 +264,7 @@ int gamestart = GameStart();   //取得開始數據
                SuddenlyEvent(xx);   //突發事件
                Alien(xx);   //外星人事件
 
-
+         if(temporary-play[xx].x==0){  //如果經過蟲洞後就不在執行
                if(play[xx].x==0){
                   if(play[xx].y==0){            //如果不是1-1
                   }else if(play[xx].y==5){      //        1-5
@@ -286,7 +287,7 @@ int gamestart = GameStart();   //取得開始數據
                       Attack(xx);
                    }
                }
-
+              }
 
                cout<<endl;
             }  //----------------------------------------------
@@ -722,6 +723,89 @@ int TruePosition(int xx){
 
             }
 
+
+}
+
+int TruePositionOnlyName(int xx){
+
+    switch(play[xx].x){  //先辨識在哪個星系
+            case 0:
+                switch(play[xx].y){  //在辨識在哪個位置
+                  case 0: cout<<drama1.a0 ;break;
+                  case 1: cout<<drama1.a1 ;break;
+                  case 2: cout<<drama1.a2 ;break;
+                  case 3: cout<<drama1.a3 ;break;
+                  case 4: cout<<drama1.a4 ;break;
+                  case 5: cout<<drama1.a5 ;break;
+                  case 6: cout<<drama1.a6 ;break;
+                  case 7: cout<<drama1.a7 ;break;
+                  case 8: cout<<drama1.a8 ;break;
+                  case 9: cout<<drama1.a9 ;break;
+                  case 10: cout<<drama1.a10 ;break;
+                  case 11: cout<<drama1.a11 ;break;
+                  case 12: cout<<drama1.a12 ;break;
+                  case 13: cout<<drama1.a13 ;break;
+                  case 14: cout<<drama1.a14 ;break;
+                  case 15: cout<<drama1.a15 ;break;
+                  case 16: cout<<drama1.a16 ;break;
+                  case 17: cout<<drama1.a17 ;break;
+                  case 18: cout<<drama1.a18 ;break;
+                  case 19: cout<<drama1.a19 ;break;
+
+                }
+                break;
+
+            case 1:
+                switch(play[xx].y){
+                  case 0: cout<<drama2.b0 ;break;
+                  case 1: cout<<drama2.b1 ;break;
+                  case 2: cout<<drama2.b2 ;break;
+                  case 3: cout<<drama2.b3 ;break;
+                  case 4: cout<<drama2.b4 ;break;
+                  case 5: cout<<drama2.b5 ;break;
+                  case 6: cout<<drama2.b6 ;break;
+                  case 7: cout<<drama2.b7 ;break;
+                  case 8: cout<<drama2.b8 ;break;
+                  case 9: cout<<drama2.b9 ;break;
+                  case 10: cout<<drama2.b10 ;break;
+                  case 11: cout<<drama2.b11 ;break;
+                  case 12: cout<<drama2.b12 ;break;
+                  case 13: cout<<drama2.b13 ;break;
+                  case 14: cout<<drama2.b14 ;break;
+                  case 15: cout<<drama2.b15 ;break;
+                  case 16: cout<<drama2.b16 ;break;
+                  case 17: cout<<drama2.b17 ;break;
+                  case 18: cout<<drama2.b18 ;break;
+                  case 19: cout<<drama2.b19 ;break;
+
+                }
+                break;
+
+            case 2:
+                switch(play[xx].y){
+                  case 0: cout<<drama3.c0 ;break;
+                  case 1: cout<<drama3.c1 ;break;
+                  case 2: cout<<drama3.c2 ;break;
+                  case 3: cout<<drama3.c3 ;break;
+                  case 4: cout<<drama3.c4 ;break;
+                  case 5: cout<<drama3.c5 ;break;
+                  case 6: cout<<drama3.c6 ;break;
+                  case 7: cout<<drama3.c7 ;break;
+                  case 8: cout<<drama3.c8 ;break;
+                  case 9: cout<<drama3.c9 ;break;
+                  case 10: cout<<drama3.c10 ;break;
+                  case 11: cout<<drama3.c11 ;break;
+                  case 12: cout<<drama3.c12 ;break;
+                  case 13: cout<<drama3.c13 ;break;
+                  case 14: cout<<drama3.c14 ;break;
+                  case 15: cout<<drama3.c15 ;break;
+                  case 16: cout<<drama3.c16 ;break;
+                  case 17: cout<<drama3.c17 ;break;
+                  case 18: cout<<drama3.c18 ;break;
+                  case 19: cout<<drama3.c19 ;break;
+                }
+                break;
+            }
 
 }
 
@@ -1859,7 +1943,8 @@ int Wormhole(int xx){         //蟲洞函式
                         cout<<endl<<"請輸入欲前往星系，除了第一星系外"<<endl;
                         cin>>AshortSystem;
                         play[xx].x = AshortSystem-1;
-                       }while(play[xx].x == 0);
+                       }while(play[xx].x <= 0||play[xx].x>2);
+                       play[xx].y = 0 ;
 
                     break;
                    case 1:
@@ -1867,7 +1952,8 @@ int Wormhole(int xx){         //蟲洞函式
                         cout<<endl<<"請輸入欲前往星系，除了第二星系外"<<endl;
                         cin>>AshortSystem;
                         play[xx].x = AshortSystem-1;
-                       }while(play[xx].x == 1);
+                       }while(play[xx].x == 1||play[xx].x<0||play[xx].x>2);
+                       play[xx].y = 0 ;
 
                     break;
                    case 2:
@@ -1875,7 +1961,8 @@ int Wormhole(int xx){         //蟲洞函式
                         cout<<endl<<"請輸入欲前往星系，除了第三星系外"<<endl;
                         cin>>AshortSystem;
                         play[xx].x = AshortSystem-1;
-                       }while(play[xx].x == 2);
+                       }while(play[xx].x >=2||play[xx].x<0);
+                       play[xx].y = 0 ;
 
                     break;
                 }
@@ -1961,7 +2048,7 @@ int Store(int xx){  //確定6種
 
 
        cout<<endl<<"可購買道具項目,如已購買之項目將不再增加"<<endl;
-       cout<<"1.回復機體((用能源換防禦機體 2.光學隱形((免受攻擊"<<endl<<"3.駭入星體((攻佔對方基地 4.死星 Death Star((毀滅對方基地"<<endl<<"5.核彈((降低二階基地 6.電磁脈衝((降低一階基地 7. Cancel"<<endl;
+       cout<<"1.回復機體((用能源換防禦機體   2.光學隱形((免受攻擊"<<endl<<"3.駭入星體((攻佔對方基地   4.死星 Death Star((毀滅對方基地"<<endl<<"5.核彈((降低二階基地   6.電磁脈衝((降低一階基地   7. Cancel"<<endl;
        cout<<"請選擇您想購買道具之編號，一回合只能購買一種"<<endl;
        do{
             cin>>toolchoose;
@@ -1972,12 +2059,13 @@ int Store(int xx){  //確定6種
        switch(toolchoose){
        case 0 : play[xx].energy = play[xx].energy - 100;
                 play[xx].body = play[xx].body + 10;
+                cout<<endl<<"success buying 回復機體10%"<<endl;
                 break;                                                 //回復機體
-       case 1 : if (num[0]==1){Tool[xx] = Tool[xx]+10;play[xx].energy = play[xx].energy - 40 ;}; break;        //光學隱形
-       case 2 : if (num[0]==1){Tool[xx] = Tool[xx]+100;play[xx].energy = play[xx].energy - 100 ;}; break;       //駭入星體
-       case 3 : if (num[0]==1){Tool[xx] = Tool[xx]+1000;play[xx].energy = play[xx].energy - 75 ;}; break;      //死星 Death Star
-       case 4 : if (num[0]==1){Tool[xx] = Tool[xx]+10000;play[xx].energy = play[xx].energy - 50 ;}; break;     //核彈
-       case 5 : if (num[0]==1){Tool[xx] = Tool[xx]+100000;play[xx].energy = play[xx].energy - 25 ;}; break;    //電磁脈衝
+       case 1 : if (num[0]==1){Tool[xx] = Tool[xx]+10;play[xx].energy = play[xx].energy - 40 ;cout<<endl<<"success buying 光學隱形"<<endl;}; break;        //光學隱形
+       case 2 : if (num[0]==1){Tool[xx] = Tool[xx]+100;play[xx].energy = play[xx].energy - 100 ;cout<<endl<<"success buying 駭入星體"<<endl;}; break;       //駭入星體
+       case 3 : if (num[0]==1){Tool[xx] = Tool[xx]+1000;play[xx].energy = play[xx].energy - 75 ;cout<<endl<<"success buying 死星 Death Star"<<endl;}; break;      //死星 Death Star
+       case 4 : if (num[0]==1){Tool[xx] = Tool[xx]+10000;play[xx].energy = play[xx].energy - 50 ;cout<<endl<<"success buying 核彈"<<endl;}; break;     //核彈
+       case 5 : if (num[0]==1){Tool[xx] = Tool[xx]+100000;play[xx].energy = play[xx].energy - 25 ;cout<<endl<<"success buying 電磁脈衝"<<endl;}; break;    //電磁脈衝
 
        }
 }
@@ -1995,7 +2083,7 @@ int UcantSeeMe(int xx){
 
        if(num[1]==1){    //如果有道具
 
-       cout<<"您目前持有:";
+       cout<<endl<<endl<<"您目前持有:";
        // 如果有下列道具
        //if(num[0]==1){cout<<"1.回復機體 ";}
        cout<<"1.光學隱形";
@@ -2031,7 +2119,7 @@ int HowManyTool(int xx){
        //   80 0 0 0 0 0    從後面開始數
        //    5 4 3 2 1 0 位
 
-       if(s!=8000000&&s!=8000010){    //如果有道具
+       if(Tool[xx]!=8000000&&Tool[xx]!=8000010){    //如果有道具
 
        cout<<"您目前持有:";
        // 如果有下列道具
@@ -2057,16 +2145,36 @@ int HowManyTool(int xx){
 
          switch(skill){
         case 2:
+            if(num[2]==1){
         cout<<endl<<"已使用 駭入星體 , 佔據了對方基地,變為我方陣地"<<endl;
+        Tool[xx] = Tool[xx]-100;
+            }else{
+              cout<<"你並無此項道具,直接取消使用"<<endl;
+            }
         break;
         case 3:
+            if(num[3]==1){
         cout<<endl<<"死星 Death Star , 已將敵方奢師破壞殆盡,回歸無人星球"<<endl;
+        Tool[xx] = Tool[xx]-1000;
+            }else{
+              cout<<"你並無此項道具,直接取消使用"<<endl;
+            }
         break;
         case 4:
+            if(num[4]==1){
         cout<<endl<<"核彈 , 已讓敵方損失慘重,降低二階基地"<<endl;
+        Tool[xx] = Tool[xx]-10000;
+            }else{
+              cout<<"你並無此項道具,直接取消使用"<<endl;
+            }
         break;
         case 5:
+            if(num[5]==1){
         cout<<endl<<"電磁脈衝 , 已讓敵方遭受些許毀損,降低一階基地"<<endl;
+        Tool[xx] = Tool[xx]-100000;
+            }else{
+              cout<<"你並無此項道具,直接取消使用"<<endl;
+            }
         break;
 
 
