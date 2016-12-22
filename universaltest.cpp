@@ -126,10 +126,10 @@ struct story{    //剛開始的劇情
     string story5 = "╚═════════════════════════════════════╝\n";
  };
 struct Player play[] = {
-       {500,100,0,0,0,0},  //player1  use play[0]
-       {500,100,0,0,0,0},  //player2  use play[1]
-       {500,100,0,0,0,0},  //player3  use play[2]
-       {500,100,0,0,0,0},  //player4  use play[3]
+       {2000,100,0,0,0,0},  //player1  use play[0]
+       {2000,100,0,0,0,0},  //player2  use play[1]
+       {2000,100,0,0,0,0},  //player3  use play[2]
+       {2000,100,0,0,0,0},  //player4  use play[3]
      };
 struct Drama1 drama1;
 struct Drama2 drama2;
@@ -146,7 +146,7 @@ int main(){
                            }
                Tool[k]=8000000;  //這是道具初始值
 
-               play[k].energy = 500;
+               play[k].energy = 2000;
                play[k].body = 100 ;
                play[k].x = 0 ;
                play[k].y = 0 ;
@@ -293,8 +293,8 @@ int gamestart = GameStart();   //取得開始數據
             }  //----------------------------------------------
         }
 
-        if(play[xx].energy>500){       //如果能源超過500則只能500
-            play[xx].energy = 500;
+        if(play[xx].energy>2000){       //如果能源超過2000則只能2000
+            play[xx].energy = 2000;
         }
         if(play[xx].body>100){         //如果機體超過100則只能100
             play[xx].body = 100;
@@ -375,54 +375,54 @@ int dice(){
 
 int Energy(int xx){  //  energy~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-     if(play[xx].energy>=500){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉╣  ";}
-else if(play[xx].energy>=487){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▋╣  ";}
-else if(play[xx].energy>=475){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉  ╣  ";}
-else if(play[xx].energy>=462){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▋  ╣  ";}
-else if(play[xx].energy>=450){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉    ╣  ";}
-else if(play[xx].energy>=437){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▋    ╣  ";}
-else if(play[xx].energy>=425){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉      ╣  ";}
-else if(play[xx].energy>=412){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▋      ╣  ";}
-else if(play[xx].energy>=400){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉        ╣  ";}
-else if(play[xx].energy>=387){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▋        ╣  ";}
-else if(play[xx].energy>=375){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉          ╣  ";}
-else if(play[xx].energy>=362){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▋          ╣  ";}
-else if(play[xx].energy>=350){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉            ╣  ";}
-else if(play[xx].energy>=337){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▋            ╣  ";}
-else if(play[xx].energy>=325){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉              ╣  ";}
-else if(play[xx].energy>=312){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▋              ╣  ";}
-else if(play[xx].energy>=300){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉                ╣  ";}
-else if(play[xx].energy>=287){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▋                ╣  ";}
-else if(play[xx].energy>=275){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉                  ╣  ";}
-else if(play[xx].energy>=262){cout<<"╠▉▉▉▉▉▉▉▉▉▉▋                  ╣  ";}
-else if(play[xx].energy>=250){cout<<"╠▉▉▉▉▉▉▉▉▉▉                    ╣  ";}
-else if(play[xx].energy>=237){cout<<"╠▉▉▉▉▉▉▉▉▉▋                    ╣  ";}
-else if(play[xx].energy>=225){cout<<"╠▉▉▉▉▉▉▉▉▉                      ╣  ";}
-else if(play[xx].energy>=212){cout<<"╠▉▉▉▉▉▉▉▉▋                      ╣  ";}
-else if(play[xx].energy>=200){cout<<"╠▉▉▉▉▉▉▉▉                        ╣  ";}
-else if(play[xx].energy>=187){cout<<"╠▉▉▉▉▉▉▉▋                        ╣  ";}
-else if(play[xx].energy>=175){cout<<"╠▉▉▉▉▉▉▉                          ╣  ";}
-else if(play[xx].energy>=162){cout<<"╠▉▉▉▉▉▉▋                          ╣  ";}
-else if(play[xx].energy>=150){cout<<"╠▉▉▉▉▉▉                            ╣  ";}
-else if(play[xx].energy>=137){cout<<"╠▉▉▉▉▉▋                            ╣  ";}
-else if(play[xx].energy>=125){cout<<"╠▉▉▉▉▉                              ╣  ";}
-else if(play[xx].energy>=112){cout<<"╠▉▉▉▉▋                              ╣  ";}
-else if(play[xx].energy>=100){cout<<"╠▉▉▉▉                                ╣  ";}
-else if(play[xx].energy>=87 ){cout<<"╠▉▉▉▋                                ╣  ";}
-else if(play[xx].energy>=75 ){SetColor(12);
-                              cout<<"╠▉▉▉                                  ╣  ";SetColor();}
-else if(play[xx].energy>=62 ){SetColor(12);
-                              cout<<"╠▉▉▋                                  ╣  ";SetColor();}
+     if(play[xx].energy>=2000){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉╣  ";}
+else if(play[xx].energy>=1950){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▋╣  ";}
+else if(play[xx].energy>=1900){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉  ╣  ";}
+else if(play[xx].energy>=1850){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▋  ╣  ";}
+else if(play[xx].energy>=1800){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉    ╣  ";}
+else if(play[xx].energy>=1750){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▋    ╣  ";}
+else if(play[xx].energy>=1700){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉      ╣  ";}
+else if(play[xx].energy>=1650){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▋      ╣  ";}
+else if(play[xx].energy>=1600){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉        ╣  ";}
+else if(play[xx].energy>=1550){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉▋        ╣  ";}
+else if(play[xx].energy>=1500){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▉          ╣  ";}
+else if(play[xx].energy>=1450){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉▋          ╣  ";}
+else if(play[xx].energy>=1400){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▉            ╣  ";}
+else if(play[xx].energy>=1350){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉▋            ╣  ";}
+else if(play[xx].energy>=1300){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▉              ╣  ";}
+else if(play[xx].energy>=1250){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉▋              ╣  ";}
+else if(play[xx].energy>=1200){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▉                ╣  ";}
+else if(play[xx].energy>=1150){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉▋                ╣  ";}
+else if(play[xx].energy>=1100){cout<<"╠▉▉▉▉▉▉▉▉▉▉▉                  ╣  ";}
+else if(play[xx].energy>=1050){cout<<"╠▉▉▉▉▉▉▉▉▉▉▋                  ╣  ";}
+else if(play[xx].energy>=1000){cout<<"╠▉▉▉▉▉▉▉▉▉▉                    ╣  ";}
+else if(play[xx].energy>=950 ){cout<<"╠▉▉▉▉▉▉▉▉▉▋                    ╣  ";}
+else if(play[xx].energy>=900 ){cout<<"╠▉▉▉▉▉▉▉▉▉                      ╣  ";}
+else if(play[xx].energy>=850 ){cout<<"╠▉▉▉▉▉▉▉▉▋                      ╣  ";}
+else if(play[xx].energy>=800 ){cout<<"╠▉▉▉▉▉▉▉▉                        ╣  ";}
+else if(play[xx].energy>=750 ){cout<<"╠▉▉▉▉▉▉▉▋                        ╣  ";}
+else if(play[xx].energy>=700 ){cout<<"╠▉▉▉▉▉▉▉                          ╣  ";}
+else if(play[xx].energy>=650 ){cout<<"╠▉▉▉▉▉▉▋                          ╣  ";}
+else if(play[xx].energy>=600 ){cout<<"╠▉▉▉▉▉▉                            ╣  ";}
+else if(play[xx].energy>=550 ){cout<<"╠▉▉▉▉▉▋                            ╣  ";}
+else if(play[xx].energy>=500 ){cout<<"╠▉▉▉▉▉                              ╣  ";}
+else if(play[xx].energy>=450 ){cout<<"╠▉▉▉▉▋                              ╣  ";}
+else if(play[xx].energy>=400 ){cout<<"╠▉▉▉▉                                ╣  ";}
+else if(play[xx].energy>=350 ){cout<<"╠▉▉▉▋                                ╣  ";}
+else if(play[xx].energy>=300 ){SetColor(12);
+                               cout<<"╠▉▉▉                                  ╣  ";SetColor();}
+else if(play[xx].energy>=250 ){SetColor(12);
+                               cout<<"╠▉▉▋                                  ╣  ";SetColor();}
+else if(play[xx].energy>=200 ){SetColor(12);
+                               cout<<"╠▉▉                                    ╣  ";SetColor();}
+else if(play[xx].energy>=150 ){SetColor(12);
+                               cout<<"╠▉▋                                    ╣  ";SetColor();}
+else if(play[xx].energy>=100 ){SetColor(12);
+                               cout<<"╠▉                                      ╣  ";SetColor();}
 else if(play[xx].energy>=50 ){SetColor(12);
-                              cout<<"╠▉▉                                    ╣  ";SetColor();}
-else if(play[xx].energy>=37 ){SetColor(12);
-                              cout<<"╠▉▋                                    ╣  ";SetColor();}
-else if(play[xx].energy>=25 ){SetColor(12);
-                              cout<<"╠▉                                      ╣  ";SetColor();}
-else if(play[xx].energy>=12 ){SetColor(12);
-                              cout<<"╠▋                                      ╣  ";SetColor();}
+                               cout<<"╠▋                                      ╣  ";SetColor();}
 else if(play[xx].energy>0 ){SetColor(0);
-                              cout<<"╠▎                                      ╣  ";SetColor();}
+                               cout<<"╠▎                                      ╣  ";SetColor();}
 
 }
 
@@ -626,11 +626,26 @@ cout<<"|_____| |_| |__|__|__|__|    |_| |__|__|_____|__|__|"<<endl<<endl;
 int Rule(){   //在此輸入規則
     system("cls");
 
-    cout<<"12345678945612348974"<<endl;
-    cout<<"12345678945612348974"<<endl;
-    cout<<"12345678945612348974"<<endl;
-    cout<<"12345678945612348974"<<endl;
-    cout<<"12345678945612348974"<<endl;
+cout<<"一開始各方玩家有2000噸能源及一架完整的火箭船(100%)"<<endl;
+cout<<"玩家4人，骰2個3點的骰子"<<endl;
+cout<<"有設定3個星系，星系中有多個恆星，行星或是星雲…"<<endl;
+cout<<"1.每個星系有一個蟲洞、停在此格即可藉由它自由選擇另外兩個星系其中之一"<<endl;
+cout<<"2. 注意!!有隨機事件發生"<<endl;
+cout<<"3. 每格都有機會碰到外星人（突發事件maybe 1% or 2%）可能有好事或壞事發生"<<endl;
+cout<<"4. 有  商店  賭場  太空站  各星系皆有一個"<<endl;
+cout<<"5. 在同個星系超過兩圈者進入黑洞，直到再次擲出相同點數骰子，隨機傳入另外兩個星系"<<endl;
+cout<<"6. 在黑洞1回合扣10 Tons能源"<<endl;
+cout<<"7. 有3階段基地，"<<endl;
+cout<<"建設基地消耗"<<endl;
+cout<<"1階 消耗50 Tons，2階 消耗80 Tons，3階 消耗150 Tons"<<endl;
+cout<<"其他人通過"<<endl;
+cout<<"基地：1階扣10 Tons  機體扣2%，2階扣20 Tons  機體扣4%，3階扣50 Tons  機體扣8%"<<endl;
+cout<<"每走1格扣5能源"<<endl;
+cout<<"通過蟲洞扣較多，扣15 Tons"<<endl;
+cout<<"買地給予選擇yes or no "<<endl;
+cout<<"一個人只有一個道具"<<endl;
+
+cout<<endl<<endl;
     return 0;
 }
 
@@ -2117,11 +2132,11 @@ int Store(int xx){  //確定6種
                 play[xx].body = play[xx].body + 10;
                 cout<<endl<<"success buying 回復機體10%"<<endl;
                 break;                                                 //回復機體
-       case 1 : if (num[0]==1){Tool[xx] = Tool[xx]+10;play[xx].energy = play[xx].energy - 40 ;cout<<endl<<"success buying 光學隱形"<<endl;}; break;        //光學隱形
-       case 2 : if (num[0]==1){Tool[xx] = Tool[xx]+100;play[xx].energy = play[xx].energy - 100 ;cout<<endl<<"success buying 駭入星體"<<endl;}; break;       //駭入星體
-       case 3 : if (num[0]==1){Tool[xx] = Tool[xx]+1000;play[xx].energy = play[xx].energy - 75 ;cout<<endl<<"success buying 死星 Death Star"<<endl;}; break;      //死星 Death Star
-       case 4 : if (num[0]==1){Tool[xx] = Tool[xx]+10000;play[xx].energy = play[xx].energy - 50 ;cout<<endl<<"success buying 核彈"<<endl;}; break;     //核彈
-       case 5 : if (num[0]==1){Tool[xx] = Tool[xx]+100000;play[xx].energy = play[xx].energy - 25 ;cout<<endl<<"success buying 電磁脈衝"<<endl;}; break;    //電磁脈衝
+       case 1 : if (num[1]==1){Tool[xx] = Tool[xx]+10;play[xx].energy = play[xx].energy - 40 ;cout<<endl<<"success buying 光學隱形"<<endl;}; break;        //光學隱形
+       case 2 : if (num[2]==1){Tool[xx] = Tool[xx]+100;play[xx].energy = play[xx].energy - 100 ;cout<<endl<<"success buying 駭入星體"<<endl;}; break;       //駭入星體
+       case 3 : if (num[3]==1){Tool[xx] = Tool[xx]+1000;play[xx].energy = play[xx].energy - 75 ;cout<<endl<<"success buying 死星 Death Star"<<endl;}; break;      //死星 Death Star
+       case 4 : if (num[4]==1){Tool[xx] = Tool[xx]+10000;play[xx].energy = play[xx].energy - 50 ;cout<<endl<<"success buying 核彈"<<endl;}; break;     //核彈
+       case 5 : if (num[5]==1){Tool[xx] = Tool[xx]+100000;play[xx].energy = play[xx].energy - 25 ;cout<<endl<<"success buying 電磁脈衝"<<endl;}; break;    //電磁脈衝
 
        }
 }
