@@ -52,70 +52,73 @@ struct  Player{
 };
 
 struct  Drama1{  //星系1劇情
+        string galaxy1 = "太陽系";
         string a0 = "太空站";
-        string a1 = "星系1星球2";
-        string a2 = "星系1星球3";
-        string a3 = "星系1星球4";
-        string a4 = "星系1星球5";
+        string a1 = "火星";
+        string a2 = "金星";
+        string a3 = "水星";
+        string a4 = "太陽";
         string a5 = "蟲洞";
-        string a6 = "星系1星球7";
-        string a7 = "星系1星球8";
-        string a8 = "星系1星球9";
-        string a9 = "星系1星球10";
-        string a10 = "星系1星球11";
-        string a11 = "星系1星球12";
-        string a12 = "星系1星球13";
-        string a13 = "星系1星球14";
-        string a14 = "星系1星球15";
-        string a15 = "星系1星球16";
-        string a16 = "星系1星球17";
-        string a17 = "星系1星球18";
-        string a18 = "星系1星球19";
-        string a19 = "星系1星球20";
+        string a6 = "木星";
+        string a7 = "土星";
+        string a8 = "天王星  ";
+        string a9 = "海王星  ";
+        string a10 = "冥王星  ";
+        string a11 = "  鬩神星  ";
+        string a12 = "  穀神星  ";
+        string a13 = "智神星  ";
+        string a14 = "灶神星";
+        string a15 = "鳥神星";
+        string a16 = "妊神星";
+        string a17 = "創神星";
+        string a18 = "月亮";
+        string a19 = "地球";
 };
 struct  Drama2{  //星系2劇情
-        string b0 = "星系2星球1";
-        string b1 = "星系2星球2";
-        string b2 = "星系2星球3";
-        string b3 = "星系2星球4";
-        string b4 = "星系2星球5";
-        string b5 = "星系2星球6";
-        string b6 = "星系2星球7";
-        string b7 = "星系2星球8";
-        string b8 = "星系2星球9";
-        string b9 = "星系2星球10";
-        string b10 = "星系2星球11";
+        string galaxy2 = "星雲 群集";
+        string b0 = "蟹狀星雲";
+        string b1 = "貓眼星雲";
+        string b2 = "馬頭星雲";
+        string b3 = "螞蟻星雲";
+        string b4 = "巴納德環星雲";
+        string b5 = "回力棒星雲";
+        string b6 = "老鷹星雲";
+        string b7 = "愛斯基摩星雲";
+        string b8 = "船底座η星雲";
+        string b9 = "螺旋星雲";
+        string b10 = "沙漏星雲";
         string b11 = "蟲洞";
-        string b12 = "星系2星球13";
-        string b13 = "星系2星球14";
-        string b14 = "星系2星球15";
+        string b12 = "獵戶座星雲";
+        string b13 = "鵜鶘星雲";
+        string b14 = "紅矩形星雲";
         string b15 = "星際賭場";
-        string b16 = "星系2星球17";
-        string b17 = "星系2星球18";
-        string b18 = "星系2星球19";
-        string b19 = "星系2星球20";
+        string b16 = "環狀星雲";
+        string b17 = "玫瑰星雲";
+        string b18 = "蜘蛛星雲";
+        string b19 = "海鷗星雲";
 };
 struct  Drama3{  //星系3劇情
-        string c0 = "星系3星球1";
-        string c1 = "星系3星球2";
-        string c2 = "星系3星球3";
-        string c3 = "星系3星球4";
-        string c4 = "星系3星球5";
-        string c5 = "星系3星球6";
-        string c6 = "星系3星球7";
-        string c7 = "星系3星球8";
-        string c8 = "星系3星球9";
+        string galaxy3 = "彗星 群集";
+        string c0 = "梅克賀茲一號彗星";
+        string c1 = "克魯茲族彗星";
+        string c2 = "海爾-波普彗星";
+        string c3 = "班尼特彗星";
+        string c4 = "海爾博普彗星";
+        string c5 = "包瑞利彗星";
+        string c6 = "威斯特彗星";
+        string c7 = "池谷關彗星";
+        string c8 = "麥克諾特彗星";
         string c9 = "商店";
-        string c10 = "星系3星球11";
-        string c11 = "星系3星球12";
-        string c12 = "星系3星球13";
-        string c13 = "星系3星球14";
-        string c14 = "星系3星球15";
-        string c15 = "星系3星球16";
-        string c16 = "星系3星球17";
-        string c17 = "蟲洞";
-        string c18 = "星系3星球19";
-        string c19 = "星系3星球20";
+        string c10 = "柯侯德彗星";
+        string c11 = "百武彗星";
+        string c12 = "比拉彗星";
+        string c13 = "恩克彗星";
+        string c14 = "沃夫彗星";
+        string c15 = "霍姆斯彗星";
+        string c16 = "泰勒彗星";
+        string c17 = "  蟲洞  ";
+        string c18 = "林尼爾彗星";
+        string c19 = "哈雷彗星";
 };
 struct story{    //剛開始的劇情
     string story0 = "╔═════════════════════════════════════╗\n║";
@@ -627,11 +630,11 @@ int Rule(){   //在此輸入規則
     system("cls");
 
 cout<<"一開始各方玩家有2000噸能源及一架完整的火箭船(100%)"<<endl;
-cout<<"玩家4人，骰2個3點的骰子"<<endl;
-cout<<"有設定3個星系，星系中有多個恆星，行星或是星雲…"<<endl;
-cout<<"1.每個星系有一個蟲洞、停在此格即可藉由它自由選擇另外兩個星系其中之一"<<endl;
+cout<<"玩家4人，骰2顆3點的骰子"<<endl;
+cout<<"有設定3個星系，星系中有多個恆星，行星，星雲或是彗星"<<endl;
+cout<<"1. 每個星系都有一個蟲洞、停在此格即可藉由它自由選擇另外兩個星系其中之一"<<endl;
 cout<<"2. 注意!!有隨機事件發生"<<endl;
-cout<<"3. 每格都有機會碰到外星人（突發事件maybe 1% or 2%）可能有好事或壞事發生"<<endl;
+cout<<"3. 每格皆有機會碰到外星人（突發事件maybe 1% or 2%）可能有好事或壞事發生"<<endl;
 cout<<"4. 有  商店  賭場  太空站  各星系皆有一個"<<endl;
 cout<<"5. 在同個星系超過兩圈者進入黑洞，直到再次擲出相同點數骰子，隨機傳入另外兩個星系"<<endl;
 cout<<"6. 在黑洞1回合扣10 Tons能源"<<endl;
@@ -640,10 +643,9 @@ cout<<"建設基地消耗"<<endl;
 cout<<"1階 消耗50 Tons，2階 消耗80 Tons，3階 消耗150 Tons"<<endl;
 cout<<"其他人通過"<<endl;
 cout<<"基地：1階扣10 Tons  機體扣2%，2階扣20 Tons  機體扣4%，3階扣50 Tons  機體扣8%"<<endl;
-cout<<"每走1格扣5能源"<<endl;
+cout<<"每走1格扣5 Tons能源"<<endl;
 cout<<"通過蟲洞扣較多，扣15 Tons"<<endl;
-cout<<"買地給予選擇yes or no "<<endl;
-cout<<"一個人只有一個道具"<<endl;
+cout<<"一位玩家一種道具只能擁有一種"<<endl;
 
 cout<<endl<<endl;
     return 0;
@@ -1441,8 +1443,10 @@ int ThirdBase(int xA,int yA){
 int Map(){
     int yy = play[xxglobal].x ;
     string StarNameInMap[20];
+    string GalaxyName;
     switch(yy){   // 顯示地圖區
   case 0:
+      GalaxyName=drama1.galaxy1;
       StarNameInMap[0] = drama1.a0;
       StarNameInMap[1] = drama1.a1;
       StarNameInMap[2] = drama1.a2;
@@ -1465,6 +1469,7 @@ int Map(){
       StarNameInMap[19] = drama1.a19;
       break;
   case 1:
+      GalaxyName=drama2.galaxy2;
       StarNameInMap[0] = drama2.b0;
       StarNameInMap[1] = drama2.b1;
       StarNameInMap[2] = drama2.b2;
@@ -1487,6 +1492,7 @@ int Map(){
       StarNameInMap[19] = drama2.b19;
       break;
   case 2:
+      GalaxyName=drama3.galaxy3;
       StarNameInMap[0] = drama3.c0;
       StarNameInMap[1] = drama3.c1;
       StarNameInMap[2] = drama3.c2;
@@ -1516,7 +1522,7 @@ int Map(){
     Stage(yy,0);
     cout<<endl;
     cout<<"                                      "<<"★"<<endl;  //1
-    cout<<"                                      "<<StarNameInMap[0]<<endl<<endl;  //1
+    cout<<"                                    "<<StarNameInMap[0]<<endl<<endl;  //1
     SetColor();
 
     BaseColor(yy,19);
@@ -1532,9 +1538,9 @@ int Map(){
     BaseColor(yy,1);
     cout<<"      "<<"★"<<"              "<<endl;             SetColor();    //2`
     BaseColor(yy,19);
-    cout<<"                               "<<StarNameInMap[19]<<"      ";SetColor();  //20
+    cout<<"                               "<<StarNameInMap[19]<<"     ";SetColor();  //20
     BaseColor(yy,1);
-    cout<<"       "<<StarNameInMap[1]<<"              "<<endl<<endl;    SetColor();//2
+    cout<<"      "<<StarNameInMap[1]<<"              "<<endl<<endl;    SetColor();//2
 
     BaseColor(yy,18);
     cout<<"                          ";
@@ -1549,7 +1555,7 @@ int Map(){
     BaseColor(yy,2);
     cout<<"            "<<"★"<<"              "<<endl;        SetColor();//3
     BaseColor(yy,18);
-    cout<<"                          "<<StarNameInMap[18]<<"          ";  SetColor();  //19
+    cout<<"                          "<<StarNameInMap[18]<<"         ";  SetColor();  //19
     BaseColor(yy,2);
     cout<<"            "<<StarNameInMap[2]<<"              "<<endl<<endl;SetColor();    //3
 
@@ -1568,7 +1574,7 @@ int Map(){
     BaseColor(yy,17);
     cout<<"                    "<<StarNameInMap[17]<<"            ";        SetColor();   //18
     BaseColor(yy,3);
-    cout<<"                      "<<StarNameInMap[3]<<"     "<<endl<<endl; SetColor(); //4
+    cout<<"                   "<<StarNameInMap[3]<<"     "<<endl<<endl; SetColor(); //4
 
     BaseColor(yy,16);
     cout<<"               ";
@@ -1579,13 +1585,13 @@ int Map(){
     cout<<endl;   SetColor();                                 //5
 
     BaseColor(yy,16);
-    cout<<"               "<<"★"<<"                   ";           SetColor(); //17
+    cout<<"               "<<"★"<<"                    ";           SetColor(); //17
     BaseColor(yy,4);
-    cout<<"                          "<<"★"<<"     "<<endl;        SetColor();//5
+    cout<<GalaxyName<<"                   "<<"★"<<"     "<<endl;        SetColor();//5
     BaseColor(yy,16);
     cout<<"               "<<StarNameInMap[16]<<"                   ";         SetColor();//17
     BaseColor(yy,4);
-    cout<<"                          "<<StarNameInMap[4]<<"     "<<endl<<endl;SetColor();  //5
+    cout<<"                       "<<StarNameInMap[4]<<"     "<<endl<<endl;SetColor();  //5
 
     BaseColor(yy,15);
     cout<<"          ";
@@ -1602,7 +1608,7 @@ int Map(){
     BaseColor(yy,15);
     cout<<"          "<<StarNameInMap[15]<<"                        ";               SetColor();//16
     BaseColor(yy,5);
-    cout<<"                               "<<StarNameInMap[5]<<"     "<<endl<<endl; SetColor(); //6
+    cout<<"                            "<<StarNameInMap[5]<<"     "<<endl<<endl; SetColor(); //6
 
     BaseColor(yy,14);
     cout<<"      ";
@@ -1619,7 +1625,7 @@ int Map(){
     BaseColor(yy,14);
     cout<<"      "<<StarNameInMap[14]<<"                             ";                  SetColor();//15
     BaseColor(yy,6);
-    cout<<"                                   "<<StarNameInMap[6]<<"     "<<endl<<endl; SetColor(); //7
+    cout<<"                                "<<StarNameInMap[6]<<"     "<<endl<<endl; SetColor(); //7
 
     BaseColor(yy,13);
     cout<<" ";
@@ -1659,19 +1665,19 @@ int Map(){
     BaseColor(yy,7);
     cout<<"★"<<"           "<<endl; SetColor();  //8
     BaseColor(yy,13);
-    cout<<" "<<StarNameInMap[13]<<"          ";  SetColor(); //14
+    cout<<" "<<StarNameInMap[13]<<"   ";  SetColor(); //14
     BaseColor(yy,12);
-    cout<<StarNameInMap[12]<<"           ";  SetColor(); //13
+    cout<<StarNameInMap[12]<<"   ";  SetColor(); //13
     BaseColor(yy,11);
-    cout<<StarNameInMap[11]<<"           ";  SetColor(); //12
+    cout<<StarNameInMap[11]<<"    ";  SetColor(); //12
     BaseColor(yy,10);
-    cout<<StarNameInMap[10]<<"           ";  SetColor(); //11
+    cout<<StarNameInMap[10]<<"    ";  SetColor(); //11
     BaseColor(yy,9);
-    cout<<StarNameInMap[9]<<"           ";  SetColor(); //10
+    cout<<StarNameInMap[9]<<"     ";  SetColor(); //10
     BaseColor(yy,8);
-    cout<<StarNameInMap[8]<<"            ";  SetColor(); //9
+    cout<<StarNameInMap[8]<<"     ";  SetColor(); //9
     BaseColor(yy,7);
-    cout<<StarNameInMap[7]<<"           "<<endl<<endl;  SetColor(); //8
+    cout<<StarNameInMap[7]<<"       "<<endl<<endl;  SetColor(); //8
 
 }
 
