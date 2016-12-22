@@ -126,10 +126,10 @@ struct story{    //剛開始的劇情
     string story5 = "╚═════════════════════════════════════╝\n";
  };
 struct Player play[] = {
-       {5000,100,0,0,0,0},  //player1  use play[0]
-       {5000,100,0,0,0,0},  //player2  use play[1]
-       {5000,100,0,0,0,0},  //player3  use play[2]
-       {5000,100,0,0,0,0},  //player4  use play[3]
+       {500,100,0,0,0,0},  //player1  use play[0]
+       {500,100,0,0,0,0},  //player2  use play[1]
+       {500,100,0,0,0,0},  //player3  use play[2]
+       {500,100,0,0,0,0},  //player4  use play[3]
      };
 struct Drama1 drama1;
 struct Drama2 drama2;
@@ -146,7 +146,7 @@ int main(){
                            }
                Tool[k]=8000000;  //這是道具初始值
 
-               play[k].energy = 5000;
+               play[k].energy = 500;
                play[k].body = 100 ;
                play[k].x = 0 ;
                play[k].y = 0 ;
@@ -262,7 +262,7 @@ int gamestart = GameStart();   //取得開始數據
 
 
                SuddenlyEvent(xx);   //突發事件
-               Alien(xx);   //外星人事件
+              // Alien(xx);   //外星人事件  合併於突發事件中
 
          if(temporary-play[xx].x==0){  //如果經過蟲洞後就不在執行
                if(play[xx].x==0){
@@ -293,7 +293,12 @@ int gamestart = GameStart();   //取得開始數據
             }  //----------------------------------------------
         }
 
-
+        if(play[xx].energy>500){       //如果能源超過500則只能500
+            play[xx].energy = 500;
+        }
+        if(play[xx].body>100){         //如果機體超過100則只能100
+            play[xx].body = 100;
+        }
 
 
         cout<<endl<<"即將換下個玩家"<<endl;
@@ -1984,14 +1989,65 @@ int SuddenlyEvent(int xx){    // 突發事件程序
 
     if(result==7){   //由此5%的機率觸發事件
 
+            for(int i=0;i<10000;i++)
+           {
+             random[i]={(rand()%10)+1};
+           }
+             result = random[rand()%10000];
 
-        //事件帶享有多少個 一樣隨機取樣
+        switch(result){
+            case 1:
+                cout<<"外星人突然在大富翁面前出現，以友善的方式接待他們，並提供他們100Tons能源"<<endl;
+                play[xx].energy = play[xx].energy + 100;
+                break;
+            case 2:
+                cout<<"大富翁抵達下一個目的地時，外星人突然出現在面前，搶走大富翁150Tons能源"<<endl;
+                play[xx].energy = play[xx].energy - 150;
+                break;
+            case 3:
+                cout<<"在飛行途中，突然遭受外星人攻擊，機體受損10%"<<endl;
+                play[xx].body = play[xx].body - 10;
+                break;
+            case 4:
+                cout<<"大富翁正前往目的地，突然遇到外星人，外星人看他太弱，扔個武器就走了"<<endl;
+                cout<<"獲得電磁脈衝*1"<<endl;
+                Tool[xx] = 8100000;
+                break;
+            case 5:
+                cout<<"遭受小行星群撞擊，機體嚴重受損20%，在閃避的過程中，能源也造成了額外消耗50Tons"<<endl;
+                play[xx].body = play[xx].body - 25;
+                play[xx].energy = play[xx].energy - 50;
+                break;
+            case 6:
+                cout<<"行駛途中遇超新星爆炸，造成機體15%損壞"<<endl;
+                play[xx].body = play[xx].body- 15;
+                break;
+            case 7:
+                cout<<"星體活動異常，突然噴發大量電子和中子，造成儀器損壞，機體減少5%"<<endl;
+                play[xx].body = play[xx].body - 5;
+                break;
+            case 8:
+                cout<<"重力異常，引起導航方向錯誤，額外消耗了45Tons能源"<<endl;
+                play[xx].energy = play[xx].energy - 45;
+                break;
+            case 9:
+                cout<<"飛行途中，發現了一顆滿是能源的星體，獲得大量的能源+150Tons"<<endl;
+                play[xx].energy = play[xx].energy + 150;
+                break;
+            case 10:
+                cout<<"突然天神降臨，教導這些愚昧的富翁技術，能源+100機體+10%"<<endl;
+                play[xx].energy = play[xx].energy + 100;
+                play[xx].body = play[xx].body + 10;
+                break;
+
+        }
+
 
 
     }
 }
 
-int Alien(int xx){       //突發遇到外星人
+/*int Alien(int xx){       //突發遇到外星人
     //  隨機程序
     int result;
     srand(time(NULL));
@@ -2016,7 +2072,7 @@ int Alien(int xx){       //突發遇到外星人
         }
     }
 
-}
+}*/
 
 int Store(int xx){  //確定6種
        int s = Tool[xx];
