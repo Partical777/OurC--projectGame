@@ -321,9 +321,15 @@ int gamestart = GameStart();   //取得開始數據
       }else if(play[3].energy>0&&play[3].body>0){
         loser = name[3];
       }
-      cout<<"The Game Over,loser is "<<loser<<endl; //winner
-      cout<<"請輸入任意按鍵"<<endl;
-      cin>>loser ;
+      system("cls");
+      cout<<endl<<"   ____                       ___                 "<<endl;
+            cout<<"  / ___| __ _ _ __ ___   ___ / _ \\__   _____ _ __ "<<endl;
+            cout<<" | |  _ / _` | '_ ` _ \\ / _ \\ | | \\ \\ / / _ \\ '__|"<<endl;
+            cout<<" | |_| | (_| | | | | | |  __/ |_| |\\ V /  __/ |   "<<endl;
+            cout<<"  \\____|\\__,_|_| |_| |_|\\___|\\___/  \\_/ \\___|_|   "<<endl;
+
+      cout<<endl<<"loser is "<<loser<<endl; //winner
+      cout<<endl<<"請輸入任意按鍵回主選單"<<endl;
       system("pause");
       return main();
     //將設置跳回選單會離開~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
