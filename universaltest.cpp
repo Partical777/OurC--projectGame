@@ -1838,7 +1838,7 @@ int GuessNumber(){     //猜數字
         cout<<"您的運氣不好，猜錯了，請再接再厲"<<endl;
 
     }
-
+/*
     cout<<"是否繼續 猜數字換能源"<<endl;     //是否繼續賭博
     result123456789 = YesNo();       //result123456789 重複使用
     if(result123456789==77){ //no
@@ -1846,7 +1846,7 @@ int GuessNumber(){     //猜數字
         }else {//yes
               GuessNumber();
         }
-
+*/
 }
 
 int BigSmall(){   //比大小
@@ -1904,10 +1904,17 @@ int BigSmall(){   //比大小
 
     }while(ch!=13);
 
-
-    cout<<endl<<"請輸入任一數字1~20，如比較勝利可獲得二倍的獎勵"<<endl;
+    string nonumber ;
+    cout<<endl<<"請輸入任意字以隨機抽牌，如比較勝利可獲得二倍的獎勵"<<endl;
+    cin>>nonumber ;
     do{
-    cin>>betnumber;
+
+            for(int i=0;i<10000;i++)
+           {
+             random[i]={(rand()%20)+1};
+           }
+             betnumber = random[rand()%10000];
+
     }while(betnumber>20||betnumber<1);
 
 
@@ -2018,45 +2025,45 @@ int SuddenlyEvent(int xx){    // 突發事件程序
 
         switch(result){
             case 1:
-                cout<<"外星人突然在大富翁面前出現，以友善的方式接待他們，並提供他們100Tons能源"<<endl;
+                cout<<endl<<"突發事件:"<<endl<<"外星人突然在大富翁面前出現，以友善的方式接待他們，並提供他們100Tons能源"<<endl<<endl;
                 play[xx].energy = play[xx].energy + 100;
                 break;
             case 2:
-                cout<<"大富翁抵達下一個目的地時，外星人突然出現在面前，搶走大富翁150Tons能源"<<endl;
+                cout<<endl<<"突發事件:"<<endl<<"大富翁抵達下一個目的地時，外星人突然出現在面前，搶走大富翁150Tons能源"<<endl<<endl;
                 play[xx].energy = play[xx].energy - 150;
                 break;
             case 3:
-                cout<<"在飛行途中，突然遭受外星人攻擊，機體受損10%"<<endl;
+                cout<<endl<<"突發事件:"<<endl<<"在飛行途中，突然遭受外星人攻擊，機體受損10%"<<endl<<endl;
                 play[xx].body = play[xx].body - 10;
                 break;
             case 4:
-                cout<<"大富翁正前往目的地，突然遇到外星人，外星人看他太弱，扔個武器就走了"<<endl;
-                cout<<"獲得電磁脈衝*1"<<endl;
+                cout<<endl<<"突發事件:"<<endl<<"大富翁正前往目的地，突然遇到外星人，外星人看他太弱，扔個武器就走了"<<endl<<endl;
+                cout<<"獲得電磁脈衝*1"<<endl<<endl;
                 Tool[xx] = 8100000;
                 break;
             case 5:
-                cout<<"遭受小行星群撞擊，機體嚴重受損20%，在閃避的過程中，能源也造成了額外消耗50Tons"<<endl;
+                cout<<endl<<"突發事件:"<<endl<<"遭受小行星群撞擊，機體嚴重受損20%，在閃避的過程中，能源也造成了額外消耗50Tons"<<endl<<endl;
                 play[xx].body = play[xx].body - 25;
                 play[xx].energy = play[xx].energy - 50;
                 break;
             case 6:
-                cout<<"行駛途中遇超新星爆炸，造成機體15%損壞"<<endl;
+                cout<<endl<<"突發事件:"<<endl<<"行駛途中遇超新星爆炸，造成機體15%損壞"<<endl<<endl;
                 play[xx].body = play[xx].body- 15;
                 break;
             case 7:
-                cout<<"星體活動異常，突然噴發大量電子和中子，造成儀器損壞，機體減少5%"<<endl;
+                cout<<endl<<"突發事件:"<<endl<<"星體活動異常，突然噴發大量電子和中子，造成儀器損壞，機體減少5%"<<endl<<endl;
                 play[xx].body = play[xx].body - 5;
                 break;
             case 8:
-                cout<<"重力異常，引起導航方向錯誤，額外消耗了45Tons能源"<<endl;
+                cout<<endl<<"突發事件:"<<endl<<"重力異常，引起導航方向錯誤，額外消耗了45Tons能源"<<endl<<endl;
                 play[xx].energy = play[xx].energy - 45;
                 break;
             case 9:
-                cout<<"飛行途中，發現了一顆滿是能源的星體，獲得大量的能源+150Tons"<<endl;
+                cout<<endl<<"突發事件:"<<endl<<"飛行途中，發現了一顆滿是能源的星體，獲得大量的能源+150Tons"<<endl<<endl;
                 play[xx].energy = play[xx].energy + 150;
                 break;
             case 10:
-                cout<<"突然天神降臨，教導這些愚昧的富翁技術，能源+100機體+10%"<<endl;
+                cout<<endl<<"突發事件:"<<endl<<"突然天神降臨，教導這些愚昧的富翁技術，能源+100機體+10%"<<endl<<endl;
                 play[xx].energy = play[xx].energy + 100;
                 play[xx].body = play[xx].body + 10;
                 break;
